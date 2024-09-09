@@ -1,0 +1,65 @@
+Table Book {
+  id integer [primary key] 
+  title varchar 
+  author varchar
+  totalPages integer
+  publishDate date
+}
+Table Page{
+  id int [primary key]
+  BookId integer
+  content varchar
+  pageNumber integer
+}
+
+Table Member {
+  id int [primary key]
+  name varchar
+  surname varchar
+  username varchar
+  password varchar
+  email varchar
+  phone varchar 
+  roleId integer
+}
+Table Loan {
+  id integer [primary key]
+  bookId integer 
+  memberId integer 
+  loanDate date 
+  returnDate date 
+  isReturned bool
+}
+
+Table Role {
+  id integer [primary key]
+  name varchar
+}
+
+Table Author {
+  id integer [primary key]
+  bookId integer 
+  memberId integer 
+}
+Table Message {
+  id integer [primary key]
+  senderId integer
+  recieverId integer 
+  content varchar
+}
+
+Ref: Message.senderId > Member.id
+
+Ref: Message.recieverId > Member.id
+
+Ref: Author.bookId > Book.id
+
+Ref: Author.memberId > Member.id
+
+Ref: Role.id > Member.roleId
+
+Ref: Book.id > Page.BookId
+
+Ref: Member.id > Loan.memberId
+
+Ref: Book.id > Loan.bookId
