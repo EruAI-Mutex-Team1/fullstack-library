@@ -9,5 +9,7 @@
         public string content { get; set; } = string.Empty;
         public DateOnly sendingDate { get; set; }
         public bool isRead { get; set; }
+
+        public User User { get; set; } = null;
     }
 }
