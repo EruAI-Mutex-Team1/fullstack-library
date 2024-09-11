@@ -11,7 +11,7 @@
         public string password { get; set; } = string.Empty;
         public bool userStatus { get; set; }
 
-        public Role Role { get; set; } = null;
+        public Role? Role { get; set; } = null;
 
         public List<BookAuthor> BookAuthors { get; set; } = new();
         public List<BookPublishRequest> BookPublisRequests { get; set; } = new();
