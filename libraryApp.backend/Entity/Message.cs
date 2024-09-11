@@ -10,6 +10,7 @@
         public DateOnly sendingDate { get; set; }
         public bool isRead { get; set; }
 
-        public User User { get; set; } = null;
+        public User sender { get; set; } = null;
+        public User reciever { get; set; } = null;
     }
 }
