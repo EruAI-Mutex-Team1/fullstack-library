@@ -8,6 +8,6 @@
         public bool confirmation { get; set; }
         public bool pending { get; set; }
 
-        public User User { get; set; } = null;
+        public User? User { get; set; }
     }
 }
