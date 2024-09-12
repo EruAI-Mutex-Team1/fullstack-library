@@ -4,11 +4,10 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IBookAuthorRepository
     {
-        public IEnumerable<BookAuthor> GetAllAuthors();
-        public BookAuthor GetAuthorById(int id);
-        public void AddBookAuthor(BookAuthor bookAuthor);
-        public void UpdateBookAuthor(BookAuthor bookAuthor);
-        public void DeleteBookAuthor(int id);
-        public void Save();
+        Task<IEnumerable<BookAuthor>> GetAllAuthors();
+        Task<BookAuthor> GetAuthorById(int id);
+        Task AddBookAuthor(BookAuthor bookAuthor);
+        Task UpdateBookAuthor(BookAuthor bookAuthor);
+        Task DeleteBookAuthor(int id);
     }
 }

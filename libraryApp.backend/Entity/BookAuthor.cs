@@ -6,8 +6,8 @@
         public int userId { get; set; }
         public int bookId { get; set; }
 
-        public User User { get; set; } = null;
-        public Book Book { get; set; } = null;
+        public User? User { get; set; }
+        public Book? Book { get; set; }
 
     }
 }

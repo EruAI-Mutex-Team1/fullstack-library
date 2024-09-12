@@ -4,11 +4,10 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface ILoanRequestRepository
     {
-        public IEnumerable<LoanRequest> GetAllLoanRequests();
-        public LoanRequest GetLoanRequestById(int id);
-        public void AddLoanRequest(LoanRequest loanRequest);
-        public void UpdateLoanRequest(LoanRequest loanRequest);
-        public void DeleteLoanRequest(int id);
-        public void Save();
+        Task<IEnumerable<LoanRequest>> GetAllLoanRequests();
+        Task<LoanRequest> GetLoanRequestById(int id);
+        Task AddLoanRequest(LoanRequest loanRequest);
+        Task UpdateLoanRequest(LoanRequest loanRequest);
+        Task DeleteLoanRequest(int id);
     }
 }

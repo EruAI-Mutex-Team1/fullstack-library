@@ -1,38 +1,44 @@
 ﻿using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace libraryApp.backend.Repository.Concrete
 {
     public class EfLoanRequestRepository : ILoanRequestRepository
     {
-        public void AddLoanRequest(LoanRequest loanRequest)
+        private readonly LibraryDbContext _context;
+        public EfLoanRequestRepository(LibraryDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task AddLoanRequest(LoanRequest loanRequest)
+        {
+            await _context.LoanRequests.AddAsync(loanRequest);
         }
 
-        public void DeleteLoanRequest(int id)
+        public async Task DeleteLoanRequest(int id)
         {
-            throw new NotImplementedException();
+            var loanRequest = await _context.LoanRequests.FindAsync(id);
+            if (loanRequest != null) 
+            { 
+                _context.LoanRequests.Remove(loanRequest);
+            }
         }
 
-        public LoanRequest GetLoanRequestById(int id)
+        public async Task<IEnumerable<LoanRequest>> GetAllLoanRequests()
         {
-            throw new NotImplementedException();
+            return await _context.LoanRequests.ToListAsync();
         }
 
-        public IEnumerable<LoanRequest> GetAllLoanRequests()
+        public async Task<LoanRequest> GetLoanRequestById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.LoanRequests.FindAsync(id);
         }
 
-        public void Save()
+        public async Task UpdateLoanRequest(LoanRequest loanRequest)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateLoanRequest(LoanRequest loanRequest)
-        {
-            throw new NotImplementedException();
+            _context.LoanRequests.Update(loanRequest);
         }
     }
 }

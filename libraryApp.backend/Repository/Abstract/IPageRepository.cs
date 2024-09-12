@@ -4,12 +4,12 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IPageRepository
     {
-        public IEnumerable<Page> GetAllPages();
-        public IEnumerable<Page> GetAllPagesOfABook(Book book);
-        public Page GetPageById(int id);
-        public void AddPage(Page page);
-        public void UpdatePage(Page page);
-        public void DeletePage(int id);
-        public void Save();
+        Task<IEnumerable<Page>> GetAllPages();
+        Task<IEnumerable<Page>> GetAllPagesOfABook(Book book);
+        Task<Page> GetPageById(int id);
+        Task AddPage(Page page);
+        Task UpdatePage(Page page);
+        Task DeletePage(int id);
+
     }
 }

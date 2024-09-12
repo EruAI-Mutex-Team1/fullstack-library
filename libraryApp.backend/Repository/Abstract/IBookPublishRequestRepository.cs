@@ -4,11 +4,10 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IBookPublishRequestRepository
     {
-        public IEnumerable<BookPublishRequest> GetAllPublishRequests();
-        public BookPublishRequest GetPublishRequestById(int id);
-        public void AddPublishRequest(BookPublishRequest bookPublishRequest);
-        public void UpdatePublishRequest(BookPublishRequest bookPublishRequest);
-        public void DeletePublishRequestById(int id);
-        public void Save();
+        Task<IEnumerable<BookPublishRequest>> GetAllBookPublishRequests();
+        Task<BookPublishRequest> GetBookPublishRequestById(int id);
+        Task AddBookPublishRequest(BookPublishRequest bookPublishRequest);
+        Task UpdateBookPublishRequest(BookPublishRequest bookPublishRequest);
+        Task DeleteBookPublishRequestBy(int id);
     }
 }

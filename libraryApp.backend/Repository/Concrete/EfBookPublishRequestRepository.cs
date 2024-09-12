@@ -1,38 +1,45 @@
 ﻿using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace libraryApp.backend.Repository.Concrete
 {
     public class EfBookPublishRequestRepository : IBookPublishRequestRepository
     {
-        public void AddPublishRequest(BookPublishRequest bookPublishRequest)
+        private readonly LibraryDbContext _context;
+
+        public EfBookPublishRequestRepository(LibraryDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public void DeletePublishRequestById(int id)
+        public async Task AddBookPublishRequest(BookPublishRequest bookPublishRequest)
         {
-            throw new NotImplementedException();
+            await _context.BookPublishRequests.AddAsync(bookPublishRequest);
         }
 
-        public IEnumerable<BookPublishRequest> GetAllPublishRequests()
+        public async Task DeleteBookPublishRequestBy(int id)
         {
-            throw new NotImplementedException();
+            var publishRequest = await _context.BookPublishRequests.FindAsync(id);
+            if (publishRequest != null)
+            {
+                _context.BookPublishRequests.Remove(publishRequest);
+            }
         }
 
-        public BookPublishRequest GetPublishRequestById(int id)
+        public async Task<IEnumerable<BookPublishRequest>> GetAllBookPublishRequests()
         {
-            throw new NotImplementedException();
+            return await _context.BookPublishRequests.ToListAsync();
         }
 
-        public void Save()
+        public async Task<BookPublishRequest> GetBookPublishRequestById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.BookPublishRequests.FindAsync(id);
         }
 
-        public void UpdatePublishRequest(BookPublishRequest bookPublishRequest)
+        public async Task UpdateBookPublishRequest(BookPublishRequest bookPublishRequest)
         {
-            throw new NotImplementedException();
+            _context.BookPublishRequests.Update(bookPublishRequest);
         }
     }
 }

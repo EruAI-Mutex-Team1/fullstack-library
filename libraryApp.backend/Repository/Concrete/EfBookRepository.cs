@@ -1,37 +1,43 @@
 ﻿using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace libraryApp.backend.Repository.Concrete
 {
     public class EfBookRepository : IBookRepository
     {
-        public void AddBook(Book book)
+        private readonly LibraryDbContext _context;
+        public EfBookRepository(LibraryDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task AddBook(Book book)
+        {
+            await _context.Books.AddAsync(book);
         }
 
-        public void DeleteBook(int id)
+        public async Task DeleteBook(int id)
         {
-            throw new NotImplementedException();
+            var book = await _context.Books.FindAsync(id);
+            if(book != null)
+            {
+                _context.Books.Remove(book);
+            }
         }
 
-        public IEnumerable<Book> GetAllBooks()
+        public async Task<IEnumerable<Book>> GetAllBooks()
         {
-            throw new NotImplementedException();
+            return await _context.Books.ToListAsync();
         }
 
-        public Book GetBookById(int id)
+        public async Task<Book> GetBookById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Books.FindAsync(id);
         }
 
-        public void UpdateBook(Book book)
+        public async Task UpdateBook(Book book)
         {
-            throw new NotImplementedException();
-        }
-        public void Save()
-        {
-            throw new NotImplementedException();
+            _context.Books.Update(book);
         }
     }
 }

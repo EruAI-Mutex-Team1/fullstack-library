@@ -1,38 +1,44 @@
 ﻿using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace libraryApp.backend.Repository.Concrete
 {
     public class EfBookAuthorRepository : IBookAuthorRepository
     {
-        public void AddBookAuthor(BookAuthor bookAuthor)
+        private readonly LibraryDbContext _context;
+
+        public EfBookAuthorRepository(LibraryDbContext context) 
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task AddBookAuthor(BookAuthor bookAuthor)
+        {
+            await _context.BookAuthors.AddAsync(bookAuthor);
         }
 
-        public void DeleteBookAuthor(int id)
+        public async Task DeleteBookAuthor(int id)
         {
-            throw new NotImplementedException();
+            var bookAuthor = await _context.BookAuthors.FindAsync(id);
+            if (bookAuthor != null) 
+            {
+                _context.BookAuthors.Remove(bookAuthor);
+            }
         }
 
-        public IEnumerable<BookAuthor> GetAllAuthors()
+        public async Task<IEnumerable<BookAuthor>> GetAllAuthors()
         {
-            throw new NotImplementedException();
+            return await _context.BookAuthors.ToListAsync();
         }
 
-        public BookAuthor GetAuthorById(int id)
+        public async Task<BookAuthor> GetAuthorById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.BookAuthors.FindAsync(id);
         }
 
-        public void Save()
+        public async Task UpdateBookAuthor(BookAuthor bookAuthor)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateBookAuthor(BookAuthor bookAuthor)
-        {
-            throw new NotImplementedException();
+            _context.BookAuthors.Update(bookAuthor);
         }
     }
 }

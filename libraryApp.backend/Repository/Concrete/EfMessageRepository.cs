@@ -1,38 +1,43 @@
 ﻿using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace libraryApp.backend.Repository.Concrete
 {
     public class EfMessageRepository : IMessageRepository
     {
-        public void AddMessage(Message message)
+        private readonly LibraryDbContext _context;
+        public EfMessageRepository(LibraryDbContext context)
         {
-            throw new NotImplementedException();
+           _context = context;
+        }
+        public async Task AddMessage(Message message)
+        {
+            await _context.Messages.AddAsync(message);
         }
 
-        public void DeleteMessage(int id)
+        public async Task DeleteMessage(int id)
         {
-            throw new NotImplementedException();
+            var message = await _context.Messages.FindAsync(id);
+            if (message != null) 
+            { 
+                _context.Messages.Remove(message);
+            }
         }
 
-        public IEnumerable<Message> GetAllMessages()
+        public async Task<IEnumerable<Message>> GetAllMessages()
         {
-            throw new NotImplementedException();
+            return await _context.Messages.ToListAsync();
         }
 
-        public Message GetMessageById(int id)
+        public async Task<Message> GetMessageById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Messages.FindAsync(id);
         }
 
-        public void Save()
+        public async Task UpdateMessage(Message message)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateMessage(Message message)
-        {
-            throw new NotImplementedException();
+            _context.Messages.Update(message);
         }
     }
 }

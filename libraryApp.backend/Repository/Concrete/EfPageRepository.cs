@@ -1,43 +1,53 @@
 ﻿using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace libraryApp.backend.Repository.Concrete
 {
     public class EfPageRepository : IPageRepository
     {
-        public void AddPage(Page page)
+        private readonly LibraryDbContext _context;
+        public EfPageRepository(LibraryDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task AddPage(Page page)
+        {
+            await _context.Pages.AddAsync(page);
         }
 
-        public void DeletePage(int id)
+        public async Task DeletePage(int id)
         {
-            throw new NotImplementedException();
+            var page = await _context.Pages.FindAsync(id);
+            if(page != null)
+            {
+                _context.Pages.Remove(page);
+            }
         }
 
-        public IEnumerable<Page> GetAllPages()
+        public async Task<IEnumerable<Page>> GetAllPages()
         {
-            throw new NotImplementedException();
+            return await _context.Pages.ToListAsync();
         }
 
-        public IEnumerable<Page> GetAllPagesOfABook(Book book)
+        public async Task<IEnumerable<Page>> GetAllPagesOfABook(Book book)
         {
-            throw new NotImplementedException();
+            if(book == null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+            var pages = await _context.Pages.Where(p => p.bookId == book.id).ToListAsync();
+            return pages;
         }
 
-        public Page GetPageById(int id)
+        public async Task<Page> GetPageById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Pages.FindAsync(id);
         }
 
-        public void Save()
+        public async Task UpdatePage(Page page)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdatePage(Page page)
-        {
-            throw new NotImplementedException();
+            _context.Pages.Update(page);
         }
     }
 }
