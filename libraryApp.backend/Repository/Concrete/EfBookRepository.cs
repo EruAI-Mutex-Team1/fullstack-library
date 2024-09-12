@@ -14,6 +14,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task AddBook(Book book)
         {
             await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteBook(int id)
@@ -23,6 +24,7 @@ namespace libraryApp.backend.Repository.Concrete
             {
                 _context.Books.Remove(book);
             }
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Book>> GetAllBooks()
@@ -38,6 +40,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task UpdateBook(Book book)
         {
             _context.Books.Update(book);
+            await _context.SaveChangesAsync();
         }
     }
 }

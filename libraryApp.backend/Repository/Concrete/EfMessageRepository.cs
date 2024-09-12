@@ -14,6 +14,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task AddMessage(Message message)
         {
             await _context.Messages.AddAsync(message);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteMessage(int id)
@@ -23,6 +24,7 @@ namespace libraryApp.backend.Repository.Concrete
             { 
                 _context.Messages.Remove(message);
             }
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Message>> GetAllMessages()
@@ -38,6 +40,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task UpdateMessage(Message message)
         {
             _context.Messages.Update(message);
+            await _context.SaveChangesAsync();
         }
     }
 }

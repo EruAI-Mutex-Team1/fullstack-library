@@ -14,6 +14,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task AddPage(Page page)
         {
             await _context.Pages.AddAsync(page);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeletePage(int id)
@@ -23,6 +24,7 @@ namespace libraryApp.backend.Repository.Concrete
             {
                 _context.Pages.Remove(page);
             }
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Page>> GetAllPages()
@@ -48,6 +50,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task UpdatePage(Page page)
         {
             _context.Pages.Update(page);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task AddLoanRequest(LoanRequest loanRequest)
         {
             await _context.LoanRequests.AddAsync(loanRequest);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteLoanRequest(int id)
@@ -24,6 +25,7 @@ namespace libraryApp.backend.Repository.Concrete
             { 
                 _context.LoanRequests.Remove(loanRequest);
             }
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<LoanRequest>> GetAllLoanRequests()
@@ -39,6 +41,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task UpdateLoanRequest(LoanRequest loanRequest)
         {
             _context.LoanRequests.Update(loanRequest);
+            await _context.SaveChangesAsync();
         }
     }
 }

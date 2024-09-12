@@ -16,6 +16,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task AddBookPublishRequest(BookPublishRequest bookPublishRequest)
         {
             await _context.BookPublishRequests.AddAsync(bookPublishRequest);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteBookPublishRequestBy(int id)
@@ -25,6 +26,7 @@ namespace libraryApp.backend.Repository.Concrete
             {
                 _context.BookPublishRequests.Remove(publishRequest);
             }
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<BookPublishRequest>> GetAllBookPublishRequests()
@@ -40,6 +42,7 @@ namespace libraryApp.backend.Repository.Concrete
         public async Task UpdateBookPublishRequest(BookPublishRequest bookPublishRequest)
         {
             _context.BookPublishRequests.Update(bookPublishRequest);
+            await _context.SaveChangesAsync();
         }
     }
 }
