@@ -4,7 +4,7 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IBookPublishRequestRepository
     {
-        Task<IEnumerable<BookPublishRequest>> GetAllBookPublishRequests();
+        IQueryable<BookPublishRequest> GetAllBookPublishRequests {  get; }
         Task<BookPublishRequest> GetBookPublishRequestById(int id);
         Task AddBookPublishRequest(BookPublishRequest bookPublishRequest);
         Task UpdateBookPublishRequest(BookPublishRequest bookPublishRequest);

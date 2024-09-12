@@ -4,7 +4,7 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IMessageRepository
     {
-        Task<IEnumerable<Message>> GetAllMessages();
+        IQueryable<Message> GetAllMessages {  get; }
         Task<Message> GetMessageById(int id);
         Task AddMessage(Message message);
         Task UpdateMessage(Message message);

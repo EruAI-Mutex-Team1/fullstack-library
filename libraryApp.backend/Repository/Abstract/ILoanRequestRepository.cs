@@ -4,7 +4,7 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface ILoanRequestRepository
     {
-        Task<IEnumerable<LoanRequest>> GetAllLoanRequests();
+        IQueryable<LoanRequest> GetAllLoanRequests {  get; }
         Task<LoanRequest> GetLoanRequestById(int id);
         Task AddLoanRequest(LoanRequest loanRequest);
         Task UpdateLoanRequest(LoanRequest loanRequest);

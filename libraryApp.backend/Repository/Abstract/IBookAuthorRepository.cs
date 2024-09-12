@@ -4,7 +4,7 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IBookAuthorRepository
     {
-        Task<IEnumerable<BookAuthor>> GetAllAuthors();
+        IQueryable<BookAuthor> GetAllAuthors{ get; }
         Task<BookAuthor> GetAuthorById(int id);
         Task AddBookAuthor(BookAuthor bookAuthor);
         Task UpdateBookAuthor(BookAuthor bookAuthor);
