@@ -1,4 +1,6 @@
 using libraryApp.backend.Entity;
+using libraryApp.backend.Repository.Abstract;
+using libraryApp.backend.Repository.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,16 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IBookAuthorRepository, EfBookAuthorRepository>();
+builder.Services.AddScoped<IBookPublishRequestRepository, EfBookPublishRequestRepository>();
+builder.Services.AddScoped<IBookRepository, EfBookRepository>();
+builder.Services.AddScoped<ILoanRequestRepository, EfLoanRequestRepository>();
+builder.Services.AddScoped<IMessageRepository, EfMessageRepository>();
+builder.Services.AddScoped<IPageRepository, EfPageRepository>();
+
+
+
 
 
 var app = builder.Build();
