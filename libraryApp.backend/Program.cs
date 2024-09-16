@@ -4,6 +4,7 @@ using libraryApp.backend.Repository.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
 builder.Services.AddDbContext<LibraryDbContext>(options =>
 {
     var connStr = builder.Configuration["ConnectionStrings:DefaultConnection"];
@@ -36,5 +37,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.Run();
