@@ -8,6 +8,6 @@
         public bool confirmation { get; set; }  //onaylamak
         public bool pending { get; set; }    //beklemede
 
-        public User User { get; set; } = null;
+        public User? User { get; set; }
     }
 }

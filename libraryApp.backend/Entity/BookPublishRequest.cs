@@ -9,7 +9,7 @@
         public bool confirmation { get; set; } //onay merkezi onaylama
         public bool pending { get; set; } //beklede
 
-        public User User { get; set; } = null;
-        public Book Book { get; set; } = null;
+        public User? User { get; set; }
+        public Book? Book { get; set; }
     }
 }

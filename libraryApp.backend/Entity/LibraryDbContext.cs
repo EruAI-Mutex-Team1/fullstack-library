@@ -26,6 +26,7 @@ namespace libraryApp.backend.Entity
 
         public DbSet<User> Users => Set<User>();
 
+
         public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options)
         {
 

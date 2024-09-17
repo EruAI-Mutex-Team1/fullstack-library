@@ -7,6 +7,6 @@
         public int point { get; set; }
         public DateOnly earnDate { get; set; }
 
-        public User User { get; set; } = null;
+        public User? User { get; set; }
     }
 }

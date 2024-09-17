@@ -1,10 +1,11 @@
+import Login from "./Login"
 
 function App() {
 
   return (
     <>
-      <div>
-        <h1>TEST</h1>
+      <div className="bg-hero-pattern h-screen grid">
+      <Login/>
       </div>
     </>
   )
