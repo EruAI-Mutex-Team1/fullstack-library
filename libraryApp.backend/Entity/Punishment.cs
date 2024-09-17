@@ -6,7 +6,6 @@
         public int userId { get; set; }
         public DateOnly punishmentDate { get; set; }
         public bool isActive { get; set; }
-
         public User User { get; set; } = null;
     }
 }

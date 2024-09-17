@@ -1,6 +1,14 @@
-﻿namespace libraryApp.backend.Repository.Abstract
+﻿using libraryApp.backend.Entity;
+
+namespace libraryApp.backend.Repository.Abstract
 {
-    public interface IUsercs
+    public interface IUserRepository
     {
+        IQueryable<User> Users { get; }
+        Task<User> GetUseridAsync(int id);
+        Task CreateUserAsync(User user);
+        Task DeleteUserAsync(int id);
+        Task UpdateUserAsync(User user);
+
     }
 }

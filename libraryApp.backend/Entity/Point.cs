@@ -1,6 +1,6 @@
 ﻿namespace libraryApp.backend.Entity
 {
-    public class Point
+    public class Point  //Puan 
     {
         public int id { get; set; }
         public int userId { get; set; }

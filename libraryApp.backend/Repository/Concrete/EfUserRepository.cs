@@ -33,7 +33,6 @@ namespace libraryApp.backend.Repository.Concrete
             else
                 throw new ArgumentException("User doesn't found.");
             
-
         }
 
         public async Task UpdateUserAsync(User user)

@@ -1,6 +1,18 @@
-﻿namespace libraryApp.backend.Repository.Abstract
+﻿using libraryApp.backend.Entity;
+
+namespace libraryApp.backend.Repository.Abstract
 {
-    public interface IRole
+    public interface IRoleRepository
     {
+        IQueryable<Role> Roles { get; }
+
+        Task<Role> GetRoleIdAsync(int id);
+        Task CreateRoleAsync(Role role);
+        Task DeleteRoleAsync(int id);
+        Task UpdateRoleAsync(Role role);
+
+
+
+
     }
 }
