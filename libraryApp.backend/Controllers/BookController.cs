@@ -15,14 +15,17 @@ namespace libraryApp.backend.Controllers
         private readonly IBookAuthorRepository _bookAuthorRepository;
         private readonly IBookPublishRequestRepository _bookPublishRequestRepository;
         private readonly IPageRepository _pageRepository;
+        private readonly IUserRepository _userRepository;
 
         public BookController(IBookRepository bookRepository, IBookAuthorRepository bookAuthorRepository,
-            IBookPublishRequestRepository bookPublishRequestRepository, IPageRepository pageRepository)
+            IBookPublishRequestRepository bookPublishRequestRepository, IPageRepository pageRepository,
+            IUserRepository userRepository)
         {
             _bookRepository = bookRepository;
             _bookAuthorRepository = bookAuthorRepository;
             _bookPublishRequestRepository = bookPublishRequestRepository;
             _pageRepository = pageRepository;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -60,24 +63,25 @@ namespace libraryApp.backend.Controllers
             return Ok(books);
         }
 
-        [HttpGet("borrowed")]
-        public async Task<IActionResult> GetBorrowedBooks()
+        [HttpGet("borrowed/{id}")]
+        public async Task<IActionResult> GetBorrowedBooksByUser(int id)
         {
-            var books = await _bookRepository.GetAllBooks
-                .Where(b => b.status == false)
-                .ToListAsync();
-            if (!books.Any())
+            User user = await _userRepository.GetUseridAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
+
+            var books = user.LoanRequests.Where(b => b.pending != true && b.confirmation == true);
+
             return Ok(books);
         }
 
-        [HttpGet("byauthor/{authorName}")]
-        public async Task<IActionResult> GetBooksByAuthor(string authorName)
+        [HttpGet("byauthor/{id}")]
+        public async Task<IActionResult> GetBooksByAuthor(int id)
         {
             var books = await _bookAuthorRepository.GetAllAuthors
-                .Where(ba => ba.User.name.Contains(authorName))
+                .Where(ba => ba.User.id == id)
                 .Select(ba => ba.Book)
                 .ToListAsync();
             if (!books.Any())
@@ -112,7 +116,7 @@ namespace libraryApp.backend.Controllers
             page.pageNumber = newPageNumber;
 
             book.Pages.Add(page);
-            await _bookRepository.UpdateBook(book);
+            await _pageRepository.AddPage(page);
 
             return Ok(new { Message = "Page added successfully!" });
         }
