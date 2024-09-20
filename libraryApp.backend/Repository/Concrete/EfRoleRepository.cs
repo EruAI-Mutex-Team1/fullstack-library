@@ -9,12 +9,10 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfRoleRepository : IRoleRepository
     {
         private readonly LibraryDbContext _context;
-        private readonly IMapper _mapper;
 
-        public EfRoleRepository(LibraryDbContext context, IMapper mapper)
+        public EfRoleRepository(LibraryDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public IQueryable<Role> Roles => _context.Roles;
 

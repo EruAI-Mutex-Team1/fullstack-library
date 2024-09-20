@@ -8,12 +8,10 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfBookAuthorRepository : IBookAuthorRepository
     {
         private readonly LibraryDbContext _context;
-        private readonly IMapper _mapper;
 
-        public EfBookAuthorRepository(LibraryDbContext context, IMapper mapper) 
+        public EfBookAuthorRepository(LibraryDbContext context) 
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public IQueryable<BookAuthor> GetAllAuthors => _context.BookAuthors;

@@ -8,12 +8,10 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfMessageRepository : IMessageRepository
     {
         private readonly LibraryDbContext _context;
-        private readonly IMapper _mapper;
 
-        public EfMessageRepository(LibraryDbContext context, IMapper mapper)
+        public EfMessageRepository(LibraryDbContext context)
         {
            _context = context;
-            _mapper = mapper;
         }
         public IQueryable<Message> GetAllMessages => _context.Messages;
 

@@ -9,12 +9,10 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfLoanRequestRepository : ILoanRequestRepository
     {
         private readonly LibraryDbContext _context;
-        private readonly IMapper _mapper;
 
-        public EfLoanRequestRepository(LibraryDbContext context, IMapper mapper )
+        public EfLoanRequestRepository(LibraryDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public IQueryable<LoanRequest> GetAllLoanRequests => _context.LoanRequests;
 

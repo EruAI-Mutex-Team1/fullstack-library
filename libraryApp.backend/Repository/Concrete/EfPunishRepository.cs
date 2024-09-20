@@ -9,12 +9,10 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfPunishRepository : IPunishRepository
     {
         private readonly LibraryDbContext _context;
-        private readonly IMapper _mapper;
 
-        public EfPunishRepository(LibraryDbContext context, IMapper mapper)
+        public EfPunishRepository(LibraryDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public IQueryable<Punishment> GetAllPunishments => _context.Punishments;

@@ -10,12 +10,10 @@ namespace libraryApp.backend.Repository.Concrete
     {
 
         private readonly LibraryDbContext _context;
-        private readonly IMapper _mapper;
 
-        public EfRegisterRequestRepository(LibraryDbContext context, IMapper mapper)
+        public EfRegisterRequestRepository(LibraryDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public IQueryable<RegisterRequest> GetAllRegisterRequests => _context.RegisterRequests;
         

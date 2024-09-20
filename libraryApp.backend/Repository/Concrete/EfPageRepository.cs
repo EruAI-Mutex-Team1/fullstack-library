@@ -8,12 +8,10 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfPageRepository : IPageRepository
     {
         private readonly LibraryDbContext _context;
-        private readonly IMapper _mapper;
 
-        public EfPageRepository(LibraryDbContext context, IMapper mapper)
+        public EfPageRepository(LibraryDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public IQueryable<Page> GetAllPages => _context.Pages;
 

@@ -8,12 +8,10 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfBookPublishRequestRepository : IBookPublishRequestRepository
     {
         private readonly LibraryDbContext _context;
-        private readonly IMapper _mapper;
 
-        public EfBookPublishRequestRepository(LibraryDbContext context, IMapper mapper)
+        public EfBookPublishRequestRepository(LibraryDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public IQueryable<BookPublishRequest> GetAllBookPublishRequests => _context.BookPublishRequests;
 
