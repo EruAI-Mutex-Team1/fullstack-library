@@ -1,4 +1,5 @@
 ﻿
+using AutoMapper;
 using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
@@ -7,13 +8,15 @@ namespace libraryApp.backend.Repository.Concrete
 {
     public class EfRoleRepository : IRoleRepository
     {
-        public IQueryable<Role> Roles => _context.Roles;
-        private  readonly LibraryDbContext _context;
+        private readonly LibraryDbContext _context;
+        private readonly IMapper _mapper;
 
-        public EfRoleRepository(LibraryDbContext context)
+        public EfRoleRepository(LibraryDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
+        public IQueryable<Role> Roles => _context.Roles;
 
         public async Task CreateRoleAsync(Role role)
         {

@@ -1,4 +1,5 @@
-﻿using libraryApp.backend.Entity;
+﻿using AutoMapper;
+using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,11 +8,12 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfMessageRepository : IMessageRepository
     {
         private readonly LibraryDbContext _context;
+        private readonly IMapper _mapper;
 
-
-        public EfMessageRepository(LibraryDbContext context)
+        public EfMessageRepository(LibraryDbContext context, IMapper mapper)
         {
            _context = context;
+            _mapper = mapper;
         }
         public IQueryable<Message> GetAllMessages => _context.Messages;
 

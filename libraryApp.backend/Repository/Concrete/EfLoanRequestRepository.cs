@@ -1,4 +1,5 @@
-﻿using libraryApp.backend.Entity;
+﻿using AutoMapper;
+using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
@@ -8,11 +9,12 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfLoanRequestRepository : ILoanRequestRepository
     {
         private readonly LibraryDbContext _context;
+        private readonly IMapper _mapper;
 
-
-        public EfLoanRequestRepository(LibraryDbContext context)
+        public EfLoanRequestRepository(LibraryDbContext context, IMapper mapper )
         {
             _context = context;
+            _mapper = mapper;
         }
         public IQueryable<LoanRequest> GetAllLoanRequests => _context.LoanRequests;
 

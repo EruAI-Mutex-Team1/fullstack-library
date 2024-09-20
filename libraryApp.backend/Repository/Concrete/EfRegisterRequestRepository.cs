@@ -1,4 +1,5 @@
-﻿using libraryApp.backend.Entity;
+﻿using AutoMapper;
+using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -8,15 +9,16 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfRegisterRequestRepository : IRegisterRequestRepository
     {
 
-
-        public IQueryable<RegisterRequest> GetAllRegisterRequests => _context.RegisterRequests;
         private readonly LibraryDbContext _context;
+        private readonly IMapper _mapper;
 
-        public EfRegisterRequestRepository(LibraryDbContext context)
+        public EfRegisterRequestRepository(LibraryDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-
+        public IQueryable<RegisterRequest> GetAllRegisterRequests => _context.RegisterRequests;
+        
         public async Task<Role> GetAdminByIdAsync(int id)
         {
             return await _context.Roles.FindAsync(id);

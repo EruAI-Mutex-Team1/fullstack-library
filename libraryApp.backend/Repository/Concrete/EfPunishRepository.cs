@@ -1,4 +1,5 @@
-﻿using libraryApp.backend.Entity;
+﻿using AutoMapper;
+using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -7,15 +8,16 @@ namespace libraryApp.backend.Repository.Concrete
 {
     public class EfPunishRepository : IPunishRepository
     {
-
-        public IQueryable<Punishment> GetAllPunishments => _context.Punishments;
-
         private readonly LibraryDbContext _context;
+        private readonly IMapper _mapper;
 
-        public EfPunishRepository(LibraryDbContext context)
+        public EfPunishRepository(LibraryDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
+
+        public IQueryable<Punishment> GetAllPunishments => _context.Punishments;
 
         public async Task<Punishment> GetByIdAsync(int id)
         {
