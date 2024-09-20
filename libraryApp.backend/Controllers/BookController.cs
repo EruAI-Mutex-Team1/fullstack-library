@@ -72,7 +72,7 @@ namespace libraryApp.backend.Controllers
                 return NotFound();
             }
 
-            var books = user.LoanRequests.Where(b => b.pending != true && b.confirmation == true);
+            var books = user.LoanRequests.Where(b => b.pending != true && b.confirmation == true && b.isReturned == false);
 
             return Ok(books);
         }
