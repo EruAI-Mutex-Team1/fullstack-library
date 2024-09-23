@@ -41,9 +41,15 @@ namespace libraryApp.backend.Controllers
                 return NotFound();
             }
 
-            var booksDto = _mapper.Map<Book>(books);
-
-            return Ok(booksDto);
+            List<BookSearchDTO> BooksDtos = books.Select(b => new BookSearchDTO
+            {
+                title = b.title,
+                type = b.type,
+                number_of_pages = b.number_of_pages,
+                BookAuthors = b.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList()
+            }).ToList();
+            
+            return Ok(BooksDtos);
         }
 
         [HttpGet("{id}")]
@@ -55,9 +61,15 @@ namespace libraryApp.backend.Controllers
                 return NotFound();
             }
 
-            var booksDto = _mapper.Map<BookSearchDTO>(_bookRepository);
 
-            return Ok(booksDto);
+            BookSearchDTO bookSearchDTO = new BookSearchDTO
+            {
+                title = book.title,
+                type = book.type,
+                number_of_pages = book.number_of_pages,
+            };
+
+            return Ok(bookSearchDTO);
         }
 
         [HttpGet("bytitle/{title}")]
@@ -71,9 +83,15 @@ namespace libraryApp.backend.Controllers
                 return NotFound();
             }
 
-            var booksDto = _mapper.Map<BookSearchDTO>(_bookRepository);
+            List<BookSearchDTO> BookDtos = books.Select(b => new BookSearchDTO
+            {
+                title = b.title,
+                type = b.type,
+                number_of_pages=b.number_of_pages,
+                BookAuthors = b.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList()
+            }).ToList();
 
-            return Ok(booksDto);
+            return Ok(BookDtos);
         }
 
         [HttpGet("borrowed/{id}")]
@@ -85,11 +103,18 @@ namespace libraryApp.backend.Controllers
                 return NotFound();
             }
 
-            var books = user.LoanRequests.Where(b => b.pending != true && b.confirmation == true && b.isReturned == false);
+            var books = user.LoanRequests.Where(b => b.pending != true && b.confirmation == true && b.isReturned == false).
+                Select(b => b.Book);
 
-            var booksDto = _mapper.Map<BookSearchDTO>(_bookRepository);
+            List<BookSearchDTO> BookDtos = books.Select(book => new BookSearchDTO
+            {
+                title = book.title,
+                type = book.type,
+                number_of_pages = book.number_of_pages,
+                BookAuthors = book.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList()
+            }).ToList();
 
-            return Ok(booksDto);
+            return Ok(BookDtos);
         }
 
         [HttpGet("byauthor/{id}")]
@@ -104,9 +129,15 @@ namespace libraryApp.backend.Controllers
                 return NotFound();
             }
 
-            var booksDto = _mapper.Map<BookSearchDTO>(_bookRepository);
+            List<BookSearchDTO> BookDtos = books.Select(book => new BookSearchDTO
+            {
+                title = book.title,
+                type = book.type,
+                number_of_pages = book.number_of_pages,
+                BookAuthors = book.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList()
+            }).ToList();
 
-            return Ok(books);
+            return Ok(BookDtos);
         }
 
         [HttpGet("publishrequests")]
@@ -118,9 +149,23 @@ namespace libraryApp.backend.Controllers
                 return NotFound();
             }
 
-            var requestsDto = _mapper.Map<BookPublishRequestDTO>(_bookPublishRequestRepository);
+            List<BookPublishRequestDTO> RequestDtos = requests.Select(request => new BookPublishRequestDTO
+            {
+                requestDate = request.requestDate,
+                confirmation = request.confirmation,
+                pending = request.pending,
+                User = new List<string>
+                {
+                    request.User.name,
+                    request.User.surname
+                },
+                Book = new List<string>
+                {
+                    request.Book.title,
+                }
+            }).ToList();
 
-            return Ok(requests);
+            return Ok(RequestDtos);
         }
 
         [HttpPost("{id}/addpage")]

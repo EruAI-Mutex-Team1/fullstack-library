@@ -6,9 +6,9 @@ namespace libraryApp.backend.Dtos
     {
         public DateOnly requestDate { get; set; }
         public bool confirmation { get; set; } 
-        public bool pending { get; set; } 
+        public bool pending { get; set; }
 
-        public User? User { get; set; }
-        public Book? Book { get; set; }
+        public List<string> User { get; set; } = new();
+        public List<string> Book { get; set; } = new();
     }
 }

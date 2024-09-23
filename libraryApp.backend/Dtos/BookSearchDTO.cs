@@ -8,7 +8,7 @@ namespace libraryApp.backend.Dtos
         public string type { get; set; } = string.Empty;
         public int number_of_pages{ get; set; }
 
-        public List<BookAuthor> BookAuthors { get; set; } = new();
+        public List<string> BookAuthors { get; set; } = new();
 
     }
 }
