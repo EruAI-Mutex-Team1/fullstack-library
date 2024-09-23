@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace libraryApp.backend.Entity
+﻿namespace libraryApp.backend.Entity
 {
     public class User
     {
         public int id { get; set; }
         public int roleId { get; set; }
-        public string roleName { get; set; }
         public string name { get; set; } = string.Empty;
         public string surname { get; set; } = string.Empty;
         public string email { get; set; } = string.Empty;
