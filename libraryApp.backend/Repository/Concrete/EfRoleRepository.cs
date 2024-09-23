@@ -7,7 +7,9 @@ namespace libraryApp.backend.Repository.Concrete
 {
     public class EfRoleRepository : IRoleRepository
     {
-        public IQueryable<Role> Roles => _context.Roles;
+        
+        public IQueryable<Role> GetAllRolesAsync => _context.Roles;
+
         private  readonly LibraryDbContext _context;
 
         public EfRoleRepository(LibraryDbContext context)
