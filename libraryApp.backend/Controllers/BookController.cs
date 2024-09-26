@@ -227,5 +227,36 @@ namespace libraryApp.backend.Controllers
 
             return Ok(new { Message = "Book created successfully!", BookId = book.id });
         }
+        [HttpPost("requestBook")]
+        public async Task<IActionResult> RequestBorrowingBook([FromBody] LoanRequestDTO loanRequestDTO)
+        {
+            var user = await _userRepository.GetUseridAsync(loanRequestDTO.userId);
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            var book = await _bookRepository.GetBookById(loanRequestDTO.bookId);
+            if(book == null)
+            {
+                return NotFound();
+            }
+            var existingRequest = await _loanRequestRepository.GetLoanRequestByUserAndBook(loanRequestDTO.userId, loanRequestDTO.bookId);
+            if(existingRequest != null && !existingRequest.isReturned)
+            {
+                return Conflict(new { Message = "You have already sent borrowing request" });
+            }
+            var newLoanRequest = new LoanRequest
+            {
+                userId = loanRequestDTO.userId,
+                bookId = book.id,
+                requestDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                returnDate = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(14)),
+                isReturned = false,
+                confirmation = false,
+                pending = true
+            };
+            return Ok(new { Message = "Loan request submitted successfully!" });
+        }
     }
 }
