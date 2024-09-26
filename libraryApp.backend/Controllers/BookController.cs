@@ -258,5 +258,27 @@ namespace libraryApp.backend.Controllers
             };
             return Ok(new { Message = "Loan request submitted successfully!" });
         }
+        [HttpPost("setBorrowRequest")]
+        public async Task<IActionResult> SetBorrowRequest([FromBody] BorrowRequestUpdateDTO borrowRequestUpdateDTO)
+        {
+            var loanRequest = await _loanRequestRepository.GetLoanRequestById(borrowRequestUpdateDTO.requestId);
+            if(loanRequest == null)
+            {
+                return NotFound();
+            }
+            if (borrowRequestUpdateDTO.confirmation)
+            {
+                loanRequest.confirmation = true;
+                loanRequest.pending = false;
+                loanRequest.isReturned = false;
+            }
+            else
+            {
+                loanRequest.pending = false;
+                loanRequest.confirmation = false;
+            }
+            await _loanRequestRepository.UpdateLoanRequest(loanRequest);
+            return Ok(new { Message = borrowRequestUpdateDTO.confirmation ? "Loan request approved successfully!" : "Loan request rejected successfully!" });
+        }
     }
 }
