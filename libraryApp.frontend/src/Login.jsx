@@ -1,7 +1,6 @@
 import React from 'react'
 import { MdOutlineLocalLibrary } from "react-icons/md";
 
-
 const Login = () => {
   return (
     <div className='place-self-center bg-white h-[550px] w-[450px] p-20 rounded-xl flex flex-col gap-4 '>
