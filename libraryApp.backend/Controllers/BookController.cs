@@ -18,18 +18,18 @@ namespace libraryApp.backend.Controllers
         private readonly IBookPublishRequestRepository _bookPublishRequestRepository;
         private readonly IPageRepository _pageRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
+        private readonly ILoanRequestRepository _loanRequestRepository;
 
         public BookController(IBookRepository bookRepository, IBookAuthorRepository bookAuthorRepository,
             IBookPublishRequestRepository bookPublishRequestRepository, IPageRepository pageRepository,
-            IUserRepository userRepository, IMapper mapper)
+            IUserRepository userRepository, ILoanRequestRepository loanRequestRepository)
         {
             _bookRepository = bookRepository;
             _bookAuthorRepository = bookAuthorRepository;
             _bookPublishRequestRepository = bookPublishRequestRepository;
             _pageRepository = pageRepository;
             _userRepository = userRepository;
-            _mapper = mapper;
+            _loanRequestRepository = loanRequestRepository;
         }
 
         [HttpGet]
@@ -185,6 +185,30 @@ namespace libraryApp.backend.Controllers
             await _pageRepository.AddPage(page);
 
             return Ok(new { Message = "Page added successfully!" });
+        }
+        [HttpPut("returnBook")]
+        public async Task<IActionResult> ReturnBook([FromBody] ReturnBookDTO returnBookDTO)// elimizde kitap ve kullanıcı id si var 
+        {
+            var loan = await _loanRequestRepository.GetLoanRequestById(returnBookDTO.bookId);
+            if(loan == null)
+            {
+                return NotFound();
+            }
+            if (loan.isReturned)
+            {
+                return BadRequest("Book is already returned.");
+            }
+            
+            loan.isReturned = true;
+            await _loanRequestRepository.UpdateLoanRequest(loan);
+
+            var book = await _bookRepository.GetBookById(returnBookDTO.bookId);
+            if(book != null)
+            {
+                book.status = true;
+                await _bookRepository.UpdateBook(book);
+            }
+            return Ok(new { Message = "Book returned succesfully!" });
         }
     }
 }
