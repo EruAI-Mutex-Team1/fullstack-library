@@ -5,6 +5,17 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
+// Add CORS services to the container
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("TestOrigin",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") // Replace with your frontend domain
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 builder.Services.AddControllers();
 builder.Services.AddDbContext<LibraryDbContext>(options =>
 {
