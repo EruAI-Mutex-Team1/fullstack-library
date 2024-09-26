@@ -210,5 +210,22 @@ namespace libraryApp.backend.Controllers
             }
             return Ok(new { Message = "Book returned succesfully!" });
         }
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateBook([FromBody] Book book)
+        {
+            if (book == null || string.IsNullOrEmpty(book.title) || string.IsNullOrEmpty(book.type))
+            {
+                return BadRequest(new { Message = "Invalid book data. Title and Type are required." });
+            }
+
+            if (book.BookAuthors == null || !book.BookAuthors.Any())
+            {
+                return BadRequest(new { Message = "A book must have at least one author." });
+            }
+
+            await _bookRepository.AddBook(book);
+
+            return Ok(new { Message = "Book created successfully!", BookId = book.id });
+        }
     }
 }
