@@ -8,7 +8,7 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfPunishRepository : IPunishRepository
     {
 
-        public IQueryable<Punishment> GetAllPunishments => _context.Punishments;
+        public IQueryable<Punishment> GetAllPunishmentsAsync => _context.Punishments;
 
         private readonly LibraryDbContext _context;
 

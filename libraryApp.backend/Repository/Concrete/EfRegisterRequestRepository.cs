@@ -9,7 +9,8 @@ namespace libraryApp.backend.Repository.Concrete
     {
 
 
-        public IQueryable<RegisterRequest> GetAllRegisterRequests => _context.RegisterRequests;
+        public IQueryable<RegisterRequest> GetAllRegisterRequestsAsync => _context.RegisterRequests;
+
         private readonly LibraryDbContext _context;
 
         public EfRegisterRequestRepository(LibraryDbContext context)
@@ -58,5 +59,8 @@ namespace libraryApp.backend.Repository.Concrete
                 throw new ArgumentException("Record doesn't found");
             
         }
+
+      
+      
     }
 }

@@ -1,12 +1,12 @@
 ﻿namespace libraryApp.backend.Entity
 {
-    public class RegisterRequest  //Kayıt Talep
+    public class RegisterRequest  
     {
         public int id { get; set; }
         public int userId { get; set; }
         public DateOnly responseDate { get; set; }
-        public bool confirmation { get; set; }  //onaylamak
-        public bool pending { get; set; }    //beklemede
+        public bool confirmation { get; set; } 
+        public bool pending { get; set; }    
 
         public User? User { get; set; }
     }
