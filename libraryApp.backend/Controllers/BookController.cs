@@ -305,5 +305,39 @@ namespace libraryApp.backend.Controllers
 
             return CreatedAtAction(nameof(RequestPublishment), new { id = newBook.id }, newPublishRequest);
         }
+
+        [HttpPost("setpublishing/{requestId}")]
+        public async Task<IActionResult> SetPublishing(int requestId, [FromBody] SetPublishingDTO publishingDto)
+        {
+            var publishRequest = await _bookPublishRequestRepository.GetBookPublishRequestById(requestId);
+
+            if (publishRequest == null)
+            {
+                return NotFound();
+            }
+
+            if (!publishRequest.pending)
+            {
+                return BadRequest(new { Message = "Publish request has already checked." });
+            }
+
+            publishRequest.confirmation = publishingDto.confirmation;
+            publishRequest.pending = false;
+
+            if (publishingDto.confirmation)
+            {
+                var book = await _bookRepository.GetBookById(publishRequest.bookId);
+                if (book != null)
+                {
+                    book.status = true;
+                    await _bookRepository.UpdateBook(book);
+                }
+            }
+
+            await _bookPublishRequestRepository.UpdateBookPublishRequest(publishRequest);
+
+            return Ok(new { Message = "Publish request updated.", Confirmation = publishRequest.confirmation });
+        }
+
     }
 }
