@@ -4,15 +4,15 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {
-      //to add bg image
-      backgroundImage: {
-        'hero-pattern': "url('loginback.jpg')",
-      },
+   theme: {
+     extend: {
+       //to add bg image
+       backgroundImage: {
+         'hero-pattern': "url('loginback.jpg')",
+       },
      
-  },
-  },
-  plugins: [],
+   },
+   },
+   plugins: [],
 }
 
