@@ -211,21 +211,28 @@ namespace libraryApp.backend.Controllers
             return Ok(new { Message = "Book returned succesfully!" });
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreateBook([FromBody] Book book)
+        public async Task<IActionResult> CreateBook([FromBody]  BookSearchDTO bookSearchDTO)
         {
-            if (book == null || string.IsNullOrEmpty(book.title) || string.IsNullOrEmpty(book.type))
+            if (bookSearchDTO == null || string.IsNullOrEmpty(bookSearchDTO.title) || string.IsNullOrEmpty(bookSearchDTO.type))
             {
                 return BadRequest(new { Message = "Invalid book data. Title and Type are required." });
             }
 
-            if (book.BookAuthors == null || !book.BookAuthors.Any())
+            if (bookSearchDTO.BookAuthors == null || !bookSearchDTO.BookAuthors.Any())
             {
                 return BadRequest(new { Message = "A book must have at least one author." });
             }
 
-            await _bookRepository.AddBook(book);
+            var newBook = new Book 
+            {
+                title = bookSearchDTO.title,
+                type = bookSearchDTO.type,
+                number_of_pages = bookSearchDTO.number_of_pages
+            };
 
-            return Ok(new { Message = "Book created successfully!", BookId = book.id });
+            await _bookRepository.AddBook(newBook);
+
+            return Ok(new { Message = "Book created successfully!"});
         }
         [HttpPost("requestBook")]
         public async Task<IActionResult> RequestBorrowingBook([FromBody] LoanRequestDTO loanRequestDTO)
