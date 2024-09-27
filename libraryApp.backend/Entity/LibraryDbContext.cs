@@ -31,5 +31,19 @@ namespace libraryApp.backend.Entity
         {
 
         }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Role>().HasData(
+
+               new Role { id = 1, name = "member" },
+                new Role { id = 2, name = "author" },
+                new Role { id = 3, name = "staff" },
+                new Role { id = 4, name = "manager" }
+                );
+        }
     }
 }

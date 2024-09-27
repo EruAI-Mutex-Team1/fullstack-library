@@ -4,7 +4,7 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IUserRepository
     {
-        IQueryable<User> Users { get; }
+        IQueryable<User> GetAllUsersAsync { get; }
         Task<User> GetUseridAsync(int id);
         Task CreateUserAsync(User user);
         Task DeleteUserAsync(int id);
