@@ -1,4 +1,5 @@
-﻿using libraryApp.backend.Entity;
+﻿using AutoMapper;
+using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,8 +8,6 @@ namespace libraryApp.backend.Repository.Concrete
     public class EfBookPublishRequestRepository : IBookPublishRequestRepository
     {
         private readonly LibraryDbContext _context;
-
-
 
         public EfBookPublishRequestRepository(LibraryDbContext context)
         {
