@@ -1,6 +1,6 @@
 ﻿namespace libraryApp.backend.Entity
 {
-    public class LoanRequest   // Talep merkezi
+    public class LoanRequest
     {
         public int id { get; set; }
         public int userId { get; set; }
