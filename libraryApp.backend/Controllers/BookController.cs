@@ -280,5 +280,30 @@ namespace libraryApp.backend.Controllers
             await _loanRequestRepository.UpdateLoanRequest(loanRequest);
             return Ok(new { Message = borrowRequestUpdateDTO.confirmation ? "Loan request approved successfully!" : "Loan request rejected successfully!" });
         }
+        [HttpPost("requestpublishment")]
+        public async Task<IActionResult> RequestPublishment([FromBody] RequestPublishmentDTO requestDto)
+        {
+            var newBook = new Book
+            {
+                title = requestDto.title,
+                type = requestDto.type,
+                number_of_pages = requestDto.number_of_pages,
+                status = false   
+            };
+
+            await _bookRepository.AddBook(newBook);
+
+            var newPublishRequest = new BookPublishRequest
+            {
+                bookId = newBook.id,
+                requestDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                confirmation = false,
+                pending = true
+            };
+
+            await _bookPublishRequestRepository.AddBookPublishRequest(newPublishRequest);
+
+            return CreatedAtAction(nameof(RequestPublishment), new { id = newBook.id }, newPublishRequest);
+        }
     }
 }
