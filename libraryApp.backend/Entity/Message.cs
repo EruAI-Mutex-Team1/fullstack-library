@@ -11,6 +11,5 @@
         public bool isRead { get; set; }
 
         public User? sender { get; set; }
-        public User? reciever { get; set; }
     }
 }
