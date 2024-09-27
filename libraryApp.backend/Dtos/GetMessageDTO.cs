@@ -1,0 +1,15 @@
+﻿using libraryApp.backend.Entity;
+
+namespace libraryApp.backend.Dtos
+{
+    public class GetMessageDTO
+    {
+        public string title { get; set; } = string.Empty;
+        public string content { get; set; } = string.Empty;
+        public DateOnly sendingDate { get; set; }
+        public bool isRead { get; set; }
+
+        public User? sender { get; set; }
+        public User? reciever { get; set; }
+    }
+}
