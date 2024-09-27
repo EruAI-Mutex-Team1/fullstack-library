@@ -1,4 +1,5 @@
 ﻿using libraryApp.backend.Dtos;
+using libraryApp.backend.Entity;
 using libraryApp.backend.Repository.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -70,10 +71,35 @@ namespace libraryApp.backend.Controllers
                 title = m.title,
                 content = m.content,
                 sendingDate = m.sendingDate,
+                isRead = m.isRead,
+                sender = m.sender,
+                reciever = m.reciever
             }).ToList();
 
             return Ok(messageDTO);
         }
 
+        [HttpPost("sendMessage")]
+        public async Task<IActionResult> SendMessage([FromBody] SendMessageDTO messageDto)
+        {
+            if (messageDto == null || string.IsNullOrEmpty(messageDto.title) || string.IsNullOrEmpty(messageDto.content))
+            {
+                return BadRequest(new { Message = "Message information is missing or invalid." });
+            }
+
+            var newMessage = new Message
+            {
+                title = messageDto.title,
+                content = messageDto.content,
+                sendingDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                senderId = messageDto.senderId,
+                recieverId = messageDto.receiverId
+            };
+
+            await _messageRepository.AddMessage(newMessage);
+            await _messageRepository.UpdateMessage(newMessage);
+
+            return CreatedAtAction(nameof(GetMessageById), new { id = newMessage.id }, newMessage);
+        }
     }
 }
