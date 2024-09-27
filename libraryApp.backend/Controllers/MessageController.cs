@@ -101,5 +101,28 @@ namespace libraryApp.backend.Controllers
 
             return CreatedAtAction(nameof(GetMessageById), new { id = newMessage.id }, newMessage);
         }
+        [HttpGet("getinbox/{userId}")]
+        public async Task<IActionResult> GetInbox(int userId)
+        {
+            var messages = await _messageRepository.GetAllMessages
+                                                   .Where(m => m.recieverId == userId)
+                                                   .ToListAsync();
+
+            if (messages == null || !messages.Any())
+            {
+                return NotFound();
+            }
+
+            var messageDTOs = messages.Select(m => new GetMessageDTO
+            {
+                title = m.title,
+                content = m.content,
+                sendingDate = m.sendingDate,
+                isRead = m.isRead
+            }).ToList();
+
+            return Ok(messageDTOs);
+        }
+
     }
 }
