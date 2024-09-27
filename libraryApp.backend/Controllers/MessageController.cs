@@ -34,5 +34,24 @@ namespace libraryApp.backend.Controllers
             }).ToList();
             return Ok(messageDTO);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetMessageById(int id)
+        {
+            var message = await _messageRepository.GetMessageById(id);
+            if (message == null)
+            {
+                return NotFound();
+            }
+            GetMessageDTO getMessageDTO = new GetMessageDTO
+            {
+                title = message.title,
+                content = message.content,
+                sendingDate = message.sendingDate,
+                isRead = message.isRead,
+                sender = message.sender,
+                reciever = message.reciever
+            };
+            return Ok(getMessageDTO);
+        }
     }
 }
