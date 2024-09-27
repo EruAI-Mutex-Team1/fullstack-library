@@ -14,7 +14,7 @@ namespace libraryApp.backend.Repository.Concrete
         {
             _context = context;
         }
-        public IQueryable<Role> Roles => _context.Roles;
+        public IQueryable<Role> GetAllRolesAsync => _context.Roles;
 
         public async Task CreateRoleAsync(Role role)
         {

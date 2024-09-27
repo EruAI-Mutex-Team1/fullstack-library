@@ -15,7 +15,7 @@ namespace libraryApp.backend.Repository.Concrete
             _context = context;
         }
 
-        public IQueryable<Punishment> GetAllPunishments => _context.Punishments;
+        public IQueryable<Punishment> GetAllPunishmentsAsync => _context.Punishments;
 
         public async Task<Punishment> GetByIdAsync(int id)
         {
