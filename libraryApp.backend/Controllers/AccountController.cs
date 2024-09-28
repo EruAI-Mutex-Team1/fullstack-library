@@ -6,22 +6,29 @@ using libraryApp.backend.Entity;
 using Org.BouncyCastle.Crypto.Generators;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using Microsoft.IdentityModel.Tokens;
+using static Org.BouncyCastle.Math.EC.ECCurve;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 
 namespace libraryApp.backend.Controllers
 {
 
-    [Route("api/[controller]")]
+    
     [ApiController]
+    [Route("api/[controller]")]
 
     public class AccountController:ControllerBase
     {
         private readonly IUserRepository _userRepo;
         private readonly IRegisterRequestRepository _registerRequestRepository;
-
-        public AccountController (IUserRepository userRepo,IRegisterRequestRepository registerRequestRepository)
+        readonly IConfiguration _config;
+        public AccountController (IUserRepository userRepo,IRegisterRequestRepository registerRequestRepository,IConfiguration config)
         {
             _userRepo = userRepo;
+            _config = config;
             _registerRequestRepository = registerRequestRepository;
         }
 
@@ -47,12 +54,12 @@ namespace libraryApp.backend.Controllers
               
             };
 
-          //  string token = GenerateJWT(user);
+            string token = GenerateJWT(user);
 
             return Ok(new
             {
-                userDTO = userDto
-               // token = token,
+                userDTO = userDto,
+                token = token
             });
         }
 
@@ -78,11 +85,6 @@ namespace libraryApp.backend.Controllers
         
         }
 
-
-        //Bu kısımda GenereteJwt var bak buna 
-
-
-
         [HttpGet("getaccountcreationrequests")]
 
         public async Task<ActionResult<List<RegisterRequest>>> GetAccountCreationRequests()
@@ -102,6 +104,26 @@ namespace libraryApp.backend.Controllers
             request.confirmation = userRequestDto.isApproved;
            await _registerRequestRepository.UpdateAsync(request);
             return Ok(); //201
+        }
+
+
+
+        private string GenerateJWT(User user)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Secret").Value ?? "");
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity([
+                    new Claim("roleName", user.Role.name.ToString()),
+                    new Claim("status", user.userStatus.ToString()),
+                ]),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
     }

@@ -8,8 +8,9 @@ using libraryApp.backend.Repository.Concrete;
 
 namespace libraryApp.backend.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
+    [Route("api/[controller]")]
 
     public class UserController : ControllerBase
     {
@@ -35,9 +36,7 @@ namespace libraryApp.backend.Controllers
             var user = await _userRepo.GetUseridAsync(changeRoleDto.userId);
             if (user == null) 
                 return NotFound(new { Message = "User could not found" });
-            //Manager olduğunu düşünelim
-            //if (user.RoleId == 5) return BadRequest(new { Message = "You cannot change the role of this user." });  //id 5 managerdan geliyormus            if (!_roleRepo.Roles.Any(r => r.id == changeRoleDto.newRoleId))
-               if(!_roleRepo.GetAllRolesAsync.Any(r=>r.id==changeRoleDto.newRoleId))
+            if(!_roleRepo.GetAllRolesAsync.Any(r=>r.id==changeRoleDto.newRoleId))
                 return NotFound(new { Message = "Role could not found" });
 
             user.roleId = changeRoleDto.newRoleId;
@@ -126,46 +125,7 @@ namespace libraryApp.backend.Controllers
             }));
         }
 
-        //[HttpGet("getusersforlowserrole")]
-        //public async Task<IActionResult> GetUsersForPunishment()
-        //{
-        //    var users = await _userRepo.GetAllUsersAsync();
-
-        //    // Ceza almış veya ceza alma riski taşıyan kullanıcıları filtreleme
-        //    var punishedUsers = users.Where(u => u.HasPunishment || /* ceza alma durumu kontrolü */).Select(u => new
-        //    {
-        //        u.Id,
-        //        u.Username,
-        //        Punishments = u.Punishments.Select(p => new
-        //        {
-        //            p.Type,
-        //            p.Date // Ceza türü ve tarihi
-        //        }).ToList()
-        //    }).ToList();
-
-        //    return Ok(punishedUsers);
-        //}
-
-
-
-
-        //[HttpGet("getusersforrolechanging")]
-        //public async Task<IActionResult> GetUsersForRoleChanging()
-        //{
-        //    var users = await _userRepo.GetAllUsersAsync();
-
-        //    // Rol değiştirme için uygun kullanıcıları filtreleme
-        //    var eligibleForRoleChange = users.Where(u => /* rol değiştirme uygunluk kontrolü */).Select(u => new
-        //    {
-        //        u.Id,
-        //        u.Username,
-        //        CurrentRole = u.Role.Name // Kullanıcının mevcut rolü
-        //    }).ToList();
-
-        //    return Ok(eligibleForRoleChange);
-        //}
-
-
+        
 
 
 
