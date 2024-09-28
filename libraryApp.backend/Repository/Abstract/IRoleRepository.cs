@@ -4,8 +4,7 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IRoleRepository
     {
-        IQueryable<Role> Roles { get; }
-
+        IQueryable<Role> GetAllRolesAsync { get; }
         Task<Role> GetRoleIdAsync(int id);
         Task CreateRoleAsync(Role role);
         Task DeleteRoleAsync(int id);

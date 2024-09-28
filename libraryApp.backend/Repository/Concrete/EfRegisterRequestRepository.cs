@@ -15,8 +15,8 @@ namespace libraryApp.backend.Repository.Concrete
         {
             _context = context;
         }
-        public IQueryable<RegisterRequest> GetAllRegisterRequests => _context.RegisterRequests;
-        
+        public IQueryable<RegisterRequest> GetAllRegisterRequestsAsync => _context.RegisterRequests;
+
         public async Task<Role> GetAdminByIdAsync(int id)
         {
             return await _context.Roles.FindAsync(id);
@@ -58,5 +58,8 @@ namespace libraryApp.backend.Repository.Concrete
                 throw new ArgumentException("Record doesn't found");
             
         }
+
+      
+      
     }
 }

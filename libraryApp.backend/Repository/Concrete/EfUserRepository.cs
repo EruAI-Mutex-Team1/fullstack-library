@@ -7,9 +7,15 @@ namespace libraryApp.backend.Repository.Concrete
 {
     public class EfUserRepository : IUserRepository
     {
-        public IQueryable<User> Users => _context.Users;
+       
+        public IQueryable<User> GetAllUsersAsync => _context.Users;
+
         private readonly LibraryDbContext _context;
-        
+        public EfUserRepository(LibraryDbContext context)
+        {
+            _context = context;
+        }
+
 
         public async Task CreateUserAsync(User user)
         {
