@@ -30,8 +30,7 @@ namespace libraryApp.backend.Controllers
                 content = m.content,
                 sendingDate = m.sendingDate,
                 isRead = m.isRead,
-                sender = m.sender,
-                reciever = m.reciever,
+                sender = m.sender
             }).ToList();
             return Ok(messageDTO);
         }
@@ -49,8 +48,7 @@ namespace libraryApp.backend.Controllers
                 content = message.content,
                 sendingDate = message.sendingDate,
                 isRead = message.isRead,
-                sender = message.sender,
-                reciever = message.reciever
+                sender = message.sender
             };
             return Ok(getMessageDTO);
         }
@@ -72,8 +70,7 @@ namespace libraryApp.backend.Controllers
                 content = m.content,
                 sendingDate = m.sendingDate,
                 isRead = m.isRead,
-                sender = m.sender,
-                reciever = m.reciever
+                sender = m.sender
             }).ToList();
 
             return Ok(messageDTO);
