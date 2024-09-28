@@ -4,7 +4,7 @@ namespace libraryApp.backend.Repository.Abstract
 {
     public interface IPunishRepository
     {
-        IQueryable<Punishment> GetAllPunishments { get; }
+        IQueryable<Punishment> GetAllPunishmentsAsync { get; }
         Task<Punishment> GetByIdAsync(int id);
         Task CreatePunishAsync(Punishment punish);
         Task UpdatePunishAsync(Punishment punish);
