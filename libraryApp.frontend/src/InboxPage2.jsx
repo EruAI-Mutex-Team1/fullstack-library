@@ -1,6 +1,7 @@
 import React from 'react'
 
 const InboxPage2 = () => {
+
   return (
     <div>
         <nav className='bg-black text-white h-24 flex items-center justify-between'>
@@ -28,11 +29,7 @@ const InboxPage2 = () => {
 
   <div className="container p-4"> 
       <form className="bg-slate-300 space-x-5 h-screen">
-        <div className='flex flex-row gap-x-20'>
-          <label className="flex-auto text-md font-bold ml-10 mt-5">[1 Okunmamış Mesaj]</label>
-          {/* <h2 className="text-l font-bold pr-5 ml-10 mt-5"> GörevliAdı Zehra</h2> */}
-        </div>
-    
+        <label className="flex-auto text-md font-bold ml-10 mt-5">[1 Okunmamış Mesaj]</label>           
         <ul className="p-4 space-y-2 ">
           <li className="p-4 bg-black rounded shadow">
             <article className='p-4 flex justify-between items-center'>
@@ -75,7 +72,7 @@ const InboxPage2 = () => {
   </div>
   <div className=' bg-slate-300 space-x-5 h-screen mt-4 w-3/4 flex flex-col space-y-3'>  
    <form className='bg-slate-500 h-auto border-spacing-3 rounded flex flex-auto justify-between gap-3'>
-    <h3 className="  text-black font-semibold ml-2 mt-2">Kitap Ödünç Alma Talebiniz Hakkında</h3>
+    <h3 className="  text-black font-semibold ml-2 mt-2">Kitap Ödünç Alma Talebi</h3>
     <h3 className="  text-black font-semibold ml-4 mt-2">GörevliAdı Abdurrahman</h3>
    </form>
    <form className='bg-slate-500 min-h-screen mx-3'>
