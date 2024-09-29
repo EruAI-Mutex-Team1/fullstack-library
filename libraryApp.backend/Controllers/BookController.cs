@@ -85,6 +85,7 @@ namespace libraryApp.backend.Controllers
 
             List<BookSearchDTO> BookDtos = books.Select(b => new BookSearchDTO
             {
+                id = b.id,
                 title = b.title,
                 type = b.type,
                 number_of_pages=b.number_of_pages,
@@ -107,7 +108,7 @@ namespace libraryApp.backend.Controllers
                 Select(b => b.Book);
 
             List<BookSearchDTO> BookDtos = books.Select(book => new BookSearchDTO
-            {
+            {   id= book.id,
                 title = book.title,
                 type = book.type,
                 number_of_pages = book.number_of_pages,

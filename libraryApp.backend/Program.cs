@@ -61,16 +61,6 @@ builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 builder.Services.AddScoped<IRegisterRequestRepository, EfRegisterRequestRepository>();
 builder.Services.AddScoped<IPunishRepository, EfPunishRepository>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("Origin",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:5173/").AllowAnyHeader().AllowAnyMethod();
-        });
-});
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -81,7 +71,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("Origin");
+app.UseCors("TestOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
 
