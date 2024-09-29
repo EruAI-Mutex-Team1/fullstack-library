@@ -19,6 +19,11 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(user),
         });
+
+        if(yanit.ok){
+          const user = yanit.json();
+          localStorage.setItem("user", Json.stringify(user));
+        }
       }
 
   return (
