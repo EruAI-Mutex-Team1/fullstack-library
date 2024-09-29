@@ -30,6 +30,11 @@ function App() {
             <Borrowed />
           </div>
         }></Route>
+        <Route path="ChangeRole" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <Changerole/>
+          </div>
+        }></Route>
       </Routes>
     </BrowserRouter>
   )

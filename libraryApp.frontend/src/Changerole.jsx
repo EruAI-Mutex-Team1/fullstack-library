@@ -1,6 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Changerole = () => {
+   const[users,setusers]=useState([]);
+
+   const fetchUsers= async ()=>{
+    const yanit = await fetch(`http://localhost:5249/api/User/getusersforrolechanging/2`, {
+      method:"GET"
+    });
+    if(yanit.ok){
+      const users= yanit.json();
+      setusers[users];
+    }
+   };
+  
+
+
+   useEffect(
+    ()=>{fetchUsers()},
+    [])
+
   return (
     <div>
         <nav className='bg-black text-white h-24 flex items-center justify-between'>
@@ -30,12 +48,21 @@ const Changerole = () => {
           <form className='text-white bg-[#3953882c]  border-2 border-black h-[600px] w-[1000px] flex flex-col py-7 px-7 gap-6 ml-[120px] mt-[40px]'>
            <div className='flex flex-col'>
             <label >SELECT USER</label>
-            <select className=' bg-[#0b265d5e] w-[800px] hover:bg-[#2d374b5a] '></select>
+            <select className=' bg-[#0b265d5e] w-[800px] hover:bg-[#2d374b5a] '>
+              {users.map((user,index)=>(
+                 <option value={user.userId} >{user.fullname + " "+ user.roleName}</option>
+              ))}
+            </select>
             </div> 
             
             <div className='flex flex-col py-3'>
             <label>ROLES</label>
-            <select className=' bg-[#0b265d5e] w-[800px] hover:bg-[#2d374b5a] '></select>
+            <select className=' bg-[#0b265d5e] w-[800px] hover:bg-[#2d374b5a] '>
+              <option value="1" >MEMBER</option>
+              <option value="2" >MANAGER</option>
+              <option value="3" >STAFF</option>
+              <option value="4" >AUTHOR</option>
+            </select>
             </div> 
 
             <button className='bg-[#0f123c] rounded-sm py-1 hover:bg-[#0f123cd1] w-[120px]  ml-[670px] mt-[50px]'>UPDATE</button>
