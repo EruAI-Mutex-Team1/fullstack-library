@@ -32,15 +32,16 @@ function App() {
           </div>
         }></Route> */}
         <Route path="Inbox" element={
-          <div >
+          <div className="bg-[#d8d8d8] min-h-screen grid">
             <InboxPage2 />
           </div>
         }></Route>
         <Route path="ChangeRole" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
-            <Changerole/>
+            <Changerole />
           </div>
         }></Route>
+
       </Routes>
     </BrowserRouter>
   )
