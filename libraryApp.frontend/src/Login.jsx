@@ -3,6 +3,24 @@ import { MdOutlineLocalLibrary } from "react-icons/md";
 
 
 const Login = () => {
+
+    const [username, setusername] = useState("");
+    const [password, setpassword] = useState("");
+
+    const uyesor = async () => {
+
+        const user = {
+          username: username,
+          password: password,
+        }
+    
+        const yanit = await fetch(`http://localhost:5249/api/Account/Login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        });
+      }
+
   return (
     <div className='place-self-center bg-white h-[550px] w-[450px] p-20 rounded-xl flex flex-col gap-4 '>
       {/* title */}
@@ -14,12 +32,12 @@ const Login = () => {
        tracking-wide p-8 flex flex-col gap-5 border border-blue-300 cursor-pointer'>
         <div>
             <label>KULLANICI ADI</label>
-            <input type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
+            <input onChange={e => setusername(e.target.value)} type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
              hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
         </div>
         <div>
             <label>PAROLA</label>
-            <input type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
+            <input onChange={e => setpassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
              transition-all focus: outline-none'></input>
         </div>    
             <button className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[230px]
@@ -27,7 +45,7 @@ const Login = () => {
         </form>
       
     </div>
-  )
+    )
 }
 
 export default Login
