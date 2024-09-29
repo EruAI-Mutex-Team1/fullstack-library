@@ -8,11 +8,9 @@ const WritePage2 = () => {
   const [content, setContent] = useState("");
   const [pageNum, setPageNum] = useState(0);
 
-
-
   useEffect(() => {
     const kitabiAl = async () => {
-      const yanit = await fetch("http://localhost:5249/api/Book/" + "2", {
+      const yanit = await fetch(`http://localhost:5249/api/Book/${2}`, {
         method: "GET",
       });
 
@@ -40,6 +38,13 @@ const WritePage2 = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(page),
     });
+
+    if(yanit.ok)
+    {
+      console.log("sayfa eklendi");
+    }else{
+      console.log("sayfa eklenemedi");
+    }
   }
 
   return (
@@ -89,7 +94,7 @@ const WritePage2 = () => {
                 <input type="file" className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
               </label>
             </div>
-            <button className='bg-green-700 hover:bg-green-800 h-10 w-auto p-2 text-slate-50 rounded'> Kaydet
+            <button onClick={sayfaEkle} className='bg-green-700 hover:bg-green-800 h-10 w-auto p-2 text-slate-50 rounded'> Kaydet
             </button>
           </form>
         </form>
