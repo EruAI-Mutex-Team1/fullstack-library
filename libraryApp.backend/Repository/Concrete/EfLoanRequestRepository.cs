@@ -53,5 +53,10 @@ namespace libraryApp.backend.Repository.Concrete
                 throw new ArgumentException("Loan request not found");
             }
         }
+        public async Task<LoanRequest?> GetLoanRequestByUserAndBook(int userId, int bookId)
+        {
+            return await _context.LoanRequests
+                .FirstOrDefaultAsync(lr => lr.userId == userId && lr.bookId == bookId && !lr.isReturned);
+        }
     }
 }

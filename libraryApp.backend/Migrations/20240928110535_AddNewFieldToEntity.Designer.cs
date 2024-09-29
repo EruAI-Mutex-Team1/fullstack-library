@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using libraryApp.backend.Entity;
@@ -11,9 +12,11 @@ using libraryApp.backend.Entity;
 namespace libraryApp.backend.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240928110535_AddNewFieldToEntity")]
+    partial class AddNewFieldToEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,10 +191,6 @@ namespace libraryApp.backend.Migrations
                     b.Property<int>("bookId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("pageNumber")
                         .HasColumnType("integer");
 
@@ -233,9 +232,6 @@ namespace libraryApp.backend.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<int>("fineAmount")
-                        .HasColumnType("integer");
 
                     b.Property<bool>("isActive")
                         .HasColumnType("boolean");
@@ -295,28 +291,6 @@ namespace libraryApp.backend.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 1,
-                            name = "member"
-                        },
-                        new
-                        {
-                            id = 2,
-                            name = "author"
-                        },
-                        new
-                        {
-                            id = 3,
-                            name = "staff"
-                        },
-                        new
-                        {
-                            id = 4,
-                            name = "manager"
-                        });
                 });
 
             modelBuilder.Entity("libraryApp.backend.Entity.User", b =>

@@ -9,5 +9,6 @@ namespace libraryApp.backend.Repository.Abstract
         Task AddLoanRequest(LoanRequest loanRequest);
         Task UpdateLoanRequest(LoanRequest loanRequest);
         Task DeleteLoanRequest(int id);
+        Task<LoanRequest?> GetLoanRequestByUserAndBook(int userId, int bookId);
     }
 }
