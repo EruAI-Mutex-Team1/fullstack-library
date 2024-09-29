@@ -1,4 +1,4 @@
- import React, { useEffect ,useState} from 'react'
+ import React, {  useState} from 'react'
  import { MdOutlineLocalLibrary } from "react-icons/md";
 
 
@@ -15,6 +15,7 @@
 
     const user = {
       
+      uyeid:2,
       name: name,
       surname: surname,
       username: username,

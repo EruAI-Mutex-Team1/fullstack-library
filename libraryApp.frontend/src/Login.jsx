@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdOutlineLocalLibrary } from "react-icons/md";
 
 
@@ -17,11 +17,11 @@ const Login = () => {
         const yanit = await fetch(`http://localhost:5249/api/Account/Login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(user),
+          body: Json.stringify(user),
         });
 
         if(yanit.ok){
-          const user = yanit.json();
+          const user = await yanit.json();
           localStorage.setItem("user", Json.stringify(user));
         }
       }
