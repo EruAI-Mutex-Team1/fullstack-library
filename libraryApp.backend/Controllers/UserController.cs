@@ -19,7 +19,7 @@ namespace libraryApp.backend.Controllers
         private readonly IPunishRepository _punishRepo;
 
 
-        public UserController(IRoleRepository roleRepo, IUserRepository userRepo,IPunishRepository punishRepo)
+        public UserController(IRoleRepository roleRepo, IUserRepository userRepo, IPunishRepository punishRepo)
         {
             _userRepo = userRepo;
             _roleRepo = roleRepo;
@@ -33,11 +33,11 @@ namespace libraryApp.backend.Controllers
         public async Task<IActionResult> ChangeRole(ChangeRoleDto changeRoleDto)
         {
             var user = await _userRepo.GetUseridAsync(changeRoleDto.userId);
-            if (user == null) 
+            if (user == null)
                 return NotFound(new { Message = "User could not found" });
             //Manager olduğunu düşünelim
             //if (user.RoleId == 5) return BadRequest(new { Message = "You cannot change the role of this user." });  //id 5 managerdan geliyormus            if (!_roleRepo.Roles.Any(r => r.id == changeRoleDto.newRoleId))
-               if(!_roleRepo.GetAllRolesAsync.Any(r=>r.id==changeRoleDto.newRoleId))
+            if (!_roleRepo.GetAllRolesAsync.Any(r => r.id == changeRoleDto.newRoleId))
                 return NotFound(new { Message = "Role could not found" });
 
             user.roleId = changeRoleDto.newRoleId;
@@ -68,13 +68,13 @@ namespace libraryApp.backend.Controllers
             }
             else //caza aktif ama ceza kalmısşsa onun aktifliğini döndürüyor
             {
-                var punishment = await  _punishRepo.GetAllPunishmentsAsync.FirstOrDefaultAsync(p => p.userId == punishDto.userId);
+                var punishment = await _punishRepo.GetAllPunishmentsAsync.FirstOrDefaultAsync(p => p.userId == punishDto.userId);
                 if (punishment == null)
                     return NotFound();
                 punishment.isActive = false;
-               await  _punishRepo.UpdatePunishAsync(punishment);
+                await _punishRepo.UpdatePunishAsync(punishment);
             }
-        
+
 
             return Ok();
         }
@@ -86,12 +86,12 @@ namespace libraryApp.backend.Controllers
             //1=üye 2=yönetici 3=görevli 4=yazar
             int[] rolesToMessage = roleId == 1 ? [3] : roleId == 2 ? [3, 4] : roleId == 3 ? [1, 2, 4] : roleId == 4 ? [2, 3] : [0];
 
-            var users = await _userRepo.GetAllUsersAsync.Where(u => rolesToMessage.Contains(u.roleId)).ToListAsync(); //filtreleme oluyor  userlar arasındaki roller arraye göre filtrelendi
-            return Ok(users.Select(u=>new UserFDto
+            var users = await _userRepo.GetAllUsersAsync.Where(u => rolesToMessage.Contains(u.roleId)).Include(u => u.Role).ToListAsync(); //filtreleme oluyor  userlar arasındaki roller arraye göre filtrelendi
+            return Ok(users.Select(u => new UserFDto
             {
-                userId=u.id,
-                fullname=u.name+u.surname,
-                roleName=u.Role.name,
+                userId = u.id,
+                fullname = u.name + u.surname,
+                roleName = u.Role.name,
             }));
 
         }
@@ -101,8 +101,8 @@ namespace libraryApp.backend.Controllers
 
         public async Task<IActionResult> GetUserforPunishment(int roleId)
         {
-            int[] rolesToPunish = roleId == 2 ? [1, 3, 4] : roleId == 3 ? [1, 4] :roleId==1 ? [0]: roleId ==4 ?[0]: [0];
-            var usersP = await _userRepo.GetAllUsersAsync.Where(p => rolesToPunish.Contains(p.roleId)).ToListAsync();
+            int[] rolesToPunish = roleId == 2 ? [1, 3, 4] : roleId == 3 ? [1, 4] : roleId == 1 ? [0] : roleId == 4 ? [0] : [0];
+            var usersP = await _userRepo.GetAllUsersAsync.Where(p => rolesToPunish.Contains(p.roleId)).Include(u => u.Role).ToListAsync();
             return Ok(usersP.Select(p => new UserFDto
             {
                 userId = p.id,
@@ -117,7 +117,7 @@ namespace libraryApp.backend.Controllers
         public async Task<IActionResult> GetUserforRoleChanging(int roleId)
         {
             int[] roleChange = roleId == 2 ? [1, 3, 4] : [0];
-            var userChangeRole = await _userRepo.GetAllUsersAsync.Where(c => roleChange.Contains(c.roleId)).ToListAsync();
+            var userChangeRole = await _userRepo.GetAllUsersAsync.Where(c => roleChange.Contains(c.roleId)).Include(u => u.Role).ToListAsync();
             return Ok(userChangeRole.Select(c => new UserFDto
             {
                 userId = c.id,
