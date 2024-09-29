@@ -1,6 +1,10 @@
 import React from 'react'
+//swaggerda nereden çekeceğimi emin olamadım borrow kısmından çektim doğru değil gibi geldi borrew request kısmını göremedim
 
 const BorrowRequest = () => {
+  const borrowRequest = async ()=>{
+    const yanit=fetch(`http://localhost:5249/api/Book/borrowed/3`)
+  }
   return (
     <div>
        <nav className='bg-black text-white h-24 flex items-center justify-between'>
