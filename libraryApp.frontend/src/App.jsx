@@ -12,6 +12,7 @@ import Punishing from "./Punishing"
 import BorrowRequest from "./BorrowRequest"
 import Messaging from "./Messaging"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import InboxPage2 from "./InboxPage2"
 
 function App() {
 
@@ -19,22 +20,28 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Booksearch/>}></Route>
+        {/* <Route path="/" element={<Booksearch/>}></Route>
         <Route path="BookSearch" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
             <Booksearch />
           </div>
-        }></Route>
-        <Route path="BorrowedBooks" element={
+        }></Route> */}
+        {/* <Route path="BorrowedBooks" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
             <Borrowed />
+          </div>
+        }></Route> */}
+        <Route path="Inbox" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <InboxPage2 />
           </div>
         }></Route>
         <Route path="ChangeRole" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
-            <Changerole/>
+            <Changerole />
           </div>
         }></Route>
+
       </Routes>
     </BrowserRouter>
   )
