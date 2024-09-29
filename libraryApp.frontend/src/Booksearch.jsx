@@ -13,8 +13,9 @@ const Booksearch = () => {
     });
 
     if (yanit.ok) {
-      const kitaplar = yanit.json();
+      const kitaplar = await yanit.json();
       setKitaplar(kitaplar);
+      console.log(kitaplar);
     }
 
   };
@@ -77,12 +78,6 @@ const Booksearch = () => {
           </table>
         </div>
       </div>
-
-
-
-
-
-
     </div>
   )
 }
