@@ -87,8 +87,13 @@ namespace libraryApp.backend.Controllers
 
         public async Task<ActionResult<List<RegisterRequest>>> GetAccountCreationRequests()
         {
-            var requests = await _registerRequestRepository.GetAllRegisterRequestsAsync.Where(r=>r.pending==true).ToListAsync();//Iregisterrequest ile bağdaşacak
-            return Ok(requests);
+            var requests = await _registerRequestRepository.GetAllRegisterRequestsAsync.Include(rra => rra.User).Where(r=>r.pending==true).ToListAsync();//Iregisterrequest ile bağdaşacak
+            var reqDTOS = requests.Select(r => new AccountCreationReqDTO{
+                FullName = r.User.name + r.User.surname,
+                Username = r.User.username,
+                RequestDate = r.requestDate,
+            });
+            return Ok(reqDTOS);
         }
 
         [HttpPut("setaccountcreationrequest")]
