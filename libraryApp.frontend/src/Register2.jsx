@@ -26,7 +26,7 @@
     const yanit = await fetch(`http://localhost:5249/api/Account/Register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
+      body: Json.stringify(user),
     });
 }
 

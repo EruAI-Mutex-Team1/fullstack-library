@@ -11,14 +11,13 @@ const Borrowed = () => {
     });
 
     if (yanit.ok) {
-      const kitaplar = yanit.json();
+      const kitaplar = await yanit.json();
       setKitaplar2(kitaplar);
     }
   };
 
   useEffect(() => {
     fetchBorrowedBooks();
-
   }, [])
 
   return (
