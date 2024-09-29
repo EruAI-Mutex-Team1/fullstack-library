@@ -5,17 +5,16 @@ const Changerole = () => {
 
   useEffect(
     () => {
-
-
-      const fetchUsers = async () => {
-        const yanit = await fetch(`http://localhost:5249/api/User/getusersforrolechanging/2`, {
-          method: "GET"
-        });
-        if (yanit.ok) {
-          const users = await yanit.json();
-          setusers[users];
-        }
-      };
+   const fetchUsers= async ()=>{
+    const yanit = await fetch(`http://localhost:5249/api/User/getusersforrolechanging/2`, {
+      method:"GET"
+    });
+    if(yanit.ok){
+      const users= await yanit.json();
+      setusers[users];
+    }
+   };
+  
 
       fetchUsers();
     },

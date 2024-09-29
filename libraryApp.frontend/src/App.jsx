@@ -25,15 +25,20 @@ function App() {
           <div className="bg-[#d8d8d8] min-h-screen grid">
             <Booksearch />
           </div>
-        }></Route>
-        <Route path="BorrowedBooks" element={
+        }></Route> 
+         <Route path="BorrowedBooks" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
             <Borrowed />
+          </div>
+        }></Route> 
+        <Route path="Inbox" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <InboxPage2 />
           </div>
         }></Route>
         <Route path="Changerole" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
-            <Changerole/>
+            <Changerole />
           </div>
         }></Route>
          <Route path="AccRequest" element={
