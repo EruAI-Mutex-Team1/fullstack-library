@@ -169,7 +169,7 @@ namespace libraryApp.backend.Controllers
         }
 
         [HttpPost("{id}/addpage")]
-        public async Task<IActionResult> AddPageToBook(int id, [FromBody] Page page)
+        public async Task<IActionResult> AddPageToBook(int id, [FromBody] PageDTO pageDTO)
         {
             var book = await _bookRepository.GetBookById(id);
             if (book == null)
@@ -178,16 +178,24 @@ namespace libraryApp.backend.Controllers
             }
 
             int newPageNumber = book.Pages.Count > 0 ? book.Pages.Max(p => p.pageNumber) + 1 : 1;
-            page.bookId = id;
-            page.pageNumber = newPageNumber;
+            pageDTO.bookId = id;
+            pageDTO.pageNumber = newPageNumber;
 
-            book.Pages.Add(page);
-            await _pageRepository.AddPage(page);
+            var newPage = new Page
+            {
+                bookId = pageDTO.bookId,
+                pageNumber = pageDTO.pageNumber,
+                content = pageDTO.content
+            };
+
+            book.Pages.Add(newPage);
+            await _pageRepository.AddPage(newPage);
 
             return Ok(new { Message = "Page added successfully!" });
         }
+
         [HttpPut("returnBook")]
-        public async Task<IActionResult> ReturnBook([FromBody] ReturnBookDTO returnBookDTO)// elimizde kitap ve kullanıcı id si var 
+        public async Task<IActionResult> ReturnBook([FromBody] ReturnBookDTO returnBookDTO)
         {
             var loan = await _loanRequestRepository.GetLoanRequestById(returnBookDTO.bookId);
             if(loan == null)
