@@ -48,7 +48,7 @@ namespace libraryApp.backend.Controllers
                 email = user.email,
                 username = user.username,
                 userStatus = user.userStatus,
-
+                roleName = user.Role.name,
             };
 
             //  string token = GenerateJWT(user);
@@ -70,11 +70,13 @@ namespace libraryApp.backend.Controllers
 
             await _userRepo.CreateUserAsync(new User
             {
+                roleId = 1,
                 name = registerDto.name,
                 surname = registerDto.surname,
                 username = registerDto.username,
                 email = registerDto.email,
                 password = registerDto.password, //=BCrypt.Net.BCrypt.HashPassword(registerDto.password)
+                userStatus = false,
 
             });
             return Ok(new { message = "User registered" });
@@ -94,7 +96,8 @@ namespace libraryApp.backend.Controllers
             var requests = await _registerRequestRepository.GetAllRegisterRequestsAsync.Include(rra => rra.User).Where(r => r.pending == true).ToListAsync();//Iregisterrequest ile bağdaşacak
             var reqDTOS = requests.Select(r => new AccountCreationReqDTO
             {
-                FullName = r.User.name + r.User.surname,
+                Id = r.id,
+                FullName = r.User.name + " "+ r.User.surname,
                 Username = r.User.username,
                 RequestDate = r.requestDate,
             });

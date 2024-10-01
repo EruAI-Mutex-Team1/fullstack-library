@@ -67,7 +67,7 @@ function App() {
           </div>
         }></Route>
          <Route path="Login" element={
-          <div className="bg-[#d8d8d8] min-h-screen grid">
+          <div className="bg-hero-pattern min-h-screen grid">
             <Login/>
           </div>
         }></Route>
@@ -81,7 +81,7 @@ function App() {
             <Punishing/>
           </div>
         }></Route>
-        <Route path="WritePage2" element={
+        <Route path="WritePage" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
             <WritePage2/>
           </div>

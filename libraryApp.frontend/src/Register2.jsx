@@ -1,7 +1,7 @@
  import React, { useEffect ,useState} from 'react'
  import { MdOutlineLocalLibrary } from "react-icons/md";
 
-
+//zehra
  const Register2 = () => {
 
    const[name, setname]=useState("");

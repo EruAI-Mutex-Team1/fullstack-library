@@ -143,26 +143,16 @@ namespace libraryApp.backend.Controllers
         [HttpGet("publishrequests")]
         public async Task<IActionResult> GetBookPublishRequests()
         {
-            var requests = await _bookPublishRequestRepository.GetAllBookPublishRequests.ToListAsync();
-            if (!requests.Any())
-            {
-                return NotFound();
-            }
+            var requests = await _bookPublishRequestRepository.GetAllBookPublishRequests.Where(bpr => bpr.pending).Include(bpr => bpr.User).Include(bpr => bpr.Book).ToListAsync();
 
             List<BookPublishRequestDTO> RequestDtos = requests.Select(request => new BookPublishRequestDTO
             {
+                id = request.id,
                 requestDate = request.requestDate,
                 confirmation = request.confirmation,
                 pending = request.pending,
-                User = new List<string>
-                {
-                    request.User.name,
-                    request.User.surname
-                },
-                Book = new List<string>
-                {
-                    request.Book.title,
-                }
+                userFullname = request.User.name + " " +request.User.surname,
+                bookTitle = request.Book.title,
             }).ToList();
 
             return Ok(RequestDtos);
@@ -295,6 +285,20 @@ namespace libraryApp.backend.Controllers
             await _loanRequestRepository.UpdateLoanRequest(loanRequest);
             return Ok(new { Message = borrowRequestUpdateDTO.confirmation ? "Loan request approved successfully!" : "Loan request rejected successfully!" });
         }
+
+        [HttpGet("getBorrowRequests")]
+        public async Task<IActionResult> SetBorrowRequest()
+        {
+            var requests  = await _loanRequestRepository.GetAllLoanRequests.Where(lr => lr.pending).Include(lr => lr.User).Include(lr => lr.Book).ToListAsync();
+            return Ok(requests.Select(r => new GetBorrowReqDTO{
+                id = r.id,
+                userFullname = r.User.name + " " + r.User.surname,
+                bookTitle = r.Book.title,
+                borrowDate = r.requestDate,
+                returnDate = r.returnDate,
+            }).ToList());
+        }
+
         [HttpPost("requestpublishment")]
         public async Task<IActionResult> RequestPublishment([FromBody] RequestPublishmentDTO requestDto)
         {

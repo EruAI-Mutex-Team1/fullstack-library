@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-
+//özge
 const Borrowed = () => {
   const [kitaplar2, setKitaplar2] = useState([]);
 
@@ -19,20 +19,39 @@ const Borrowed = () => {
   useEffect(() => {
     fetchBorrowedBooks();
   }, [])
+  
+  const returnBook = async () => {
+
+    const request ={
+      id: 0,
+      bookId: 0
+    }
+    const yanit = await fetch(`http://localhost:5249/api/Book/returnBook`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request),
+    });
+
+    if(yanit.ok)
+    {
+      console.log("return edildi");
+    }else{
+      console.log("return edilemedi");
+    }
+  }
+
 
   return (
     <div>
       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
           <div className=' font-extrabold text-4xl'>LIBRARY</div>
-          <a href='#' className='text-l font-thin' >HOME</a>
+          <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
         <div className='flex gap-4 text-sm'>
           <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <a href='#' >REPORTS</a>
-          <a href='#'>SETTINGS</a>
-          <a href='#' className='mr-4 '>LOGOUT</a>
+          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
         </div>
       </nav>
 
@@ -71,7 +90,7 @@ const Borrowed = () => {
                   <td className='py-3 font-thin'>00/0/0</td>
                   <td className='py-2'>
                     <Link to="/BookSearch" className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 '>READ</Link>
-                    <button className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>RETURN</button>
+                    <button onClick={returnBook} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>RETURN</button>
                   </td>
                 </tr>
               ))}

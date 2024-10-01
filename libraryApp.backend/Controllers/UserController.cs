@@ -121,7 +121,7 @@ namespace libraryApp.backend.Controllers
             return Ok(userChangeRole.Select(c => new UserFDto
             {
                 userId = c.id,
-                fullname = c.name + c.surname,
+                fullname = c.name +" " +  c.surname,
                 roleName = c.Role.name,
             }));
         }

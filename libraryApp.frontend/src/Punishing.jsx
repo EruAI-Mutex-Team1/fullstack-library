@@ -1,5 +1,5 @@
 import React from 'react'
-
+//zehra
 const Punishing = () => {
   return (
     <div>

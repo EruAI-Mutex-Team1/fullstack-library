@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdOutlineLocalLibrary } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
-
+//özgen
 const Login = () => {
 
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
+    const nav = useNavigate();
 
-    const uyesor = async () => {
+    const uyesor = async (e) => {
+        e.preventDefault(); //submit türündeki butonun sayfayı yenilemesini engeller
 
         const user = {
           username: username,
@@ -19,6 +22,14 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(user),
         });
+
+        if(yanit.ok)
+        {
+          const data = await yanit.json();
+          console.log(data);
+          localStorage.setItem("userData",JSON.stringify(data.userDTO)); //çekilen user diğer sayfalarda silinmesin diye kaydediyoruz başka yerden de çekicez
+          nav("/");
+        }
       }
 
   return (
@@ -40,7 +51,7 @@ const Login = () => {
             <input onChange={e => setpassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
              transition-all focus: outline-none'></input>
         </div>    
-            <button className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[230px]
+            <button onClick={e => uyesor(e)} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[230px]
              place-self-center hover:bg-[#fed478c9] transition-all  '>GİRİŞ</button>
         </form>
       

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-
+//zeh yaptı
 const InboxPage2 = () => {
   
   const [mesajlar2,setmesajlar2]=useState([]);
