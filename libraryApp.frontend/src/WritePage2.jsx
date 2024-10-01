@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
+import { Link } from 'react-router-dom';
+//Zeh
 const WritePage2 = () => {
 
   const [kitapAdi, setKitapAdi] = useState("");
@@ -52,13 +53,11 @@ const WritePage2 = () => {
       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
           <div className=' font-extrabold text-4xl'>LIBRARY</div>
-          <a href='#' className='text-l font-thin' >MY BOOKS</a>
+          <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
           <span className='text-[#fed478fe]'>AUTHOR NAME</span>
-          <a href='#'>REPORTS</a>
-          <a href='#'>SETTINGS</a>
-          <a href='#' className='mr-4 '>LOGOUT</a>
+          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
         </div>
       </nav>
       <div className='bg-slate-800 h-screen flex flex-col gap-3 items-center '>

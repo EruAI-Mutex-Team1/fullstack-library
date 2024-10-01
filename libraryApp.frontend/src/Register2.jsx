@@ -1,7 +1,7 @@
- import React, { useEffect ,useState} from 'react'
+ import React, {  useState} from 'react'
  import { MdOutlineLocalLibrary } from "react-icons/md";
 
-//zehra
+//Zeh
  const Register2 = () => {
 
    const[name, setname]=useState("");
@@ -15,6 +15,7 @@
 
     const user = {
       
+      uyeid:2,
       name: name,
       surname: surname,
       username: username,

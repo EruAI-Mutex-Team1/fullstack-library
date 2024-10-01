@@ -55,21 +55,19 @@ namespace libraryApp.backend.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBookById(int id)
         {
-            var book = await _bookRepository.GetBookById(id);
+            var book = await _bookRepository.GetAllBooks.Include(b => b.Pages).FirstOrDefaultAsync(b => b.id == id);
             if (book == null)
             {
                 return NotFound();
             }
 
 
-            BookSearchDTO bookSearchDTO = new BookSearchDTO
-            {
+            bookReadDTO readDTO = new bookReadDTO{
                 title = book.title,
-                type = book.type,
-                number_of_pages = book.number_of_pages,
+                pages = book.Pages.Select(p => p.content).ToList(),
             };
 
-            return Ok(bookSearchDTO);
+            return Ok(readDTO);
         }
 
         [HttpGet("bytitle")]
