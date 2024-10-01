@@ -14,6 +14,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import InboxPage2 from "./InboxPage2"
 import Register2 from "./Register2"
 import HomePage from "./HomePage"
+import ReadPage from "./ReadPage"
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
           </div>
         }></Route>
         <Route path="BorrowedBooks" element={
-          <div className="bg-[#d8d8d8] min-h-screen grid">
+          <div className="bg-[#f8f6f6] min-h-screen grid">
             <Borrowed />
           </div>
         }></Route>
@@ -76,12 +77,22 @@ function App() {
             <AuMybook />
           </div>
         }></Route>
-        <Route path="Writebook" element={      
+        <Route path="WritePage" element={      
             <WritePage2 />    
         }></Route>
         <Route path="Punishing" element={
-          <div className="bg-[#d8d8d8] min-h-screen grid">
+          <div className="bg-[#ffff] min-h-screen grid">
             <Punishing />
+          </div>
+        }></Route>
+        <Route path="ReadBook" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <ReadPage />
+          </div>
+        }></Route>
+        <Route path="AccountRequest" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <AccRequest />
           </div>
         }></Route>
 

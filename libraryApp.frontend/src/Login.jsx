@@ -22,7 +22,7 @@ const Login = () => {
 
         if(yanit.ok){
           const user = await yanit.json();
-          localStorage.setItem("user", Json.stringify(user));
+          localStorage.setItem("userData", Json.stringify(user.userDTO));
         }
       }
 

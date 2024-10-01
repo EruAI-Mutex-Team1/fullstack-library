@@ -102,12 +102,13 @@ namespace libraryApp.backend.Controllers
         public async Task<IActionResult> GetUserforPunishment(int roleId)
         {
             int[] rolesToPunish = roleId == 2 ? [1, 3, 4] : roleId == 3 ? [1, 4] : roleId == 1 ? [0] : roleId == 4 ? [0] : [0];
-            var usersP = await _userRepo.GetAllUsersAsync.Where(p => rolesToPunish.Contains(p.roleId)).Include(u => u.Role).ToListAsync();
-            return Ok(usersP.Select(p => new UserFDto
+            var usersP = await _userRepo.GetAllUsersAsync.Where(p => rolesToPunish.Contains(p.roleId)).Include(u => u.Role).Include(u => u.Punishments).ToListAsync();
+            return Ok(usersP.Select( p => new UserFDto
             {
                 userId = p.id,
                 fullname = p.name + p.surname,
                 roleName = p.Role.name,
+                isPunished = p.Punishments.Any(p => p.isActive)
             }));
         }
 

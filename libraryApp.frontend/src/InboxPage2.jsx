@@ -10,14 +10,14 @@ const InboxPage2 = () => {
   const [Showedadate,setShowedDate]=useState("");
   
   const fetchmessages= async ()=>{
-    const yanit =await fetch(`http://localhost:5249/api/Message/getMessages `,{
+    const yanit = await fetch(`http://localhost:5249/api/Message/getMessages `,{
       method:"GET"
   
     });
   
   if(yanit.ok){
     const mesajlar=await yanit.json();
-    setKitaplar2(mesajlar);
+    setmesajlar2(mesajlar);
   }
   };
 
