@@ -6,7 +6,7 @@ const AuMybook = () => {
   const [reqBooks, setreqBooks] = useState([]);
   //request url içine id girdim doğru mu acaba
   const AumybookRequest = async () => {
-    const yanit = fetch(`http://localhost:5249/api/Book/byauthor/${id}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/byauthor/${1}`, {
       method: "GET"
     });
 
@@ -18,22 +18,22 @@ const AuMybook = () => {
   useEffect(() => {
     AumybookRequest();
   }, [])
-  //FONKSİYON ÇALIŞMAYORRRRR
+
   const createbook = async () => {
     const newbook = {
-      id: 0,
-      title: "string",
-      type: "string",
-      number_of_pages: 0,
+      title: "özge",
+      type: "özge1",
+      number_of_pages: 2,
       bookAuthors: [
-        "string"
+        "özgeeee"
       ]
     }
 
+    //book author idsi almıyor backend
     const yanit = await fetch(`http://localhost:5249/api/Book/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringfy(newbook),
+      body: JSON.stringify(newbook),
     });
     if (yanit.ok) {
       console.log("yeni kitap oluşturuldu");

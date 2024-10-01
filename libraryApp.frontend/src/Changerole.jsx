@@ -8,7 +8,6 @@ const Changerole = () => {
 
 
   const [user, setUser] = useState(null);//kullanıcı bilgileri için
-  const nav = useNavigate();
 
   const fetchUsers = async () => {
     const yanit = await fetch(`http://localhost:5249/api/User/getusersforrolechanging/${user.roleId}`, {
@@ -20,26 +19,9 @@ const Changerole = () => {
     }
   };
 
-  //kullanıcı bilgilerini kullanmak için her sayfaya eklenecek
-  const checkUser = () => {
-    const data = localStorage.getItem("userData");
-    if (data === null) {
-      nav("/Login");
-      return;
-    }
-    
-    const user = JSON.parse(data);
-    setUser(user);
-
-    if (user.roleName !== "manager") {
-     nav("/");
-     return;
-    }
-  }
-  //
   useEffect(
     () => {
-      checkUser();
+      // checkUser();
       fetchUsers();
     },
     []);
@@ -123,5 +105,4 @@ const Changerole = () => {
   )
 }
 
-}
 export default Changerole

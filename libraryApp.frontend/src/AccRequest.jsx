@@ -24,11 +24,10 @@ const AccRequest = () => {
     }, [])
 
    //
-    const ApproveReq = async () =>{
+    const ApproveReq = async (id) =>{
       const request={
-        requestId: 0,
+        requestId: id,
         isApproved: true,
-        staffId: 0
       }
 
       const yanit = await fetch(`http://localhost:5249/api/Account/setaccountcreationrequest`,{
@@ -45,11 +44,10 @@ const AccRequest = () => {
       }
     }
 
-    const RejectReq = async () =>{
+    const RejectReq = async (id) =>{
       const request={
-        requestId: 0,
+        requestId: id,
         isApproved: false,
-        staffId: 0
       }
 
       const yanit = await fetch(`http://localhost:5249/api/Account/setaccountcreationrequest`,{

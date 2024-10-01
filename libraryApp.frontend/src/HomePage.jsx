@@ -3,18 +3,6 @@ import { Link } from 'react-router-dom'
 
 const HomePage = () => {
     const [user, setUser] = useState({});
-  
-    useEffect(() => {
-      const data = localStorage.getItem("userData");
-      if(data === null){
-        nav("/login");
-        return;
-      }
-
-      const user = JSON.parse(data);
-      setUser(user); 
-    },[]);
-
     return (
     <div>
         <nav className='bg-black text-white h-24 flex items-center justify-between'>
