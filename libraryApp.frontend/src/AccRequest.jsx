@@ -9,7 +9,7 @@ const AccRequest = () => {
     });
 
     if (yanit.ok) {
-      const users = yanit.json();
+      const users = await yanit.json();
       setusers[users];
 
     }

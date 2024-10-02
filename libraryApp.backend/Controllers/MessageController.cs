@@ -30,7 +30,6 @@ namespace libraryApp.backend.Controllers
                 content = m.content,
                 sendingDate = m.sendingDate,
                 isRead = m.isRead,
-                sender = m.sender
             }).ToList();
             return Ok(messageDTO);
         }
@@ -48,7 +47,6 @@ namespace libraryApp.backend.Controllers
                 content = message.content,
                 sendingDate = message.sendingDate,
                 isRead = message.isRead,
-                sender = message.sender
             };
             return Ok(getMessageDTO);
         }
@@ -70,7 +68,6 @@ namespace libraryApp.backend.Controllers
                 content = m.content,
                 sendingDate = m.sendingDate,
                 isRead = m.isRead,
-                sender = m.sender
             }).ToList();
 
             return Ok(messageDTO);
@@ -103,6 +100,7 @@ namespace libraryApp.backend.Controllers
         {
             var messages = await _messageRepository.GetAllMessages
                                                    .Where(m => m.recieverId == userId)
+                                                   .Include(m => m.sender)
                                                    .ToListAsync();
 
             if (messages == null || !messages.Any())
@@ -115,7 +113,8 @@ namespace libraryApp.backend.Controllers
                 title = m.title,
                 content = m.content,
                 sendingDate = m.sendingDate,
-                isRead = m.isRead
+                isRead = m.isRead,
+                senderName = m.sender.name + " " + m.sender.surname,
             }).ToList();
 
             return Ok(messageDTOs);

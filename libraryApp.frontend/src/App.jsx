@@ -1,5 +1,5 @@
 
-// import WritePage2 from "./WritePage2"
+import WritePage2 from "./WritePage2"
 import AccRequest from "./AccRequest"
 import AubookRequest from "./AubookRequest"
 import AuMybook from "./AuMybook"
@@ -7,12 +7,14 @@ import Booksearch from "./Booksearch"
 import Borrowed from "./Borrowed"
 import Changerole from "./Changerole"
 import Login from "./Login"
-import MemRequest from "./BorrowRequest"
 import Punishing from "./Punishing"
 import BorrowRequest from "./BorrowRequest"
 import Messaging from "./Messaging"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import InboxPage2 from "./InboxPage2"
+import Register2 from "./Register2"
+import HomePage from "./HomePage"
+import ReadPage from "./ReadPage"
 
 function App() {
 
@@ -20,17 +22,41 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<Booksearch/>}></Route>
+        <Route path="/" element={
+          <div className="bg-hero-pattern min-h-screen grid">  
+          <HomePage /> 
+        </div>                                                    //home default giriş
+      }></Route>
+      <Route path="Home" element={
+          <div className="bg-hero-pattern min-h-screen grid">  
+          <HomePage /> 
+        </div>                                                    //home urlden giriş
+      }></Route>
         <Route path="BookSearch" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
             <Booksearch />
           </div>
-        }></Route> */}
-        {/* <Route path="BorrowedBooks" element={
-          <div className="bg-[#d8d8d8] min-h-screen grid">
+        }></Route>
+        <Route path="BorrowedBooks" element={
+          <div className="bg-[#f8f6f6] min-h-screen grid">
             <Borrowed />
           </div>
-        }></Route> */}
+        }></Route>
+        <Route path="BorrowRequest" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <BorrowRequest />
+          </div>
+        }></Route>
+        <Route path="Register" element={
+          <div className="bg-hero-pattern min-h-screen grid">
+            <Register2 />
+          </div>                                                   //register
+        }></Route>
+        <Route path="Login" element={
+          <div className="bg-hero-pattern min-h-screen grid">
+            <Login />
+          </div>                                                    //login
+        }></Route>
         <Route path="Inbox" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
             <InboxPage2 />
@@ -39,6 +65,39 @@ function App() {
         <Route path="ChangeRole" element={
           <div className="bg-[#d8d8d8] min-h-screen grid">
             <Changerole />
+          </div>
+        }></Route>
+        <Route path="Messaging" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <Messaging />
+          </div>
+        }></Route>
+        <Route path="AuMybook" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <AuMybook />
+          </div>
+        }></Route>
+        <Route path="WritePage" element={      
+            <WritePage2 />    
+        }></Route>
+        <Route path="Punishing" element={
+          <div className="bg-[#ffff] min-h-screen grid">
+            <Punishing />
+          </div>
+        }></Route>
+        <Route path="ReadBook" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <ReadPage />
+          </div>
+        }></Route>
+        <Route path="AccountRequest" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <AccRequest />
+          </div>
+        }></Route>
+         <Route path="AubookRequest" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <AubookRequest />
           </div>
         }></Route>
 

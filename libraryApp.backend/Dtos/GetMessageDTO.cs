@@ -8,7 +8,6 @@ namespace libraryApp.backend.Dtos
         public string content { get; set; } = string.Empty;
         public DateOnly sendingDate { get; set; }
         public bool isRead { get; set; }
-
-        public User? sender { get; set; }
+        public string? senderName { get; set; }
     }
 }
