@@ -78,7 +78,7 @@ const BorrowRequest = () => {
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>MEMBER OPERATİONS</h1>
           <button className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px] w-[200px]'>PENDING BORROW REQUESTS</button>
-          <Link to="/AccRequest" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] w-[200px]'>PENDING MEMBER REGİSTORATİONS</Link>
+          <Link to="/AccountRequest" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] w-[200px]'>PENDING MEMBER REGİSTORATİONS</Link>
 
         </div>
         {/* table */}

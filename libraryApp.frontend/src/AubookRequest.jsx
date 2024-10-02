@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 const AubookRequest = () => {
 //özge
   const [requests, setrequests] = useState([]);
+  // const requestId= new URLSearchParams(location.search).get("requestId");
+
   const BookCreateReq = async () => {
     const yanit = await fetch(`http://localhost:5249/api/Book/publishrequests`, {
       method: "GET"
@@ -79,10 +81,10 @@ const AubookRequest = () => {
 
         </div>
         {/* table */}
-        <div className=' bg-slate-500 w-[1500px] h-[780px] overflow-y-auto max-h-[780px]'>
+        <div className=' bg-white w-[1225px] h-[780px] overflow-y-auto max-h-[780px]'>
 
-          <table className=' bg-slate-500 text-slate-200 w-[1265px] '>
-            <thead className='bg-[#141b295e] text-sm'>
+          <table className=' bg-white text-black w-[1265px] '>
+            <thead className='bg-[#f9dc7654]  text-sm'>
               <tr className='border-b-2 border-black'>
                 <th className='py-3 pl-4 pr-[150px] font-serif'>BOOK NAME</th>
                 <th className='py-3  pr-[100px] font-serif'>AUTHOR</th>
@@ -90,17 +92,17 @@ const AubookRequest = () => {
                 <th className='py-3  pr-[380px] font-serif'>ACTIONS</th>
               </tr>
             </thead>
-            <tbody className='text-white text-sm'>
+            <tbody className='text-black text-sm'>
               {requests.map((request, index) => (
                 <tr className='border-b-2 border-black'>
-                  <td className='py-3 pl-7 font-medium'>{request.bookTitle}</td>
+                  <td className='py-3 pl-8 font-medium'>{request.bookTitle}</td>
                   <td className='py-3 font-thin'>{request.userFullname}</td>
                   <td className='py-3 font-thin'>{request.requestDate}</td>
                   <td className='py-2 flex flex-row gap-3'>
                     {/* read sayfasına giderken nasıl yapacağız */}
-                    <button className=' bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-[80px] '>READ THE BOOK</button>
-                    <button onClick={ApproveReq} className=' bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1]'>APPROVE</button>
-                    <button onClick={RejectReq} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
+                    <Link to={"/ReadBook?bookId="+ request.bookId} className=' bg-[#0f123c] text-white  rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-[80px] '>READ THE BOOK</Link>
+                    <button onClick={ApproveReq} className=' bg-[#0f123c] text-white rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1]'>APPROVE</button>
+                    <button onClick={RejectReq} className='bg-[#f8c558fe] text-white rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
                   </td>
                 </tr>
               ))}

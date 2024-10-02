@@ -91,7 +91,7 @@ const AccRequest = () => {
 
         <div className='flex gap-4 text-sm'>
           <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login" href='#' className='mr-4 text-red-700 '>LOGOUT</Link>
+          <Link to="/Login"  className='mr-4 text-red-700 '>LOGOUT</Link>
         </div>
       </nav>
 
@@ -105,10 +105,10 @@ const AccRequest = () => {
 
         </div>
         {/* table */}
-        <div className=' bg-slate-500 w-[1500px] h-[780px] overflow-y-auto max-h-[780px]'>
+        <div className=' bg-white w-[1225px] h-[780px] overflow-y-auto max-h-[780px]'>
 
-          <table className=' bg-slate-500 text-slate-200 w-[1265px] '>
-            <thead className='bg-[#141b295e] text-sm'>
+          <table className=' bg-white text-black w-[1265px] '>
+            <thead className='bg-[#f9dc7654]  text-sm'>
               <tr className='border-b-2 border-black'>
                 <th className='py-3 pl-4 pr-[200px] font-serif'>FULL NAME</th>
                 <th className='py-3  pr-[100px] font-serif'>USERNAME</th>
@@ -116,14 +116,15 @@ const AccRequest = () => {
                 <th className='py-3  pr-[270px] font-serif'>ACTIONS</th>
               </tr>
             </thead>
-            <tbody className='text-white text-[15px]'>
+            <tbody className='text-black text-[15px]'>
               {users.map((user, index) => (
                 <tr className='border-b-2 border-black'>
                   <td className='py-3 pl-4 font-medium'>{user.fullName}</td>
                   <td className='py-3 font-thin'>{user.username}</td>
                   <td className='py-3 font-thin'>{user.requestDate}</td>
-                  <td className='py-2 flex flex-row gap-3'><button onClick={() => ApproveReq(user.id)} className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-3 '>APPROVE</button>
-                    <button onClick={() => RejectReq(user.id)} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
+                  <td className='py-2 flex flex-row gap-3'>
+                    <button onClick={() => ApproveReq(user.id)} className='bg-[#0f123c] text-white rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-3 '>APPROVE</button>
+                    <button onClick={() => RejectReq(user.id)} className='bg-[#f8c558fe] text-white rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
                   </td>
                 </tr>
               ))}

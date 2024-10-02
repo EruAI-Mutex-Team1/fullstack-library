@@ -46,7 +46,8 @@ const ReadPage = () => {
           ))}
         </section>
 
-        <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go Back</Link> 
+        <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go Borrowed Books</Link> 
+        <Link to="/AuMybook" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go My Books</Link> 
         {/* go back= borromed book a git */}
            
       </div>

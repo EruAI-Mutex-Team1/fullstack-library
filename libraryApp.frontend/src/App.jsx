@@ -77,6 +77,11 @@ function App() {
             <AuMybook />
           </div>
         }></Route>
+         <Route path="AubookRequest" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <AubookRequest/>
+          </div>
+        }></Route>
         <Route path="WritePage" element={      
             <WritePage2 />    
         }></Route>
