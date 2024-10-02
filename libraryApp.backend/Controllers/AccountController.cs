@@ -48,7 +48,7 @@ namespace libraryApp.backend.Controllers
                 email = user.email,
                 username = user.username,
                 userStatus = user.userStatus,
-
+                roleName = user.Role.name,
             };
 
             //  string token = GenerateJWT(user);
