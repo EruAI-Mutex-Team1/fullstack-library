@@ -269,16 +269,16 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "number_of_pages", "status", "title", "type" },
                 values: new object[,]
                 {
-                    { 1, 10, true, "test1", "psycho" },
-                    { 2, 220, true, "test2", "thriller" },
-                    { 3, 320, true, "test3", "fantasy" },
-                    { 4, 140, false, "test4", "mystery" },
-                    { 5, 250, true, "test5", "non-fiction" },
-                    { 6, 190, true, "test6", "science fiction" },
-                    { 7, 270, false, "test7", "romance" },
-                    { 8, 330, true, "test8", "horror" },
-                    { 9, 410, true, "test9", "biography" },
-                    { 10, 200, false, "test10", "history" }
+                    { 1, 250, true, "The Psychology of Money", "psychology" },
+                    { 2, 368, true, "The Silent Patient", "thriller" },
+                    { 3, 334, true, "Educated", "memoir" },
+                    { 4, 448, true, "Becoming", "memoir" },
+                    { 5, 208, true, "The Alchemist", "fiction" },
+                    { 6, 464, true, "Sapiens: A Brief History of Humankind", "history" },
+                    { 7, 371, true, "The Power of Habit", "self-help" },
+                    { 8, 277, true, "The Catcher in the Rye", "fiction" },
+                    { 9, 328, true, "1984", "dystopian" },
+                    { 10, 281, true, "To Kill a Mockingbird", "fiction" }
                 });
 
             migrationBuilder.InsertData(
@@ -297,16 +297,56 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "bookId", "content", "pageNumber" },
                 values: new object[,]
                 {
-                    { 1, 1, "Page content 1", 1 },
-                    { 2, 1, "Page content 2", 2 },
-                    { 3, 2, "Page content 1", 1 },
-                    { 4, 2, "Page content 2", 2 },
-                    { 5, 3, "Page content 1", 1 },
-                    { 6, 3, "Page content 2", 2 },
-                    { 7, 4, "Page content 1", 1 },
-                    { 8, 4, "Page content 2", 2 },
-                    { 9, 5, "Page content 1", 1 },
-                    { 10, 5, "Page content 2", 2 }
+                    { 1, 1, "Understanding how money works is essential in today's economy. This chapter explores the psychology behind financial decisions.", 1 },
+                    { 2, 1, "The concept of saving and investing is examined, highlighting the impact of time and compound interest.", 2 },
+                    { 3, 1, "We delve into common financial myths and the reality behind them, debunking misconceptions that can hinder financial growth.", 3 },
+                    { 4, 1, "Emotional aspects of money management are discussed, emphasizing the need for awareness and discipline.", 4 },
+                    { 5, 1, "The final chapter provides actionable steps to improve financial literacy and well-being.", 5 },
+                    { 6, 2, "The Silent Patient begins with a shocking incident, setting the stage for a psychological thriller filled with twists and turns.", 1 },
+                    { 7, 2, "We explore the protagonist's motivations and the dark secrets that unfold throughout the narrative.", 2 },
+                    { 8, 2, "Themes of love, betrayal, and forgiveness are intricately woven into the story, making it a gripping read.", 3 },
+                    { 9, 2, "The unreliable narrator challenges readers to question the truth behind the events.", 4 },
+                    { 10, 2, "The climax leaves readers breathless, leading to a shocking revelation that ties all elements together.", 5 },
+                    { 11, 3, "Educated recounts the author's journey from a strict upbringing in Idaho to pursuing higher education against all odds.", 1 },
+                    { 12, 3, "The struggle for knowledge and identity forms the core of this compelling memoir.", 2 },
+                    { 13, 3, "Key events in the author's life are portrayed with raw honesty and vulnerability.", 3 },
+                    { 14, 3, "The challenges faced by the author serve as a powerful reminder of the importance of education.", 4 },
+                    { 15, 3, "The memoir concludes with a reflection on personal growth and the value of resilience.", 5 },
+                    { 16, 4, "Becoming tells the inspiring story of Michelle Obama, chronicling her life from childhood to the White House.", 1 },
+                    { 17, 4, "The author shares personal anecdotes that resonate with themes of identity and self-discovery.", 2 },
+                    { 18, 4, "The journey through her career and marriage showcases the challenges faced in the public eye.", 3 },
+                    { 19, 4, "Advocacy for education and health issues becomes a focal point in her story.", 4 },
+                    { 20, 4, "The memoir ends with a powerful message of hope and empowerment for future generations.", 5 },
+                    { 21, 5, "The Alchemist is a magical tale about following one’s dreams and listening to one’s heart.", 1 },
+                    { 22, 5, "The journey of Santiago, a young shepherd, serves as a metaphor for the quest for personal legend.", 2 },
+                    { 23, 5, "The book emphasizes the significance of dreams and the courage to pursue them.", 3 },
+                    { 24, 5, "Wisdom and the interconnectedness of the universe play key roles in the narrative.", 4 },
+                    { 25, 5, "The conclusion inspires readers to realize their own dreams and take action.", 5 },
+                    { 26, 6, "Sapiens provides a thought-provoking overview of human history and evolution.", 1 },
+                    { 27, 6, "The author examines how Homo sapiens came to dominate the Earth and the implications of this power.", 2 },
+                    { 28, 6, "Major events, such as the Agricultural Revolution, are analyzed in detail.", 3 },
+                    { 29, 6, "The narrative challenges readers to think critically about humanity's future.", 4 },
+                    { 30, 6, "The concluding chapter reflects on our place in the world and our responsibilities as a species.", 5 },
+                    { 31, 7, "The Power of Habit explores the science behind why habits exist and how they can be changed.", 1 },
+                    { 32, 7, "The author breaks down the habit loop: cue, routine, and reward.", 2 },
+                    { 33, 7, "Real-life examples illustrate the power of habits in personal and professional life.", 3 },
+                    { 34, 7, "Strategies for creating positive habits and breaking negative ones are presented.", 4 },
+                    { 35, 7, "The final chapter emphasizes the importance of belief in changing habits.", 5 },
+                    { 36, 8, "The Catcher in the Rye narrates the story of Holden Caulfield, a disenchanted teenager.", 1 },
+                    { 37, 8, "Themes of alienation and rebellion permeate the narrative, reflecting teenage angst.", 2 },
+                    { 38, 8, "Holden's perspective provides a critique of adult hypocrisy and societal expectations.", 3 },
+                    { 39, 8, "Key moments highlight the struggle for identity and connection.", 4 },
+                    { 40, 8, "The ending leaves readers contemplating the complexities of growing up.", 5 },
+                    { 41, 9, "1984 depicts a dystopian future under totalitarian rule, exploring themes of surveillance and oppression.", 1 },
+                    { 42, 9, "The protagonist, Winston Smith, grapples with the loss of individuality in a conformist society.", 2 },
+                    { 43, 9, "The narrative challenges readers to reflect on the nature of freedom and truth.", 3 },
+                    { 44, 9, "The struggle against oppressive regimes is a central theme that resonates in contemporary society.", 4 },
+                    { 45, 9, "The conclusion leaves a lasting impact, urging readers to remain vigilant in preserving their freedoms.", 5 },
+                    { 46, 10, "To Kill a Mockingbird presents a poignant exploration of racism and injustice in the American South.", 1 },
+                    { 47, 10, "The story unfolds through the eyes of young Scout Finch, offering a unique perspective on moral growth.", 2 },
+                    { 48, 10, "Key characters highlight the complexities of human behavior and social norms.", 3 },
+                    { 49, 10, "The narrative emphasizes empathy and understanding as vital to combating prejudice.", 4 },
+                    { 50, 10, "The conclusion underscores the importance of standing up for what is right, even in the face of adversity.", 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -314,16 +354,21 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "email", "name", "password", "roleId", "surname", "userStatus", "username" },
                 values: new object[,]
                 {
-                    { 1, "test1@ex.com", "Alice", "pass123", 1, "Smith", true, "alice_smith" },
-                    { 2, "test2@ex.com", "Bob", "pass456", 2, "Johnson", true, "bob_johnson" },
-                    { 3, "test3@ex.com", "Charlie", "pass789", 1, "Brown", false, "charlie_brown" },
-                    { 4, "test4@ex.com", "Diana", "pass321", 2, "Wright", true, "diana_wright" },
-                    { 5, "test5@ex.com", "Eve", "pass654", 1, "Davis", true, "eve_davis" },
-                    { 6, "test6@ex.com", "Frank", "pass987", 2, "Clark", false, "frank_clark" },
-                    { 7, "test7@ex.com", "Grace", "pass147", 1, "Lewis", true, "grace_lewis" },
-                    { 8, "test8@ex.com", "Henry", "pass258", 2, "Walker", true, "henry_walker" },
-                    { 9, "test9@ex.com", "Ivy", "pass369", 1, "Allen", false, "ivy_allen" },
-                    { 10, "test10@ex.com", "Jack", "pass1234", 2, "Young", true, "jack_young" }
+                    { 1, "test1@example.com", "Alice", "pass123", 1, "Smith", true, "alice_smith" },
+                    { 2, "test2@example.com", "Bob", "pass234", 1, "Brown", true, "bob_brown" },
+                    { 3, "test3@example.com", "Charlie", "pass345", 1, "Davis", true, "charlie_davis" },
+                    { 4, "test4@example.com", "Diana", "pass456", 1, "Evans", true, "diana_evans" },
+                    { 5, "test5@example.com", "Evan", "pass567", 1, "Foster", true, "evan_foster" },
+                    { 6, "test6@example.com", "Fiona", "pass678", 1, "Gates", true, "fiona_gates" },
+                    { 7, "test7@example.com", "George", "pass789", 1, "Harris", true, "george_harris" },
+                    { 8, "test8@example.com", "Hannah", "pass890", 1, "Irwin", true, "hannah_irwin" },
+                    { 9, "test9@example.com", "Isaac", "pass901", 1, "Jones", true, "isaac_jones" },
+                    { 10, "test10@example.com", "Jack", "pass012", 1, "King", true, "jack_king" },
+                    { 11, "test11@example.com", "Feyza", "123", 1, "Beyaztaş", true, "member" },
+                    { 12, "test12@example.com", "Türker", "123", 2, "Kıvılcım", true, "manager" },
+                    { 13, "test13@example.com", "Fatih", "123", 3, "Çağdaş", true, "staff" },
+                    { 14, "test14@example.com", "Zehra", "123", 4, "Ülker", true, "author" },
+                    { 15, "test14@example.com", "Özge", "123", 4, "Nur", true, "author2" }
                 });
 
             migrationBuilder.InsertData(
@@ -336,11 +381,11 @@ namespace libraryApp.backend.Migrations
                     { 3, 3, 3 },
                     { 4, 4, 4 },
                     { 5, 5, 5 },
-                    { 6, 6, 1 },
-                    { 7, 7, 2 },
-                    { 8, 8, 3 },
-                    { 9, 9, 4 },
-                    { 10, 10, 5 }
+                    { 6, 6, 6 },
+                    { 7, 7, 7 },
+                    { 8, 8, 8 },
+                    { 9, 9, 9 },
+                    { 10, 10, 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -348,16 +393,16 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "bookId", "confirmation", "pending", "requestDate", "userId" },
                 values: new object[,]
                 {
-                    { 1, 2, false, true, new DateOnly(2024, 9, 29), 1 },
-                    { 2, 3, false, true, new DateOnly(2024, 9, 29), 2 },
-                    { 3, 4, true, false, new DateOnly(2024, 9, 29), 3 },
-                    { 4, 5, false, true, new DateOnly(2024, 9, 29), 4 },
-                    { 5, 6, true, false, new DateOnly(2024, 9, 29), 5 },
-                    { 6, 7, false, true, new DateOnly(2024, 9, 29), 1 },
-                    { 7, 8, true, false, new DateOnly(2024, 9, 29), 2 },
-                    { 8, 9, false, true, new DateOnly(2024, 9, 29), 3 },
-                    { 9, 10, true, false, new DateOnly(2024, 9, 29), 4 },
-                    { 10, 1, false, true, new DateOnly(2024, 9, 29), 5 }
+                    { 1, 1, false, true, new DateOnly(2024, 10, 2), 1 },
+                    { 2, 2, false, true, new DateOnly(2024, 10, 2), 2 },
+                    { 3, 3, false, true, new DateOnly(2024, 10, 2), 3 },
+                    { 4, 4, false, true, new DateOnly(2024, 10, 2), 4 },
+                    { 5, 5, false, true, new DateOnly(2024, 10, 2), 5 },
+                    { 6, 6, false, true, new DateOnly(2024, 10, 2), 6 },
+                    { 7, 7, false, true, new DateOnly(2024, 10, 2), 7 },
+                    { 8, 8, false, true, new DateOnly(2024, 10, 2), 8 },
+                    { 9, 9, false, true, new DateOnly(2024, 10, 2), 9 },
+                    { 10, 10, false, true, new DateOnly(2024, 10, 2), 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -365,16 +410,16 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "bookId", "confirmation", "isReturned", "pending", "requestDate", "returnDate", "userId" },
                 values: new object[,]
                 {
-                    { 1, 1, false, false, true, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 1 },
-                    { 2, 2, true, true, false, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 2 },
-                    { 3, 3, false, false, true, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 3 },
-                    { 4, 4, true, false, false, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 4 },
-                    { 5, 5, false, false, true, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 5 },
-                    { 6, 6, true, false, false, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 1 },
-                    { 7, 7, false, false, true, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 2 },
-                    { 8, 8, true, false, false, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 3 },
-                    { 9, 9, false, false, true, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 4 },
-                    { 10, 10, true, false, false, new DateOnly(2024, 9, 29), new DateOnly(2024, 10, 6), 5 }
+                    { 1, 1, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 10, 9), 1 },
+                    { 2, 2, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 10, 16), 2 },
+                    { 3, 3, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 10, 23), 3 },
+                    { 4, 4, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 10, 30), 4 },
+                    { 5, 5, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 11, 1), 5 },
+                    { 6, 6, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 10, 16), 6 },
+                    { 7, 7, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 10, 23), 7 },
+                    { 8, 8, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 10, 30), 8 },
+                    { 9, 9, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 11, 1), 9 },
+                    { 10, 10, false, false, true, new DateOnly(2024, 10, 2), new DateOnly(2024, 10, 16), 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -382,16 +427,16 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "content", "isRead", "recieverId", "senderId", "sendingDate", "title" },
                 values: new object[,]
                 {
-                    { 1, "Hello!", false, 2, 1, new DateOnly(2024, 9, 29), "Greetings" },
-                    { 2, "How are you?", true, 3, 2, new DateOnly(2024, 9, 29), "Check-in" },
-                    { 3, "Meeting tomorrow?", false, 4, 3, new DateOnly(2024, 9, 29), "Meeting" },
-                    { 4, "Check your email", false, 5, 4, new DateOnly(2024, 9, 29), "Reminder" },
-                    { 5, "Let's catch up", true, 1, 5, new DateOnly(2024, 9, 29), "Catch-up" },
-                    { 6, "Project update", false, 2, 1, new DateOnly(2024, 9, 29), "Update" },
-                    { 7, "Great job!", false, 3, 2, new DateOnly(2024, 9, 29), "Praise" },
-                    { 8, "Next steps?", true, 4, 3, new DateOnly(2024, 9, 29), "Discussion" },
-                    { 9, "See you soon", false, 5, 4, new DateOnly(2024, 9, 29), "Goodbye" },
-                    { 10, "Congrats!", false, 1, 5, new DateOnly(2024, 9, 29), "Congratulations" }
+                    { 1, "Hello! Looking forward to reading this book.", false, 2, 1, new DateOnly(2024, 10, 2), "Greetings" },
+                    { 2, "Did you finish the last chapter?", false, 1, 2, new DateOnly(2024, 10, 2), "Question" },
+                    { 3, "I found a great article related to our reading.", false, 3, 1, new DateOnly(2024, 10, 2), "Resource Sharing" },
+                    { 4, "Let's discuss this book in our next meeting.", false, 4, 1, new DateOnly(2024, 10, 2), "Discussion" },
+                    { 5, "What do you think about the protagonist's choices?", false, 5, 1, new DateOnly(2024, 10, 2), "Character Analysis" },
+                    { 6, "I can't wait to start the next book!", false, 6, 1, new DateOnly(2024, 10, 2), "Excitement" },
+                    { 7, "Have you read the latest chapter?", false, 7, 1, new DateOnly(2024, 10, 2), "Update" },
+                    { 8, "This book changed my perspective on many things.", false, 8, 1, new DateOnly(2024, 10, 2), "Thoughts" },
+                    { 9, "I'm glad we chose this book for our group.", false, 9, 1, new DateOnly(2024, 10, 2), "Group Decision" },
+                    { 10, "What are your favorite quotes from the book?", false, 10, 1, new DateOnly(2024, 10, 2), "Quotes" }
                 });
 
             migrationBuilder.InsertData(
@@ -399,16 +444,16 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "earnDate", "point", "userId" },
                 values: new object[,]
                 {
-                    { 1, new DateOnly(2024, 9, 29), 10, 1 },
-                    { 2, new DateOnly(2024, 9, 29), 20, 2 },
-                    { 3, new DateOnly(2024, 9, 29), 30, 3 },
-                    { 4, new DateOnly(2024, 9, 29), 40, 4 },
-                    { 5, new DateOnly(2024, 9, 29), 50, 5 },
-                    { 6, new DateOnly(2024, 9, 29), 60, 1 },
-                    { 7, new DateOnly(2024, 9, 29), 70, 2 },
-                    { 8, new DateOnly(2024, 9, 29), 80, 3 },
-                    { 9, new DateOnly(2024, 9, 29), 90, 4 },
-                    { 10, new DateOnly(2024, 9, 29), 100, 5 }
+                    { 1, new DateOnly(2024, 10, 2), 10, 1 },
+                    { 2, new DateOnly(2024, 10, 1), 20, 1 },
+                    { 3, new DateOnly(2024, 9, 30), 15, 2 },
+                    { 4, new DateOnly(2024, 9, 29), 25, 2 },
+                    { 5, new DateOnly(2024, 9, 28), 30, 3 },
+                    { 6, new DateOnly(2024, 9, 27), 40, 4 },
+                    { 7, new DateOnly(2024, 9, 26), 50, 5 },
+                    { 8, new DateOnly(2024, 9, 25), 60, 6 },
+                    { 9, new DateOnly(2024, 9, 24), 70, 7 },
+                    { 10, new DateOnly(2024, 9, 23), 80, 8 }
                 });
 
             migrationBuilder.InsertData(
@@ -416,16 +461,16 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "fineAmount", "isActive", "punishmentDate", "userId" },
                 values: new object[,]
                 {
-                    { 1, 5, true, new DateOnly(2024, 9, 29), 1 },
-                    { 2, 10, true, new DateOnly(2024, 9, 29), 3 },
-                    { 3, 15, false, new DateOnly(2024, 9, 29), 1 },
-                    { 4, 20, true, new DateOnly(2024, 9, 29), 2 },
-                    { 5, 25, false, new DateOnly(2024, 9, 29), 1 },
-                    { 6, 30, true, new DateOnly(2024, 9, 29), 3 },
-                    { 7, 35, true, new DateOnly(2024, 9, 29), 2 },
-                    { 8, 40, false, new DateOnly(2024, 9, 29), 1 },
-                    { 9, 45, true, new DateOnly(2024, 9, 29), 4 },
-                    { 10, 50, false, new DateOnly(2024, 9, 29), 1 }
+                    { 1, 5, true, new DateOnly(2024, 10, 2), 1 },
+                    { 2, 10, true, new DateOnly(2024, 10, 1), 2 },
+                    { 3, 15, false, new DateOnly(2024, 9, 30), 3 },
+                    { 4, 20, true, new DateOnly(2024, 9, 29), 4 },
+                    { 5, 25, false, new DateOnly(2024, 9, 28), 5 },
+                    { 6, 30, true, new DateOnly(2024, 9, 27), 6 },
+                    { 7, 35, true, new DateOnly(2024, 9, 26), 7 },
+                    { 8, 40, false, new DateOnly(2024, 9, 25), 8 },
+                    { 9, 45, true, new DateOnly(2024, 9, 24), 9 },
+                    { 10, 50, false, new DateOnly(2024, 9, 23), 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -433,16 +478,16 @@ namespace libraryApp.backend.Migrations
                 columns: new[] { "id", "confirmation", "pending", "requestDate", "userId" },
                 values: new object[,]
                 {
-                    { 1, false, true, new DateOnly(2024, 9, 29), 1 },
-                    { 2, true, false, new DateOnly(2024, 9, 29), 2 },
-                    { 3, false, true, new DateOnly(2024, 9, 29), 3 },
+                    { 1, false, true, new DateOnly(2024, 10, 2), 1 },
+                    { 2, false, true, new DateOnly(2024, 10, 1), 2 },
+                    { 3, true, false, new DateOnly(2024, 9, 30), 3 },
                     { 4, true, false, new DateOnly(2024, 9, 29), 4 },
-                    { 5, false, true, new DateOnly(2024, 9, 29), 5 },
-                    { 6, true, false, new DateOnly(2024, 9, 29), 1 },
-                    { 7, false, true, new DateOnly(2024, 9, 29), 2 },
-                    { 8, true, false, new DateOnly(2024, 9, 29), 3 },
-                    { 9, false, true, new DateOnly(2024, 9, 29), 4 },
-                    { 10, true, false, new DateOnly(2024, 9, 29), 5 }
+                    { 5, false, true, new DateOnly(2024, 9, 28), 5 },
+                    { 6, false, true, new DateOnly(2024, 9, 27), 6 },
+                    { 7, true, false, new DateOnly(2024, 9, 26), 7 },
+                    { 8, false, true, new DateOnly(2024, 9, 25), 8 },
+                    { 9, true, false, new DateOnly(2024, 9, 24), 9 },
+                    { 10, false, true, new DateOnly(2024, 9, 23), 10 }
                 });
 
             migrationBuilder.CreateIndex(
