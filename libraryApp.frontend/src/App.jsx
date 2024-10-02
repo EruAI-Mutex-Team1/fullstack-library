@@ -95,6 +95,11 @@ function App() {
             <AccRequest />
           </div>
         }></Route>
+         <Route path="AubookRequest" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <AubookRequest />
+          </div>
+        }></Route>
 
       </Routes>
     </BrowserRouter>

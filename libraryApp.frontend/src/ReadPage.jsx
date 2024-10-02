@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //seçili kitap okunacak mı
 const ReadPage = () => {
 
   const [kitapAdi, setKitapAdi] = useState("");
   const [sayfalar, setSayfalar] = useState([]);
+  const bookId = new URLSearchParams(location.search).get("bookId");
 
   const kitabiAl = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/Book/${2}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}`, {
       method: "GET",
     });
 
@@ -19,7 +20,21 @@ const ReadPage = () => {
     }
   }
 
+  const [user, setUser] = useState({});
+    const nav = useNavigate();
+  
+
   useEffect (()=> {
+    const data = localStorage.getItem("userData");
+      if(data === null){
+        nav("/Login");
+        
+      }
+
+      const user = JSON.parse(data);
+      setUser(user); 
+     
+      console.log(user);
    kitabiAl();
   }, []);
 
@@ -31,8 +46,11 @@ const ReadPage = () => {
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>USER NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+        <span className='text-[#fed478fe]'>{user.username}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav(0);
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 
@@ -45,10 +63,12 @@ const ReadPage = () => {
           <p className="text-lg leading-relaxed"> {sayfa} </p>
           ))}
         </section>
-
-        <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go Back</Link> 
-        {/* go back= borromed book a git */}
-           
+       <div className='flex flex-row justify-between gap-3'>
+        <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go Borrowed Books</Link> 
+        {(user.roleName === "author") && (
+               <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go My Books</Link>
+            )}
+        </div>    
       </div>
 
     </div>

@@ -10,24 +10,39 @@ const Messaging = () => {
   const [senderId, setsenderId] = useState("");
   const [receiverId, setreceiverId] = useState("");
 
-  const fetchgetuser = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/User/getuserformessaging/${7}`, {
+  const [user, setUser] = useState({});
+
+  const fetchgetuser = async (user) => {
+    const yanit = await fetch(`http://localhost:5249/api/User/getuserformessaging/${user.roleId}`, {
       method: "GET",
     });
 
     if (yanit.ok) {
       const users = await yanit.json();
+      console.log(users);
       setusers(users);
     }
   };
 
-  const Mesajekle = async () => {
+  useEffect(() => {
+    const data = localStorage.getItem("userData");
+    if(data === null){
+      nav("/login");
+    }
 
+    const user = JSON.parse(data);
+    setUser(user); 
+    console.log(user);
+    fetchgetuser(user);
+  },[]);
+
+  const Mesajekle = async (e) => {
+e.preventDefault();
     const mesaj = {
-      title: title,      //bu kısıma neyi ekleyeceğimiz karıştı!!!!
+      title: title, 
       content: content,
-      senderId: 7,
-      receiverId: "",
+      senderId: user.id,
+      receiverId: SelecteduserId,
     }
 
     const yanit = await fetch(`http://localhost:5249/api/Message/sendMessage`, {
@@ -42,11 +57,6 @@ const Messaging = () => {
       console.log("mesaj gönderilemedi");
     }
   }
-
-  useEffect(() => {
-    fetchgetuser();
-  },
-    []);
 
   return (
     <div>
@@ -85,9 +95,9 @@ const Messaging = () => {
           <div className=' flex flex-col ml-[140px] mt-[70px]'>
             {/* post sendmessage */}
             <label>TITLE</label>
-            <input onChange={e => settitle(e.target.value)} type='text' className='w-[700px] h-7 rounded-sm '></input>
+            <input onChange={e => settitle(e.target.value)} type='text' className='w-[700px] h-7 rounded-sm '/>
             <label>YOUR MESSAGE</label>
-            <input onChange={e => setcontent(e.target.value)} type='text' className='w-[700px] h-[450px] rounded-sm'></input>
+            <textarea onChange={e => setcontent(e.target.value)} type='text' className='w-[700px] h-[450px] rounded-sm'></textarea>
             <button onClick={Mesajekle} className='bg-[#fcb92afe] text-white font-medium rounded-sm px-3 py-2  hover:bg-[#fec752] w-[80px] ml-[620px] mt-[20px]'>SEND</button>
           </div>
 
