@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import { MdOutlineLocalLibrary } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
-
+//özgen
 const Login = () => {
 
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
-
     const nav = useNavigate();
 
     const uyesor = async (e) => {
@@ -23,9 +22,12 @@ const Login = () => {
           body: JSON.stringify(user),
         });
 
-        if(yanit.ok){
-          const user = await yanit.json();
-          localStorage.setItem("userData", JSON.stringify(user.userDTO));
+        if(yanit.ok)
+        {
+          const data = await yanit.json();
+          //
+          console.log(data);
+          localStorage.setItem("userData",JSON.stringify(data.userDTO)); //çekilen user diğer sayfalarda silinmesin diye kaydediyoruz başka yerden de çekicez
           nav("/");
         }
       }
