@@ -13,16 +13,6 @@ const ReadPage = () => {
   const nav = useNavigate();
   const [currentpage, setcurrentpage] = useState(1);
 
-  // const pages = [
-  //   "Chapter 1: Once upon a time...",
-  //   "Chapter 2: The journey continues...",
-  //   "Chapter 3: A twist in the tale...",
-  //   "Chapter 4: The grand finale...",
-  //   "Chapter 5: The story unfolds...",
-  //   "Chapter 6: The surprising conclusion...",
-  //   "Chapter 7: The surprising conclusion..."
-  // ];
-
   const bookId = new URLSearchParams(location.search).get("bookId");
 
   const kitabiAl = async () => {
@@ -119,10 +109,10 @@ const ReadPage = () => {
             <GrCaretNext />
           </button>
           <div className='flex flex-col'>
-            <label className='bg-[#edc05f] text-black flex items-center w-15 mt-6 h-auto'>Search Page</label>
+            <label className='bg-[#623216] text-white flex items-center w-15 mt-6 h-auto'>Search Page</label>
             <input min={1} max={book?.pages?.length-1} type="number" onChange={searchpage} className='bg-[#f4eee2eb] py-2 px-3 rounded-sm hover:bg-[#dad2c0eb] h-10 w-auto' />
             <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto mt-[400px]'>Go Borrowed Books</Link>
-            <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go My Books</Link>
+            <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto mt-2'>Go My Books</Link>
           </div></div>
         <div className='flex flex-row justify-between gap-3 mr-[210px]'>
 

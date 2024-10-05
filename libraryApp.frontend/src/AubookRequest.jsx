@@ -89,8 +89,8 @@ const AubookRequest = () => {
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
-        <div className='flex gap-4 text-sm'>
-        {/* <span className='text-[#fed478fe]'>{user.username}</span> */}
+        <div className='flex gap-4 text-base'>
+        <span className='text-[#fed478fe] font-semibold '>{user.name + " " + user.surname}</span>
             <button onClick={() => {
               localStorage.removeItem("userData");
               nav("/Login");
@@ -102,13 +102,13 @@ const AubookRequest = () => {
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>AUTHOR OPERATİONS</h1>
-          <div className=' bg-[#fdc13ffe] py-2 px-3 rounded-sm mt-[30px] w-[200px]'>PENDING BOOK CREATION REQUESTS</div>
+          <div className=' bg-[#fab914fe] py-2 px-3 text-lg font-semibold rounded-sm mt-[30px]  w-[230px]'>PENDING BOOK CREATION REQUESTS</div>
 
         </div>
         {/* table */}
         <div className=' bg-white w-[1225px] h-[780px] overflow-y-auto max-h-[780px]'>
 
-          <table className=' bg-white text-black w-[1265px] '>
+          <table className=' bg-white text-black w-[1225px] '>
             <thead className='bg-[#f9dc7654]  text-sm'>
               <tr className='border-b-2 border-black'>
                 <th className='py-3 pl-4 pr-[150px] font-serif'>BOOK NAME</th>
@@ -117,16 +117,16 @@ const AubookRequest = () => {
                 <th className='py-3  pr-[380px] font-serif'>ACTIONS</th>
               </tr>
             </thead>
-            <tbody className='text-black text-sm'>
+            <tbody className='text-black text-base'>
               {requests.map((request, index) => (
                 <tr className='border-b-2 border-black'>
-                  <td className='py-3 pl-8 font-medium'>{request.bookTitle}</td>
-                  <td className='py-3 font-thin'>{request.userFullname}</td>
-                  <td className='py-3 font-thin'>{request.requestDate}</td>
+                  <td className='py-3 pl-8 font-bold'>{request.bookTitle}</td>
+                  <td className='py-3 font-medium'>{request.userFullname}</td>
+                  <td className='py-3 font-medium'>{request.requestDate}</td>
                   <td className='py-2 flex flex-row gap-3'>
-                    <Link to={"/ReadBook?bookId="+ request.bookId} className=' bg-[#0f123c] text-white  rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-[80px] '>READ THE BOOK</Link>
-                    <button onClick={() => ApproveReq(request.id)} className=' bg-[#0f123c] text-white rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1]'>APPROVE</button>
-                    <button onClick={() => RejectReq(request.id)} className='bg-[#f8c558fe] text-white rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
+                    <Link to={"/ReadBook?bookId="+ request.bookId} className=' bg-[#fab914fe] text-white  rounded-md text-sm font-medium p-2 hover:bg-[#dcaa4de7] ml-[80px] '>READ THE BOOK</Link>
+                    <button onClick={() => ApproveReq(request.id)} className=' bg-[#19871b] text-white rounded-md text-sm font-medium p-2 hover:bg-[#58bb46d2]'>APPROVE</button>
+                    <button onClick={() => RejectReq(request.id)} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6]'>REJECT</button>
                   </td>
                 </tr>
               ))}

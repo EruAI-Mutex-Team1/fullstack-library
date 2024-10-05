@@ -79,7 +79,7 @@ const Punishing = () => {
           </div>
           {/* forms */}
           <div className='w-[1000px] h-[600px] ml-[70px] mt-[38px]'>
-            <form className='bg-[#f9dc7654] border-2 border-black flex flex-col w-[1000px] h-[80px] pl-6 pt-1'>
+            <form className='bg-[#fde5b1fe] border-2 border-black flex flex-col w-[1000px] h-[80px] pl-6 pt-1'>
               <label>SELECT A USER TO VİEW PUNİSHMENT STATUS</label>
               <select onChange={e => setSelectedUserId(e.target.value)} className='w-[650px] text-gray-400 ' aria-placeholder='Select'>
               <option value="" >Select an user</option>
@@ -89,12 +89,12 @@ const Punishing = () => {
               </select>
             </form>
 
-            <form className='bg-[#f9dc7654] border-2 border-black flex flex-col w-[1000px] h-[480px] mt-[18px] '>
+            <form className='bg-[#fde5b1fe] border-2 border-black flex flex-col w-[1000px] h-[480px] mt-[18px] '>
               {/* <p>{punishusers.find(p => p.userId === selectedUserId)?.isPunished ? "punished":"not punished"}</p> */}
               <div className=' place-self-center w-[950px] mt-40'>
               {/* <label>DETAILS</label>
               <input type='text' className='h-[200px]'></input> */}
-               <button onClick={punishIt} className='bg-[#820a0a]  text-white rounded-sm py-1 w-[105px] hover:bg-[#820a0ada] ml-[450px] mt-[20px]'>UPDATE PUNİSHMENT</button>
+               <button onClick={punishIt} className='bg-[#d51760fe]  text-white rounded-sm py-1 w-[105px] hover:bg-[#f75858f4] ml-[450px] mt-[20px]'>UPDATE PUNİSHMENT</button>
               </div>
              
             </form>
