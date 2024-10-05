@@ -127,10 +127,11 @@ const Booksearch = () => {
                     <td className='py-3 font-thin'>{kitap.type}</td>
                     <td className='py-3 font-thin'>{kitap.bookAuthors.join(", ")}</td>
                     <td className='py-2'>
-                      <Link className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 ' to="/ReadBook">PREVİEW THE BOOK</Link>
+                    <Link className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 ' to={"/ReadBook?bookId=" + kitap.id}>READ THE BOOK</Link>
                       <button onClick={borrowRequest} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>BORROW</button>
                       {/* post borrow request */}
                     </td>
+                      
                   </tr>
                 ))
               }

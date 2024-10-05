@@ -57,6 +57,7 @@ const Changerole = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(role),
     });
+
     if (yanit.ok) {
       console.log("rol güncellendi");
     }
