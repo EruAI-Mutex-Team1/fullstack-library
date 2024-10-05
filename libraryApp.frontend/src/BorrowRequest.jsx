@@ -18,7 +18,7 @@ const BorrowRequest = () => {
     const user = JSON.parse(data);
     setUser(user);
 
-    if (user.roleName !== "manager") {
+    if (user.roleName !== "manager" && user.roleName !== "staff") {
      nav("/");
      return;
     }
@@ -38,45 +38,44 @@ const BorrowRequest = () => {
 
   useEffect(() => {
     borrowRequest();
-    //checkUser();
+    checkUser();
   }, [])
 
-  const ApproveReq = async () => {
+  const ApproveReq = async (id) => {
     const request ={
-      requestId: 0,
+      requestId: id,
       confirmation: true
     }
-    //requestId ler doğru mu
-    const yanit = await fetch(`http://localhost:5249/api/Book/setBorrowRequest/${requestId}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/setBorrowRequest`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
     });
     if (yanit.ok) {
-      console.log("kabul edilme gerçekleşti");
-      setreqBooks(reqBooks.filter(reqBook=>reqBook.requestId !== requestId));
+      alert("başarılı");
+      nav(0);
     }
     else {
-      console.log("kabul edilme gerçekleştirilemedi");
+      alert("başarısız");
     }
   }
 
-  const RejectReq = async () => {
+  const RejectReq = async (id) => {
     const request = {
-      requestId: 0,
+      requestId: id,
       confirmation: false
     }
-    const yanit = await fetch(`http://localhost:5249/api/Book/setBorrowRequest/${requestId}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/setBorrowRequest`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
     });
     if (yanit.ok) {
-      console.log("reddetme gerçekleşti");
-      setreqBooks(reqBooks.filter(reqBook=>reqBook.requestId !== requestId));
+      alert("başarılı");
+      nav(0);
     }
     else {
-      console.log("reddetme gerçekleştirilemedi");
+      alert("başarısız");
     }
   }
 
@@ -102,7 +101,6 @@ const BorrowRequest = () => {
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>MEMBER OPERATİONS</h1>
-          <button className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px] w-[200px]'>PENDING BORROW REQUESTS</button>
           <Link to="/AccountRequest" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] w-[200px]'>PENDING MEMBER REGİSTORATİONS</Link>
 
         </div>
@@ -121,15 +119,15 @@ const BorrowRequest = () => {
             </thead>
             {/* burada db de göremediğim için parametreleri rastgele atadım */}
             <tbody className='text-white text-sm'>
-              {reqBooks.map((book, index) => (
+              {reqBooks.map((request, index) => (
                 <tr className='border-b-2 border-black'>
-                  <td className='py-3 pl-4 font-medium'>{book.bookTitle}</td>
-                  <td className='py-3 font-thin'>{book.userFullname}</td>
-                  <td className='py-3 font-thin'>{book.borrowDate}</td>
-                  <td className='py-3 font-thin'>{book.returnDate}</td>
+                  <td className='py-3 pl-4 font-medium'>{request.bookTitle}</td>
+                  <td className='py-3 font-thin'>{request.userFullname}</td>
+                  <td className='py-3 font-thin'>{request.borrowDate}</td>
+                  <td className='py-3 font-thin'>{request.returnDate}</td>
                   <td className='py-2 flex flex-row gap-3'>
-                    <button onClick={ApproveReq} className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-3 '>APPROVE</button>
-                    <button onClick={RejectReq} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
+                    <button onClick={() => ApproveReq(request.id)} className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-3 '>APPROVE</button>
+                    <button onClick={() => RejectReq(request.id)} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
                     {/* setborrowrequestden approve ve reject çekeceğim */}
                     </td>
                 </tr>

@@ -16,15 +16,12 @@ const Borrowed = () => {
     const user = JSON.parse(data);
     setUser(user);
 
-    if (user.roleName !== "manager") {
-     nav("/");
-     return;
-    }
+    fetchBorrowedBooks(user);
   }
 
 
-  const fetchBorrowedBooks = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/Book/borrowed/23`, {
+  const fetchBorrowedBooks = async (user) => {
+    const yanit = await fetch(`http://localhost:5249/api/Book/borrowed/${user.id}`, {
       method: "GET"
 
     });
@@ -32,31 +29,27 @@ const Borrowed = () => {
     if (yanit.ok) {
       const kitaplar = await yanit.json();
       setKitaplar2(kitaplar);
+      console.log(kitaplar);
     }
   };
 
   useEffect(() => {
-    fetchBorrowedBooks();
-    //checkUser();
+    checkUser();
   },[])
   
-  const returnBook = async () => {
+  const returnBook = async (id) => {
 
-    const request ={
-      id: 0,
-      bookId: 0
-    }
     const yanit = await fetch(`http://localhost:5249/api/Book/returnBook`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(request),
+      body: JSON.stringify(id),
     });
 
     if(yanit.ok)
     {
-      console.log("return edildi");
+      alert("başarılı");
     }else{
-      console.log("return edilemedi");
+      alert("başarısız");
     }
   }
 
@@ -83,11 +76,6 @@ const Borrowed = () => {
         {/* sidebar */}
         <div className=' bg-black  flex flex-col gap-8 items-center w-[320px] min-h-screen'>
           <h2 className='text-white text-2xl font-serif mt-[60px] hover:border-b-2'>BOOK OPERATİONS</h2>
-          {/* search bar */}
-          <div className=' flex item-center'>
-            <input type='text' className='border-2  w-50 h-9 bg-gray-300 p-2 rounded-l-full focus:border-[#ffc13bf4]' placeholder='  search book...' />
-            <button className='bg-[#fcb92afe] w-20 h-9 text-white font-bold text-xs hover:bg-[#fec752] rounded-r-full'>SEARCH</button>
-          </div>
           <Link to={"/BookSearch"} className='bg-[#ff7504fe] w-19 h-9 text-white font-bold text-xs hover:bg-[#fec752] rounded-xl p-2'>BOOK SEARCH</Link>
         </div>
         {/* table */}
@@ -97,7 +85,6 @@ const Borrowed = () => {
               <tr className='border-b-2 border-black'>
                 <th className='py-3 pl-4 pr-[150px] font-serif'>TİTLE</th>
                 <th className='py-3  pr-[100px] font-serif'>AUTHOR</th>
-                <th className='py-3  pr-[100px] font-serif'>PUBLISH DATE</th>
                 <th className='py-3  pr-[100px] font-serif'>BORROWED DATE</th>
                 <th className='py-3  pr-[100px] font-serif'>RETURN DATE</th>
                 <th className='py-3  pr-[200px] font-serif'>ACTIONS</th>
@@ -108,16 +95,15 @@ const Borrowed = () => {
                 <tr className='border-b-2 border-black'>
                   <td className='py-3 pl-4 font-medium'>{kitap.title}</td>
                   <td className='py-3 font-thin'>{kitap.bookAuthors.join(",")}</td>
-                  <td className='py-3 font-thin'>0/0/0</td>
-                  <td className='py-3 font-thin'>0/0/0</td>
-                  <td className='py-3 font-thin'>00/0/0</td>
+                  <td className='py-3 font-thin'>{kitap.requestDate}</td>
+                  <td className='py-3 font-thin'>{kitap.returnDate}</td>
                   <td className='py-2'>
                     <Link to="/BookSearch" className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 '>READ</Link>
-                    <button onClick={returnBook} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>RETURN</button>
+                    <button onClick={() => {returnBook(kitap.id)}} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>RETURN</button>
                   </td>
                 </tr>
               ))}
-
+            {/* kitap yazarları eksik, return hatalı */}
             </tbody>
           </table>
         </div>

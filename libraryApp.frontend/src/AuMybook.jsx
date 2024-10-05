@@ -27,14 +27,16 @@ const AuMybook = () => {
     const user = JSON.parse(data);
     setUser(user);
 
-    if (user.roleName !== "manager") {
+    if (user.roleName !== "author") {
       nav("/");
       return;
     }
+
+    fetchAumybookRequest(user);
   }
 
-  const fetchAumybookRequest = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/Book/byauthor/${1}`, {
+  const fetchAumybookRequest = async (user) => {
+    const yanit = await fetch(`http://localhost:5249/api/Book/byauthor/${user.id}`, {
       method: "GET"
     });
 
@@ -45,32 +47,31 @@ const AuMybook = () => {
   }
 
   useEffect(() => {
-    fetchAumybookRequest();
-    // checkUser();
+    checkUser();
   }, [])
 
   const createbook = async (e) => {
+    e.preventDefault();
+
     const newbook = {
       title: title,
       type: type,
-      number_of_pages: pages,
-      bookAuthors: [
-        "özgeeee"
-      ]
+      yazarId : user.id,
     }
 
-    //book author idsi almıyor backend
     const yanit = await fetch(`http://localhost:5249/api/Book/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newbook),
     });
-    setshowForm(!showForm)
+    
+    setshowForm(!showForm);
     if (yanit.ok) {
-      console.log("yeni kitap oluşturuldu");
+      alert("başarılı");
+      nav(0);
     }
     else {
-      console.log("yeni kitap oluşturulamadi");
+      alert("başarısız");
     }
   }
   // //BU FONKSİYON DA ÇALIŞMIYOR :(((((
@@ -94,38 +95,20 @@ const AuMybook = () => {
 
   // }
 
-  const PublishRequest = async () => {
-    const request = {
-      title: "string",
-      type: "string",
-      number_of_pages: 0,
-      requestDate: {
-        year: 0,
-        month: 0,
-        day: 0,
-        dayOfWeek: 0
-      },
-      confirmation: true,
-      pending: true,
-      user: [
-        string
-      ],
-      book: [
-        "string"
-      ]
-    }
-
+  const PublishRequest = async (bookId) => {
     const yanit = await fetch(`http://localhost:5249/api/Book/requestpublishment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringfy(request),
+      body: JSON.stringify({
+        kitapId : bookId,
+        yazarId : user.id,
+      }),
     });
     if (yanit.ok) {
-      console.log(" talep gönderildi");
-
+      alert("başarılı");
     }
     else {
-      console.log("talep gönderilemedi");
+      alert("başarısız");
     }
   }
 
@@ -136,23 +119,30 @@ const AuMybook = () => {
   //   setisClicked(!isClicked);
   // }
 
-  const changeTitle = async (e) => {
-    const newbook = {
-      title: title,
-    }
+  const handleTitleChange = (e,id) => {
+    const book = reqBooks.find(book => book.id == id);
+    book.title = e.target.value;
+  };
 
-    //book author idsi almıyor backend
-    const yanit = await fetch(`http://localhost:5249/api/Book/create`, {
-      method: "POST",
+  const changeTitle = async (bookId) => {
+    const book = reqBooks.find(book => book.id == bookId);
+    const newbook = {
+      yeniIsim: book.title,
+      bookId: bookId 
+    };
+
+    const yanit = await fetch(`http://localhost:5249/api/Book/editBookTitle`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newbook),
     });
 
     if (yanit.ok) {
-      console.log(" isim değişti");
+      alert("başarılı");
+      nav(0);
     }
     else {
-      console.log("isim değişmedi");
+      alert("başarısız");
     }
   }
   return (
@@ -196,12 +186,6 @@ const AuMybook = () => {
               <input onChange={e => settype(e.target.value)} type='text' className='flex flex-col border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
               hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
             </div>
-            <div className='flex flex-col justify-center items-center'>
-              <label>PAGES</label>
-              <input onChange={e => setpages(e.target.value)} type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
-              hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
-            </div>
-
             <button onClick={createbook} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[105px]
               place-self-center hover:bg-[#fed478c9] transition-all  '>CREATE</button>
           </form>)}
@@ -219,7 +203,6 @@ const AuMybook = () => {
             </thead>
             <tbody className='text-white text-sm'>
               {reqBooks.map((book, index) => (
-                //status db de dönmemiş publish date dönmememiş.
                 <tr className='border-b-2 border-black'>
                   <td className='py-3 pl-4 font-medium'>{book.title}</td>
                   <td className='py-3 font-thin'>{book.type}</td>
@@ -227,12 +210,12 @@ const AuMybook = () => {
                   <td className='py-2'>
                     {/* name input */}
                     <div className='flex flex-row mb-2'>
-                      <input onChange={e => settitle(e.target.value)} type='text' className='  w-60 h-8 bg-gray-300 p-2 rounded-sm text-black' placeholder='Enter new name' />
-                      <button onClick={changeTitle} className='bg-black rounded-sm text-xs font-medium py-2 px-3 hover:bg-neutral-900 mr-3 '>CHANGE</button>
+                      <input onChange={e => handleTitleChange(e,book.id)} type='text' className='  w-60 h-8 bg-gray-300 p-2 rounded-sm text-black' placeholder='Enter new name' />
+                      <button onClick={e => changeTitle(book.id)} className='bg-black rounded-sm text-xs font-medium py-2 px-3 hover:bg-neutral-900 mr-3 '>CHANGE</button>
                     </div>
 
-                    <Link to={"/WritePage?bookId=" + book.id} className='bg-[#0f123c] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#0f123cd1] mr-3 '>WRITE</Link>
-                    <button onClick={PublishRequest} className='bg-[#0f123c] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#0f123cd1] mr-3 '> Request Publishment </button>
+                    <Link to={"/WriteBook?bookId" + book.id} className='bg-[#0f123c] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#0f123cd1] mr-3 '>WRITE</Link>
+                    <button onClick={() => PublishRequest(book.id)} className='bg-[#0f123c] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#0f123cd1] mr-3 '> Request Publishment </button>
                     <Link to={"/ReadBook?bookId=" + book.id} className='bg-[#fdc13ffe] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#ecbe5bb6] mr-3 '>READ</Link>
                     {/* create:create change : add page, write:router writepage2???? req:req  read: router read page miii */}
                   </td>

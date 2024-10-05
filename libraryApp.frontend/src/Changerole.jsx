@@ -19,15 +19,17 @@ const Changerole = () => {
     }
 
     const user = JSON.parse(data);
-    setUser(user);
+    setuser(user);
 
     if (user.roleName !== "manager") {
       nav("/");
       return;
     }
+
+    fetchUsers(user);
   }
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (user) => {
     const yanit = await fetch(`http://localhost:5249/api/User/getusersforrolechanging/${user.roleId}`, {
       method: "GET"
     });
@@ -39,13 +41,14 @@ const Changerole = () => {
 
   useEffect(
     () => {
-      // checkUser();
-      fetchUsers();
+      checkUser();
     },
     []);
 
   //userId ve newRoleId kısmına ne vereceğiz + fonkksiyonum neden tanımlanmıyor
-  const updateRole = async () => {
+  const updateRole = async (e) => {
+    e.preventDefault();
+
     const role = {
       userId: selectedUserId,
       newRoleId: selectedRoleId
@@ -59,10 +62,11 @@ const Changerole = () => {
     });
 
     if (yanit.ok) {
-      console.log("rol güncellendi");
+      alert("rol güncellendi");
+      nav(0);
     }
     else {
-      console.log("rol güncellenemedi");
+      alert("rol güncellenemedi");
     }
 
   };
@@ -78,7 +82,7 @@ const Changerole = () => {
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>{user.username}</span>
+          <span className='text-[#fed478fe]'>{user.name + " " + user.surname}</span>
           <button onClick={() => {
             localStorage.removeItem("userData");
             nav("/Login");

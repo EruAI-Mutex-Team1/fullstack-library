@@ -6,13 +6,14 @@ const HomePage = () => {
     const nav = useNavigate();
   
     useEffect(() => {
-      //BURAYI DA YORUMA ALDIM DB BAĞLI OLMADIĞI İÇİN DATA NULL OLUYOR VE LOGİNE DÖNDERİYOR
       const data = localStorage.getItem("userData");
       if(data === null){
-        nav("/login");       
+        nav("/login");
       }
+
       const user = JSON.parse(data);
-      setUser(user);  
+      setUser(user); 
+     
       console.log(user);
     },[]);
 

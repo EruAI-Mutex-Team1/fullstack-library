@@ -25,6 +25,7 @@ const Login = () => {
 
         if(yanit.ok){
           const user = await yanit.json();
+          console.log(user);
           localStorage.setItem("userData", JSON.stringify(user.userDTO));
           nav("/");
         }

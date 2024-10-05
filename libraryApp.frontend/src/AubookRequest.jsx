@@ -36,44 +36,46 @@ const AubookRequest = () => {
   }
 
   useEffect(() => {
-    //checkUser();
+    checkUser();
     BookCreateReq();
   }, [])
 
-  //AYNI ŞEKİLDE BOOK İDLER EKLENMEDİ
-  const ApproveReq = async () => {
+  const ApproveReq = async (id) => {
     const request = {
+      id: id,
       confirmation: true
     }
-    //requestId ler doğru mu
-    const yanit = await fetch(`http://localhost:5249/api/Book/setpublishing/${requestId}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/setpublishing`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
     });
     if (yanit.ok) {
-      console.log("kabul edilme gerçekleşti");
+      alert("başarılı");
+      nav(0);
     }
     else {
-      console.log("kabul edilme gerçekleştirilemedi");
+      alert("başarısız");
     }
   }
 
-  const RejectReq = async () => {
+  const RejectReq = async (id) => {
     const request = {
+      id:id,
       confirmation: false,
     }
 
-    const yanit = await fetch(`http://localhost:5249/api/Book/setpublishing/${requestId}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/setpublishing`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
     });
     if (yanit.ok) {
-      console.log("reddetme gerçekleşti");
+      alert("başarılı");
+      nav(0);
     }
     else {
-      console.log("reddetme gerçekleştirilemedi");
+      alert("başarısız");
     }
   }
   
@@ -122,10 +124,9 @@ const AubookRequest = () => {
                   <td className='py-3 font-thin'>{request.userFullname}</td>
                   <td className='py-3 font-thin'>{request.requestDate}</td>
                   <td className='py-2 flex flex-row gap-3'>
-                    {/* read sayfasına giderken nasıl yapacağız */}
                     <Link to={"/ReadBook?bookId="+ request.bookId} className=' bg-[#0f123c] text-white  rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-[80px] '>READ THE BOOK</Link>
-                    <button onClick={ApproveReq} className=' bg-[#0f123c] text-white rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1]'>APPROVE</button>
-                    <button onClick={RejectReq} className='bg-[#f8c558fe] text-white rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
+                    <button onClick={() => ApproveReq(request.id)} className=' bg-[#0f123c] text-white rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1]'>APPROVE</button>
+                    <button onClick={() => RejectReq(request.id)} className='bg-[#f8c558fe] text-white rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
                   </td>
                 </tr>
               ))}
