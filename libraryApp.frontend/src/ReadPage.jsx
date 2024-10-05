@@ -1,41 +1,83 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { GrCaretNext } from "react-icons/gr";
+import { GrCaretPrevious } from "react-icons/gr";
 
 //seçili kitap okunacak mı
 const ReadPage = () => {
 
   const [kitapAdi, setKitapAdi] = useState("");
-  const [sayfalar, setSayfalar] = useState([]);
-  const bookId = new URLSearchParams(location.search).get("bookId");
+  // const [sayfalar, setSayfalar] = useState([]);
+  const [numOfPages, setNumOfPages] = useState([]);
+  const [currentpage, setcurrentpage] = useState([]);
+  //const [nextpage, setnextpage] = useState([]);
+ // const [prevpage, setprevpage] = useState([]);
 
-  const kitabiAl = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}`, {
-      method: "GET",
-    });
+  const pages = [
+    "Chapter 1: Once upon a time...",
+    "Chapter 2: The journey continues...",
+    "Chapter 3: A twist in the tale...",
+    "Chapter 4: The grand finale...",
+    "Chapter 5: The story unfolds...",
+    "Chapter 6: The surprising conclusion...",
+    "Chapter 7: The surprising conclusion..."
 
-    if (yanit.ok) {
-      const kitap = await yanit.json();
-      setKitapAdi(kitap.title);
-      setSayfalar(kitap.pages);
-    }
-  }
+  ];
 
-  const [user, setUser] = useState({});
+  // const bookId = new URLSearchParams(location.search).get("bookId");
+
+  // const kitabiAl = async () => {
+  //   const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}`, {
+  //     method: "GET",
+  //   });
+
+  //   if (yanit.ok) {
+  //     const kitap = await yanit.json();
+  //     setKitapAdi(kitap.title);
+  //     setSayfalar(kitap.pages);
+  //     const pages = Array.from({ length: kitap.number_of_pages }, (_, i) => i);
+  //       setNumOfPages(pages);
+  //       setPageNum(kitap.number_of_pages + 1);
+
+        const nextpage = () => {
+          if (currentpage < pages.length - 2) {
+            setcurrentpage(currentpage + 2);
+          }
+        };
+
+        const prevpage = () => {
+          if (currentpage > 0) {
+            setcurrentpage(currentpage - 2);
+          }
+        };
+
+        const searchpage = () => {
+          if (currentpage < pages.length - 2) {
+            setcurrentpage(e);
+          }
+        };
+
+    
+
+    const [user, setUser] = useState({});
     const nav = useNavigate();
   
 
   useEffect (()=> {
-    const data = localStorage.getItem("userData");
-      if(data === null){
-        nav("/Login");
+    //checkuser ı useeffect içinde çalıştırdığın için sayfalar sende görünmüyor.
+    // const data = localStorage.getItem("userData");
+    //   if(data === null){
+    //     nav("/Login");
         
-      }
+    //   }
 
-      const user = JSON.parse(data);
-      setUser(user); 
+    //   const user = JSON.parse(data);
+    //   setUser(user); 
      
-      console.log(user);
-   kitabiAl();
+    //   console.log(user);
+   //kitabiAl();
+    prevpage();
+    nextpage();
   }, []);
 
   return (
@@ -49,25 +91,62 @@ const ReadPage = () => {
         <span className='text-[#fed478fe]'>{user.username}</span>
             <button onClick={() => {
               localStorage.removeItem("userData");
-              nav(0);
+              nav("/Home");
               }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 
       <div className='bg-hero-pattern h-screen flex flex-col items-center gap-5 '>
         <div className='bg-[#fdc13ffe] h-10 w-auto p-1 rounded-md flex items-center'>
-       <h2 className='text-l font-serif text-black hover:border-b-2'>{kitapAdi}</h2>
+       <h2 className='text-l font-serif text-black hover:border-b-2'>zeh's book</h2>
        </div>
-        <section className="bg-slate-200 p-6 h-[600px] w-[1010px] rounded-lg shadow-md  overflow-y-scroll">
-          {sayfalar.map((sayfa,index) => (
+       <div className='flex justify-between'>
+       <button
+            onClick={prevpage}
+            className={`px-4 py-2 rounded bg-[#fdc13ffe] text-black font-semibold h-10 mt-[300px] mr-2 ${
+              currentpage === 0 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={currentpage === 0}
+          >
+          <GrCaretPrevious />
+          </button>
+        <form className="bg-[#f2e6c9fe] p-6 h-[600px] w-[500px] rounded-l-md shadow-md">
+          {/* {sayfalar.map((sayfa,index) => (
           <p className="text-lg leading-relaxed"> {sayfa} </p>
-          ))}
-        </section>
+          ))} */}
+          <p className="text-lg">{setcurrentpage(index)}</p>
+          {currentpage < pages.length && (
+          <p className="text-lg ">{pages[currentpage]}</p>)}
+        </form>
+        <form className='bg-black h-[600px] w-[8px]'></form>
+        
+        <form className="bg-[#f2e6c9fe] p-6 h-[600px] w-[500px] rounded-r-md shadow-md">
+        {currentpage + 1 < pages.length ? (
+              <p className="text-lg">{pages[currentpage + 1]}</p>
+            ) : (
+              <p className="text-lg ">END</p> // Eğer sayfa yoksa
+            )}
+          </form>
+          
+        <button
+            onClick={nextpage}
+            className={`px-4 py-2 rounded bg-[#fdc13ffe] text-black font-semibold h-10 mt-[300px] ml-2 ${
+              currentpage === pages.length - 1 ? "opacity-50 cursor-not-allowed": ""
+            }`}
+            disabled={currentpage === pages.length - 1}
+          >
+            <GrCaretNext />
+          </button>
+          <div className='flex flex-col'>
+          <label className='bg-[#edc05f] text-black flex items-center w-15 h-auto'>Search Page</label>
+          <input onChange={e=>setcurrentpage(e.target.value-1)} className='bg-[#f4eee2eb] py-2 px-3 rounded-sm hover:bg-[#dad2c0eb] h-10 w-auto'></input> 
+        </div></div>
        <div className='flex flex-row justify-between gap-3'>
-        <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go Borrowed Books</Link> 
+        <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go Borrowed Books</Link>
         {(user.roleName === "author") && (
                <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go My Books</Link>
             )}
+       
         </div>    
       </div>
 

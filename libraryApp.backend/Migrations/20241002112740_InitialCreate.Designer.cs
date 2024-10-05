@@ -12,7 +12,7 @@ using libraryApp.backend.Entity;
 namespace libraryApp.backend.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20240929163959_InitialCreate")]
+    [Migration("20241002112740_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -55,82 +55,82 @@ namespace libraryApp.backend.Migrations
                         new
                         {
                             id = 1,
-                            number_of_pages = 10,
+                            number_of_pages = 250,
                             status = true,
-                            title = "test1",
-                            type = "psycho"
+                            title = "The Psychology of Money",
+                            type = "psychology"
                         },
                         new
                         {
                             id = 2,
-                            number_of_pages = 220,
+                            number_of_pages = 368,
                             status = true,
-                            title = "test2",
+                            title = "The Silent Patient",
                             type = "thriller"
                         },
                         new
                         {
                             id = 3,
-                            number_of_pages = 320,
+                            number_of_pages = 334,
                             status = true,
-                            title = "test3",
-                            type = "fantasy"
+                            title = "Educated",
+                            type = "memoir"
                         },
                         new
                         {
                             id = 4,
-                            number_of_pages = 140,
-                            status = false,
-                            title = "test4",
-                            type = "mystery"
+                            number_of_pages = 448,
+                            status = true,
+                            title = "Becoming",
+                            type = "memoir"
                         },
                         new
                         {
                             id = 5,
-                            number_of_pages = 250,
+                            number_of_pages = 208,
                             status = true,
-                            title = "test5",
-                            type = "non-fiction"
+                            title = "The Alchemist",
+                            type = "fiction"
                         },
                         new
                         {
                             id = 6,
-                            number_of_pages = 190,
+                            number_of_pages = 464,
                             status = true,
-                            title = "test6",
-                            type = "science fiction"
+                            title = "Sapiens: A Brief History of Humankind",
+                            type = "history"
                         },
                         new
                         {
                             id = 7,
-                            number_of_pages = 270,
-                            status = false,
-                            title = "test7",
-                            type = "romance"
+                            number_of_pages = 371,
+                            status = true,
+                            title = "The Power of Habit",
+                            type = "self-help"
                         },
                         new
                         {
                             id = 8,
-                            number_of_pages = 330,
+                            number_of_pages = 277,
                             status = true,
-                            title = "test8",
-                            type = "horror"
+                            title = "The Catcher in the Rye",
+                            type = "fiction"
                         },
                         new
                         {
                             id = 9,
-                            number_of_pages = 410,
+                            number_of_pages = 328,
                             status = true,
-                            title = "test9",
-                            type = "biography"
+                            title = "1984",
+                            type = "dystopian"
                         },
                         new
                         {
                             id = 10,
-                            number_of_pages = 200,
-                            status = false,
-                            title = "test10",
-                            type = "history"
+                            number_of_pages = 281,
+                            status = true,
+                            title = "To Kill a Mockingbird",
+                            type = "fiction"
                         });
                 });
 
@@ -191,31 +191,31 @@ namespace libraryApp.backend.Migrations
                         {
                             id = 6,
                             bookId = 6,
-                            userId = 1
+                            userId = 6
                         },
                         new
                         {
                             id = 7,
                             bookId = 7,
-                            userId = 2
+                            userId = 7
                         },
                         new
                         {
                             id = 8,
                             bookId = 8,
-                            userId = 3
+                            userId = 8
                         },
                         new
                         {
                             id = 9,
                             bookId = 9,
-                            userId = 4
+                            userId = 9
                         },
                         new
                         {
                             id = 10,
                             bookId = 10,
-                            userId = 5
+                            userId = 10
                         });
                 });
 
@@ -254,92 +254,92 @@ namespace libraryApp.backend.Migrations
                         new
                         {
                             id = 1,
-                            bookId = 2,
+                            bookId = 1,
                             confirmation = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            requestDate = new DateOnly(2024, 10, 2),
                             userId = 1
                         },
                         new
                         {
                             id = 2,
-                            bookId = 3,
+                            bookId = 2,
                             confirmation = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            requestDate = new DateOnly(2024, 10, 2),
                             userId = 2
                         },
                         new
                         {
                             id = 3,
-                            bookId = 4,
-                            confirmation = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            bookId = 3,
+                            confirmation = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
                             userId = 3
                         },
                         new
                         {
                             id = 4,
-                            bookId = 5,
+                            bookId = 4,
                             confirmation = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            requestDate = new DateOnly(2024, 10, 2),
                             userId = 4
                         },
                         new
                         {
                             id = 5,
-                            bookId = 6,
-                            confirmation = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            bookId = 5,
+                            confirmation = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
                             userId = 5
                         },
                         new
                         {
                             id = 6,
-                            bookId = 7,
+                            bookId = 6,
                             confirmation = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 1
+                            requestDate = new DateOnly(2024, 10, 2),
+                            userId = 6
                         },
                         new
                         {
                             id = 7,
-                            bookId = 8,
-                            confirmation = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 2
+                            bookId = 7,
+                            confirmation = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
+                            userId = 7
                         },
                         new
                         {
                             id = 8,
-                            bookId = 9,
+                            bookId = 8,
                             confirmation = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 3
+                            requestDate = new DateOnly(2024, 10, 2),
+                            userId = 8
                         },
                         new
                         {
                             id = 9,
-                            bookId = 10,
-                            confirmation = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 4
+                            bookId = 9,
+                            confirmation = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
+                            userId = 9
                         },
                         new
                         {
                             id = 10,
-                            bookId = 1,
+                            bookId = 10,
                             confirmation = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 5
+                            requestDate = new DateOnly(2024, 10, 2),
+                            userId = 10
                         });
                 });
 
@@ -388,19 +388,19 @@ namespace libraryApp.backend.Migrations
                             confirmation = false,
                             isReturned = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 10, 9),
                             userId = 1
                         },
                         new
                         {
                             id = 2,
                             bookId = 2,
-                            confirmation = true,
-                            isReturned = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
+                            confirmation = false,
+                            isReturned = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 10, 16),
                             userId = 2
                         },
                         new
@@ -410,19 +410,19 @@ namespace libraryApp.backend.Migrations
                             confirmation = false,
                             isReturned = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 10, 23),
                             userId = 3
                         },
                         new
                         {
                             id = 4,
                             bookId = 4,
-                            confirmation = true,
+                            confirmation = false,
                             isReturned = false,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 10, 30),
                             userId = 4
                         },
                         new
@@ -432,20 +432,20 @@ namespace libraryApp.backend.Migrations
                             confirmation = false,
                             isReturned = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 11, 1),
                             userId = 5
                         },
                         new
                         {
                             id = 6,
                             bookId = 6,
-                            confirmation = true,
+                            confirmation = false,
                             isReturned = false,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
-                            userId = 1
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 10, 16),
+                            userId = 6
                         },
                         new
                         {
@@ -454,20 +454,20 @@ namespace libraryApp.backend.Migrations
                             confirmation = false,
                             isReturned = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
-                            userId = 2
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 10, 23),
+                            userId = 7
                         },
                         new
                         {
                             id = 8,
                             bookId = 8,
-                            confirmation = true,
+                            confirmation = false,
                             isReturned = false,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
-                            userId = 3
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 10, 30),
+                            userId = 8
                         },
                         new
                         {
@@ -476,20 +476,20 @@ namespace libraryApp.backend.Migrations
                             confirmation = false,
                             isReturned = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
-                            userId = 4
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 11, 1),
+                            userId = 9
                         },
                         new
                         {
                             id = 10,
                             bookId = 10,
-                            confirmation = true,
+                            confirmation = false,
                             isReturned = false,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            returnDate = new DateOnly(2024, 10, 6),
-                            userId = 5
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 2),
+                            returnDate = new DateOnly(2024, 10, 16),
+                            userId = 10
                         });
                 });
 
@@ -531,102 +531,102 @@ namespace libraryApp.backend.Migrations
                         new
                         {
                             id = 1,
-                            content = "Hello!",
+                            content = "Hello! Looking forward to reading this book.",
                             isRead = false,
                             recieverId = 2,
                             senderId = 1,
-                            sendingDate = new DateOnly(2024, 9, 29),
+                            sendingDate = new DateOnly(2024, 10, 2),
                             title = "Greetings"
                         },
                         new
                         {
                             id = 2,
-                            content = "How are you?",
-                            isRead = true,
-                            recieverId = 3,
+                            content = "Did you finish the last chapter?",
+                            isRead = false,
+                            recieverId = 1,
                             senderId = 2,
-                            sendingDate = new DateOnly(2024, 9, 29),
-                            title = "Check-in"
+                            sendingDate = new DateOnly(2024, 10, 2),
+                            title = "Question"
                         },
                         new
                         {
                             id = 3,
-                            content = "Meeting tomorrow?",
+                            content = "I found a great article related to our reading.",
                             isRead = false,
-                            recieverId = 4,
-                            senderId = 3,
-                            sendingDate = new DateOnly(2024, 9, 29),
-                            title = "Meeting"
+                            recieverId = 3,
+                            senderId = 1,
+                            sendingDate = new DateOnly(2024, 10, 2),
+                            title = "Resource Sharing"
                         },
                         new
                         {
                             id = 4,
-                            content = "Check your email",
+                            content = "Let's discuss this book in our next meeting.",
                             isRead = false,
-                            recieverId = 5,
-                            senderId = 4,
-                            sendingDate = new DateOnly(2024, 9, 29),
-                            title = "Reminder"
-                        },
-                        new
-                        {
-                            id = 5,
-                            content = "Let's catch up",
-                            isRead = true,
-                            recieverId = 1,
-                            senderId = 5,
-                            sendingDate = new DateOnly(2024, 9, 29),
-                            title = "Catch-up"
-                        },
-                        new
-                        {
-                            id = 6,
-                            content = "Project update",
-                            isRead = false,
-                            recieverId = 2,
-                            senderId = 1,
-                            sendingDate = new DateOnly(2024, 9, 29),
-                            title = "Update"
-                        },
-                        new
-                        {
-                            id = 7,
-                            content = "Great job!",
-                            isRead = false,
-                            recieverId = 3,
-                            senderId = 2,
-                            sendingDate = new DateOnly(2024, 9, 29),
-                            title = "Praise"
-                        },
-                        new
-                        {
-                            id = 8,
-                            content = "Next steps?",
-                            isRead = true,
                             recieverId = 4,
-                            senderId = 3,
-                            sendingDate = new DateOnly(2024, 9, 29),
+                            senderId = 1,
+                            sendingDate = new DateOnly(2024, 10, 2),
                             title = "Discussion"
                         },
                         new
                         {
-                            id = 9,
-                            content = "See you soon",
+                            id = 5,
+                            content = "What do you think about the protagonist's choices?",
                             isRead = false,
                             recieverId = 5,
-                            senderId = 4,
-                            sendingDate = new DateOnly(2024, 9, 29),
-                            title = "Goodbye"
+                            senderId = 1,
+                            sendingDate = new DateOnly(2024, 10, 2),
+                            title = "Character Analysis"
+                        },
+                        new
+                        {
+                            id = 6,
+                            content = "I can't wait to start the next book!",
+                            isRead = false,
+                            recieverId = 6,
+                            senderId = 1,
+                            sendingDate = new DateOnly(2024, 10, 2),
+                            title = "Excitement"
+                        },
+                        new
+                        {
+                            id = 7,
+                            content = "Have you read the latest chapter?",
+                            isRead = false,
+                            recieverId = 7,
+                            senderId = 1,
+                            sendingDate = new DateOnly(2024, 10, 2),
+                            title = "Update"
+                        },
+                        new
+                        {
+                            id = 8,
+                            content = "This book changed my perspective on many things.",
+                            isRead = false,
+                            recieverId = 8,
+                            senderId = 1,
+                            sendingDate = new DateOnly(2024, 10, 2),
+                            title = "Thoughts"
+                        },
+                        new
+                        {
+                            id = 9,
+                            content = "I'm glad we chose this book for our group.",
+                            isRead = false,
+                            recieverId = 9,
+                            senderId = 1,
+                            sendingDate = new DateOnly(2024, 10, 2),
+                            title = "Group Decision"
                         },
                         new
                         {
                             id = 10,
-                            content = "Congrats!",
+                            content = "What are your favorite quotes from the book?",
                             isRead = false,
-                            recieverId = 1,
-                            senderId = 5,
-                            sendingDate = new DateOnly(2024, 9, 29),
-                            title = "Congratulations"
+                            recieverId = 10,
+                            senderId = 1,
+                            sendingDate = new DateOnly(2024, 10, 2),
+                            title = "Quotes"
                         });
                 });
 
@@ -659,71 +659,351 @@ namespace libraryApp.backend.Migrations
                         {
                             id = 1,
                             bookId = 1,
-                            content = "Page content 1",
+                            content = "Understanding how money works is essential in today's economy. This chapter explores the psychology behind financial decisions.",
                             pageNumber = 1
                         },
                         new
                         {
                             id = 2,
                             bookId = 1,
-                            content = "Page content 2",
+                            content = "The concept of saving and investing is examined, highlighting the impact of time and compound interest.",
                             pageNumber = 2
                         },
                         new
                         {
                             id = 3,
-                            bookId = 2,
-                            content = "Page content 1",
-                            pageNumber = 1
+                            bookId = 1,
+                            content = "We delve into common financial myths and the reality behind them, debunking misconceptions that can hinder financial growth.",
+                            pageNumber = 3
                         },
                         new
                         {
                             id = 4,
-                            bookId = 2,
-                            content = "Page content 2",
-                            pageNumber = 2
+                            bookId = 1,
+                            content = "Emotional aspects of money management are discussed, emphasizing the need for awareness and discipline.",
+                            pageNumber = 4
                         },
                         new
                         {
                             id = 5,
-                            bookId = 3,
-                            content = "Page content 1",
-                            pageNumber = 1
+                            bookId = 1,
+                            content = "The final chapter provides actionable steps to improve financial literacy and well-being.",
+                            pageNumber = 5
                         },
                         new
                         {
                             id = 6,
-                            bookId = 3,
-                            content = "Page content 2",
-                            pageNumber = 2
+                            bookId = 2,
+                            content = "The Silent Patient begins with a shocking incident, setting the stage for a psychological thriller filled with twists and turns.",
+                            pageNumber = 1
                         },
                         new
                         {
                             id = 7,
-                            bookId = 4,
-                            content = "Page content 1",
-                            pageNumber = 1
+                            bookId = 2,
+                            content = "We explore the protagonist's motivations and the dark secrets that unfold throughout the narrative.",
+                            pageNumber = 2
                         },
                         new
                         {
                             id = 8,
-                            bookId = 4,
-                            content = "Page content 2",
-                            pageNumber = 2
+                            bookId = 2,
+                            content = "Themes of love, betrayal, and forgiveness are intricately woven into the story, making it a gripping read.",
+                            pageNumber = 3
                         },
                         new
                         {
                             id = 9,
-                            bookId = 5,
-                            content = "Page content 1",
-                            pageNumber = 1
+                            bookId = 2,
+                            content = "The unreliable narrator challenges readers to question the truth behind the events.",
+                            pageNumber = 4
                         },
                         new
                         {
                             id = 10,
-                            bookId = 5,
-                            content = "Page content 2",
+                            bookId = 2,
+                            content = "The climax leaves readers breathless, leading to a shocking revelation that ties all elements together.",
+                            pageNumber = 5
+                        },
+                        new
+                        {
+                            id = 11,
+                            bookId = 3,
+                            content = "Educated recounts the author's journey from a strict upbringing in Idaho to pursuing higher education against all odds.",
+                            pageNumber = 1
+                        },
+                        new
+                        {
+                            id = 12,
+                            bookId = 3,
+                            content = "The struggle for knowledge and identity forms the core of this compelling memoir.",
                             pageNumber = 2
+                        },
+                        new
+                        {
+                            id = 13,
+                            bookId = 3,
+                            content = "Key events in the author's life are portrayed with raw honesty and vulnerability.",
+                            pageNumber = 3
+                        },
+                        new
+                        {
+                            id = 14,
+                            bookId = 3,
+                            content = "The challenges faced by the author serve as a powerful reminder of the importance of education.",
+                            pageNumber = 4
+                        },
+                        new
+                        {
+                            id = 15,
+                            bookId = 3,
+                            content = "The memoir concludes with a reflection on personal growth and the value of resilience.",
+                            pageNumber = 5
+                        },
+                        new
+                        {
+                            id = 16,
+                            bookId = 4,
+                            content = "Becoming tells the inspiring story of Michelle Obama, chronicling her life from childhood to the White House.",
+                            pageNumber = 1
+                        },
+                        new
+                        {
+                            id = 17,
+                            bookId = 4,
+                            content = "The author shares personal anecdotes that resonate with themes of identity and self-discovery.",
+                            pageNumber = 2
+                        },
+                        new
+                        {
+                            id = 18,
+                            bookId = 4,
+                            content = "The journey through her career and marriage showcases the challenges faced in the public eye.",
+                            pageNumber = 3
+                        },
+                        new
+                        {
+                            id = 19,
+                            bookId = 4,
+                            content = "Advocacy for education and health issues becomes a focal point in her story.",
+                            pageNumber = 4
+                        },
+                        new
+                        {
+                            id = 20,
+                            bookId = 4,
+                            content = "The memoir ends with a powerful message of hope and empowerment for future generations.",
+                            pageNumber = 5
+                        },
+                        new
+                        {
+                            id = 21,
+                            bookId = 5,
+                            content = "The Alchemist is a magical tale about following one’s dreams and listening to one’s heart.",
+                            pageNumber = 1
+                        },
+                        new
+                        {
+                            id = 22,
+                            bookId = 5,
+                            content = "The journey of Santiago, a young shepherd, serves as a metaphor for the quest for personal legend.",
+                            pageNumber = 2
+                        },
+                        new
+                        {
+                            id = 23,
+                            bookId = 5,
+                            content = "The book emphasizes the significance of dreams and the courage to pursue them.",
+                            pageNumber = 3
+                        },
+                        new
+                        {
+                            id = 24,
+                            bookId = 5,
+                            content = "Wisdom and the interconnectedness of the universe play key roles in the narrative.",
+                            pageNumber = 4
+                        },
+                        new
+                        {
+                            id = 25,
+                            bookId = 5,
+                            content = "The conclusion inspires readers to realize their own dreams and take action.",
+                            pageNumber = 5
+                        },
+                        new
+                        {
+                            id = 26,
+                            bookId = 6,
+                            content = "Sapiens provides a thought-provoking overview of human history and evolution.",
+                            pageNumber = 1
+                        },
+                        new
+                        {
+                            id = 27,
+                            bookId = 6,
+                            content = "The author examines how Homo sapiens came to dominate the Earth and the implications of this power.",
+                            pageNumber = 2
+                        },
+                        new
+                        {
+                            id = 28,
+                            bookId = 6,
+                            content = "Major events, such as the Agricultural Revolution, are analyzed in detail.",
+                            pageNumber = 3
+                        },
+                        new
+                        {
+                            id = 29,
+                            bookId = 6,
+                            content = "The narrative challenges readers to think critically about humanity's future.",
+                            pageNumber = 4
+                        },
+                        new
+                        {
+                            id = 30,
+                            bookId = 6,
+                            content = "The concluding chapter reflects on our place in the world and our responsibilities as a species.",
+                            pageNumber = 5
+                        },
+                        new
+                        {
+                            id = 31,
+                            bookId = 7,
+                            content = "The Power of Habit explores the science behind why habits exist and how they can be changed.",
+                            pageNumber = 1
+                        },
+                        new
+                        {
+                            id = 32,
+                            bookId = 7,
+                            content = "The author breaks down the habit loop: cue, routine, and reward.",
+                            pageNumber = 2
+                        },
+                        new
+                        {
+                            id = 33,
+                            bookId = 7,
+                            content = "Real-life examples illustrate the power of habits in personal and professional life.",
+                            pageNumber = 3
+                        },
+                        new
+                        {
+                            id = 34,
+                            bookId = 7,
+                            content = "Strategies for creating positive habits and breaking negative ones are presented.",
+                            pageNumber = 4
+                        },
+                        new
+                        {
+                            id = 35,
+                            bookId = 7,
+                            content = "The final chapter emphasizes the importance of belief in changing habits.",
+                            pageNumber = 5
+                        },
+                        new
+                        {
+                            id = 36,
+                            bookId = 8,
+                            content = "The Catcher in the Rye narrates the story of Holden Caulfield, a disenchanted teenager.",
+                            pageNumber = 1
+                        },
+                        new
+                        {
+                            id = 37,
+                            bookId = 8,
+                            content = "Themes of alienation and rebellion permeate the narrative, reflecting teenage angst.",
+                            pageNumber = 2
+                        },
+                        new
+                        {
+                            id = 38,
+                            bookId = 8,
+                            content = "Holden's perspective provides a critique of adult hypocrisy and societal expectations.",
+                            pageNumber = 3
+                        },
+                        new
+                        {
+                            id = 39,
+                            bookId = 8,
+                            content = "Key moments highlight the struggle for identity and connection.",
+                            pageNumber = 4
+                        },
+                        new
+                        {
+                            id = 40,
+                            bookId = 8,
+                            content = "The ending leaves readers contemplating the complexities of growing up.",
+                            pageNumber = 5
+                        },
+                        new
+                        {
+                            id = 41,
+                            bookId = 9,
+                            content = "1984 depicts a dystopian future under totalitarian rule, exploring themes of surveillance and oppression.",
+                            pageNumber = 1
+                        },
+                        new
+                        {
+                            id = 42,
+                            bookId = 9,
+                            content = "The protagonist, Winston Smith, grapples with the loss of individuality in a conformist society.",
+                            pageNumber = 2
+                        },
+                        new
+                        {
+                            id = 43,
+                            bookId = 9,
+                            content = "The narrative challenges readers to reflect on the nature of freedom and truth.",
+                            pageNumber = 3
+                        },
+                        new
+                        {
+                            id = 44,
+                            bookId = 9,
+                            content = "The struggle against oppressive regimes is a central theme that resonates in contemporary society.",
+                            pageNumber = 4
+                        },
+                        new
+                        {
+                            id = 45,
+                            bookId = 9,
+                            content = "The conclusion leaves a lasting impact, urging readers to remain vigilant in preserving their freedoms.",
+                            pageNumber = 5
+                        },
+                        new
+                        {
+                            id = 46,
+                            bookId = 10,
+                            content = "To Kill a Mockingbird presents a poignant exploration of racism and injustice in the American South.",
+                            pageNumber = 1
+                        },
+                        new
+                        {
+                            id = 47,
+                            bookId = 10,
+                            content = "The story unfolds through the eyes of young Scout Finch, offering a unique perspective on moral growth.",
+                            pageNumber = 2
+                        },
+                        new
+                        {
+                            id = 48,
+                            bookId = 10,
+                            content = "Key characters highlight the complexities of human behavior and social norms.",
+                            pageNumber = 3
+                        },
+                        new
+                        {
+                            id = 49,
+                            bookId = 10,
+                            content = "The narrative emphasizes empathy and understanding as vital to combating prejudice.",
+                            pageNumber = 4
+                        },
+                        new
+                        {
+                            id = 50,
+                            bookId = 10,
+                            content = "The conclusion underscores the importance of standing up for what is right, even in the face of adversity.",
+                            pageNumber = 5
                         });
                 });
 
@@ -754,72 +1034,72 @@ namespace libraryApp.backend.Migrations
                         new
                         {
                             id = 1,
-                            earnDate = new DateOnly(2024, 9, 29),
+                            earnDate = new DateOnly(2024, 10, 2),
                             point = 10,
                             userId = 1
                         },
                         new
                         {
                             id = 2,
-                            earnDate = new DateOnly(2024, 9, 29),
+                            earnDate = new DateOnly(2024, 10, 1),
                             point = 20,
-                            userId = 2
+                            userId = 1
                         },
                         new
                         {
                             id = 3,
-                            earnDate = new DateOnly(2024, 9, 29),
-                            point = 30,
-                            userId = 3
+                            earnDate = new DateOnly(2024, 9, 30),
+                            point = 15,
+                            userId = 2
                         },
                         new
                         {
                             id = 4,
                             earnDate = new DateOnly(2024, 9, 29),
+                            point = 25,
+                            userId = 2
+                        },
+                        new
+                        {
+                            id = 5,
+                            earnDate = new DateOnly(2024, 9, 28),
+                            point = 30,
+                            userId = 3
+                        },
+                        new
+                        {
+                            id = 6,
+                            earnDate = new DateOnly(2024, 9, 27),
                             point = 40,
                             userId = 4
                         },
                         new
                         {
-                            id = 5,
-                            earnDate = new DateOnly(2024, 9, 29),
+                            id = 7,
+                            earnDate = new DateOnly(2024, 9, 26),
                             point = 50,
                             userId = 5
                         },
                         new
                         {
-                            id = 6,
-                            earnDate = new DateOnly(2024, 9, 29),
-                            point = 60,
-                            userId = 1
-                        },
-                        new
-                        {
-                            id = 7,
-                            earnDate = new DateOnly(2024, 9, 29),
-                            point = 70,
-                            userId = 2
-                        },
-                        new
-                        {
                             id = 8,
-                            earnDate = new DateOnly(2024, 9, 29),
-                            point = 80,
-                            userId = 3
+                            earnDate = new DateOnly(2024, 9, 25),
+                            point = 60,
+                            userId = 6
                         },
                         new
                         {
                             id = 9,
-                            earnDate = new DateOnly(2024, 9, 29),
-                            point = 90,
-                            userId = 4
+                            earnDate = new DateOnly(2024, 9, 24),
+                            point = 70,
+                            userId = 7
                         },
                         new
                         {
                             id = 10,
-                            earnDate = new DateOnly(2024, 9, 29),
-                            point = 100,
-                            userId = 5
+                            earnDate = new DateOnly(2024, 9, 23),
+                            point = 80,
+                            userId = 8
                         });
                 });
 
@@ -855,7 +1135,7 @@ namespace libraryApp.backend.Migrations
                             id = 1,
                             fineAmount = 5,
                             isActive = true,
-                            punishmentDate = new DateOnly(2024, 9, 29),
+                            punishmentDate = new DateOnly(2024, 10, 2),
                             userId = 1
                         },
                         new
@@ -863,16 +1143,16 @@ namespace libraryApp.backend.Migrations
                             id = 2,
                             fineAmount = 10,
                             isActive = true,
-                            punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 3
+                            punishmentDate = new DateOnly(2024, 10, 1),
+                            userId = 2
                         },
                         new
                         {
                             id = 3,
                             fineAmount = 15,
                             isActive = false,
-                            punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 1
+                            punishmentDate = new DateOnly(2024, 9, 30),
+                            userId = 3
                         },
                         new
                         {
@@ -880,55 +1160,55 @@ namespace libraryApp.backend.Migrations
                             fineAmount = 20,
                             isActive = true,
                             punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 2
+                            userId = 4
                         },
                         new
                         {
                             id = 5,
                             fineAmount = 25,
                             isActive = false,
-                            punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 1
+                            punishmentDate = new DateOnly(2024, 9, 28),
+                            userId = 5
                         },
                         new
                         {
                             id = 6,
                             fineAmount = 30,
                             isActive = true,
-                            punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 3
+                            punishmentDate = new DateOnly(2024, 9, 27),
+                            userId = 6
                         },
                         new
                         {
                             id = 7,
                             fineAmount = 35,
                             isActive = true,
-                            punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 2
+                            punishmentDate = new DateOnly(2024, 9, 26),
+                            userId = 7
                         },
                         new
                         {
                             id = 8,
                             fineAmount = 40,
                             isActive = false,
-                            punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 1
+                            punishmentDate = new DateOnly(2024, 9, 25),
+                            userId = 8
                         },
                         new
                         {
                             id = 9,
                             fineAmount = 45,
                             isActive = true,
-                            punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 4
+                            punishmentDate = new DateOnly(2024, 9, 24),
+                            userId = 9
                         },
                         new
                         {
                             id = 10,
                             fineAmount = 50,
                             isActive = false,
-                            punishmentDate = new DateOnly(2024, 9, 29),
-                            userId = 1
+                            punishmentDate = new DateOnly(2024, 9, 23),
+                            userId = 10
                         });
                 });
 
@@ -964,23 +1244,23 @@ namespace libraryApp.backend.Migrations
                             id = 1,
                             confirmation = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            requestDate = new DateOnly(2024, 10, 2),
                             userId = 1
                         },
                         new
                         {
                             id = 2,
-                            confirmation = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            confirmation = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 10, 1),
                             userId = 2
                         },
                         new
                         {
                             id = 3,
-                            confirmation = false,
-                            pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            confirmation = true,
+                            pending = false,
+                            requestDate = new DateOnly(2024, 9, 30),
                             userId = 3
                         },
                         new
@@ -996,48 +1276,48 @@ namespace libraryApp.backend.Migrations
                             id = 5,
                             confirmation = false,
                             pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
+                            requestDate = new DateOnly(2024, 9, 28),
                             userId = 5
                         },
                         new
                         {
                             id = 6,
-                            confirmation = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 1
+                            confirmation = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 9, 27),
+                            userId = 6
                         },
                         new
                         {
                             id = 7,
-                            confirmation = false,
-                            pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 2
+                            confirmation = true,
+                            pending = false,
+                            requestDate = new DateOnly(2024, 9, 26),
+                            userId = 7
                         },
                         new
                         {
                             id = 8,
-                            confirmation = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 3
+                            confirmation = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 9, 25),
+                            userId = 8
                         },
                         new
                         {
                             id = 9,
-                            confirmation = false,
-                            pending = true,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 4
+                            confirmation = true,
+                            pending = false,
+                            requestDate = new DateOnly(2024, 9, 24),
+                            userId = 9
                         },
                         new
                         {
                             id = 10,
-                            confirmation = true,
-                            pending = false,
-                            requestDate = new DateOnly(2024, 9, 29),
-                            userId = 5
+                            confirmation = false,
+                            pending = true,
+                            requestDate = new DateOnly(2024, 9, 23),
+                            userId = 10
                         });
                 });
 
@@ -1124,7 +1404,7 @@ namespace libraryApp.backend.Migrations
                         new
                         {
                             id = 1,
-                            email = "test1@ex.com",
+                            email = "test1@example.com",
                             name = "Alice",
                             password = "pass123",
                             roleId = 1,
@@ -1135,101 +1415,156 @@ namespace libraryApp.backend.Migrations
                         new
                         {
                             id = 2,
-                            email = "test2@ex.com",
+                            email = "test2@example.com",
                             name = "Bob",
-                            password = "pass456",
-                            roleId = 2,
-                            surname = "Johnson",
+                            password = "pass234",
+                            roleId = 1,
+                            surname = "Brown",
                             userStatus = true,
-                            username = "bob_johnson"
+                            username = "bob_brown"
                         },
                         new
                         {
                             id = 3,
-                            email = "test3@ex.com",
+                            email = "test3@example.com",
                             name = "Charlie",
-                            password = "pass789",
+                            password = "pass345",
                             roleId = 1,
-                            surname = "Brown",
-                            userStatus = false,
-                            username = "charlie_brown"
+                            surname = "Davis",
+                            userStatus = true,
+                            username = "charlie_davis"
                         },
                         new
                         {
                             id = 4,
-                            email = "test4@ex.com",
+                            email = "test4@example.com",
                             name = "Diana",
-                            password = "pass321",
-                            roleId = 2,
-                            surname = "Wright",
+                            password = "pass456",
+                            roleId = 1,
+                            surname = "Evans",
                             userStatus = true,
-                            username = "diana_wright"
+                            username = "diana_evans"
                         },
                         new
                         {
                             id = 5,
-                            email = "test5@ex.com",
-                            name = "Eve",
-                            password = "pass654",
+                            email = "test5@example.com",
+                            name = "Evan",
+                            password = "pass567",
                             roleId = 1,
-                            surname = "Davis",
+                            surname = "Foster",
                             userStatus = true,
-                            username = "eve_davis"
+                            username = "evan_foster"
                         },
                         new
                         {
                             id = 6,
-                            email = "test6@ex.com",
-                            name = "Frank",
-                            password = "pass987",
-                            roleId = 2,
-                            surname = "Clark",
-                            userStatus = false,
-                            username = "frank_clark"
+                            email = "test6@example.com",
+                            name = "Fiona",
+                            password = "pass678",
+                            roleId = 1,
+                            surname = "Gates",
+                            userStatus = true,
+                            username = "fiona_gates"
                         },
                         new
                         {
                             id = 7,
-                            email = "test7@ex.com",
-                            name = "Grace",
-                            password = "pass147",
+                            email = "test7@example.com",
+                            name = "George",
+                            password = "pass789",
                             roleId = 1,
-                            surname = "Lewis",
+                            surname = "Harris",
                             userStatus = true,
-                            username = "grace_lewis"
+                            username = "george_harris"
                         },
                         new
                         {
                             id = 8,
-                            email = "test8@ex.com",
-                            name = "Henry",
-                            password = "pass258",
-                            roleId = 2,
-                            surname = "Walker",
+                            email = "test8@example.com",
+                            name = "Hannah",
+                            password = "pass890",
+                            roleId = 1,
+                            surname = "Irwin",
                             userStatus = true,
-                            username = "henry_walker"
+                            username = "hannah_irwin"
                         },
                         new
                         {
                             id = 9,
-                            email = "test9@ex.com",
-                            name = "Ivy",
-                            password = "pass369",
+                            email = "test9@example.com",
+                            name = "Isaac",
+                            password = "pass901",
                             roleId = 1,
-                            surname = "Allen",
-                            userStatus = false,
-                            username = "ivy_allen"
+                            surname = "Jones",
+                            userStatus = true,
+                            username = "isaac_jones"
                         },
                         new
                         {
                             id = 10,
-                            email = "test10@ex.com",
+                            email = "test10@example.com",
                             name = "Jack",
-                            password = "pass1234",
-                            roleId = 2,
-                            surname = "Young",
+                            password = "pass012",
+                            roleId = 1,
+                            surname = "King",
                             userStatus = true,
-                            username = "jack_young"
+                            username = "jack_king"
+                        },
+                        new
+                        {
+                            id = 11,
+                            email = "test11@example.com",
+                            name = "Feyza",
+                            password = "123",
+                            roleId = 1,
+                            surname = "Beyaztaş",
+                            userStatus = true,
+                            username = "member"
+                        },
+                        new
+                        {
+                            id = 12,
+                            email = "test12@example.com",
+                            name = "Türker",
+                            password = "123",
+                            roleId = 2,
+                            surname = "Kıvılcım",
+                            userStatus = true,
+                            username = "manager"
+                        },
+                        new
+                        {
+                            id = 13,
+                            email = "test13@example.com",
+                            name = "Fatih",
+                            password = "123",
+                            roleId = 3,
+                            surname = "Çağdaş",
+                            userStatus = true,
+                            username = "staff"
+                        },
+                        new
+                        {
+                            id = 14,
+                            email = "test14@example.com",
+                            name = "Zehra",
+                            password = "123",
+                            roleId = 4,
+                            surname = "Ülker",
+                            userStatus = true,
+                            username = "author"
+                        },
+                        new
+                        {
+                            id = 15,
+                            email = "test14@example.com",
+                            name = "Özge",
+                            password = "123",
+                            roleId = 4,
+                            surname = "Nur",
+                            userStatus = true,
+                            username = "author2"
                         });
                 });
 

@@ -83,7 +83,7 @@ function App() {
             <AubookRequest/>
           </div>
         }></Route>
-        <Route path="WritePage" element={      
+        <Route path="WriteBook" element={      
             <WritePage2 />    
         }></Route>
         <Route path="Punishing" element={
