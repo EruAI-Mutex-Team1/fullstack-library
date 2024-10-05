@@ -13,15 +13,16 @@ const InboxPage2 = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    // const data = localStorage.getItem("userData");
-    // if (data === null) {
-    //   nav("/login");
+    
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/login");
+    }
+    const user = JSON.parse(data);
+    setUser(user);
+    console.log(user);
 
-    // }
 
-    // const user = JSON.parse(data);
-    // setUser(user);
-    // console.log(user);
     fetchmessages(user);
   }, []);
 
@@ -46,7 +47,7 @@ const InboxPage2 = () => {
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-        <span className='text-[#fed478fe]'>{user.username}</span>
+        <span className='text-[#fed478fe]'>{user.name + " " +user.surname}</span>
             <button onClick={() => {
               localStorage.removeItem("userData");
               nav("/Login");

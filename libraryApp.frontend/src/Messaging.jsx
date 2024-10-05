@@ -26,14 +26,14 @@ const Messaging = () => {
   };
 
   useEffect(() => {
-    // const data = localStorage.getItem("userData");
-    // if(data === null){
-    //   nav("/login");
-    // }
+    const data = localStorage.getItem("userData");
+    if(data === null){
+      nav("/login");
+    }
 
-    // const user = JSON.parse(data);
-    // setUser(user); 
-    // console.log(user);
+    const user = JSON.parse(data);
+    setUser(user); 
+    console.log(user);
     fetchgetuser(user);
   },[]);
 

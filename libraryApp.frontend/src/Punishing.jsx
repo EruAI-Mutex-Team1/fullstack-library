@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //Zeh
 const Punishing = () => {
 
   const [punishusers,setpunishusers]=useState([]);
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUser, setSelectedUser] = useState({});
+
+  const [user, setUser] = useState({});
+  const nav = useNavigate();
 
 //bu fonk çalışmayor
   const fetchgetpunishuser = async () => {
@@ -41,6 +44,14 @@ const Punishing = () => {
   }
 
   useEffect (()=> {
+    const data = localStorage.getItem("userData");
+      if(data === null){
+        nav("/Login");       
+      }
+      const user = JSON.parse(data);
+      setUser(user);     
+      console.log(user);
+
     fetchgetpunishuser();
    }, []);
 
@@ -53,7 +64,7 @@ const Punishing = () => {
             </div>
           
             <div className='flex gap-4 text-sm'>
-            <span className='text-[#fed478fe]'>MANAGER NAME</span>
+            <span className='text-[#fed478fe]'>{user.name + " " +user.surname}</span>
             <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
             </div>
         </nav>

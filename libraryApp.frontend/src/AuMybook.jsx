@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import CreateNewBook from './CreateNewBook';
+
 //özge
 const AuMybook = () => {
 
@@ -231,7 +231,7 @@ const AuMybook = () => {
                       <button onClick={changeTitle} className='bg-black rounded-sm text-xs font-medium py-2 px-3 hover:bg-neutral-900 mr-3 '>CHANGE</button>
                     </div>
 
-                    <Link to={"/WritePage?bookId" + book.id} className='bg-[#0f123c] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#0f123cd1] mr-3 '>WRITE</Link>
+                    <Link to={"/WritePage?bookId=" + book.id} className='bg-[#0f123c] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#0f123cd1] mr-3 '>WRITE</Link>
                     <button onClick={PublishRequest} className='bg-[#0f123c] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#0f123cd1] mr-3 '> Request Publishment </button>
                     <Link to={"/ReadBook?bookId=" + book.id} className='bg-[#fdc13ffe] rounded-sm text-xs font-medium py-2 px-3 hover:bg-[#ecbe5bb6] mr-3 '>READ</Link>
                     {/* create:create change : add page, write:router writepage2???? req:req  read: router read page miii */}

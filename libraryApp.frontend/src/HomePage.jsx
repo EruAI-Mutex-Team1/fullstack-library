@@ -7,16 +7,13 @@ const HomePage = () => {
   
     useEffect(() => {
       //BURAYI DA YORUMA ALDIM DB BAĞLI OLMADIĞI İÇİN DATA NULL OLUYOR VE LOGİNE DÖNDERİYOR
-      // const data = localStorage.getItem("userData");
-      // if(data === null){
-      //   nav("/login");
-        
-      // }
-
-      // const user = JSON.parse(data);
-      // setUser(user); 
-     
-      // console.log(user);
+      const data = localStorage.getItem("userData");
+      if(data === null){
+        nav("/login");       
+      }
+      const user = JSON.parse(data);
+      setUser(user);  
+      console.log(user);
     },[]);
 
 
@@ -30,7 +27,7 @@ const HomePage = () => {
             </div>
           
             <div className='flex gap-4 text-sm'>
-            <span className='text-[#fed478fe]'>{user.username}</span>
+            <span className='text-[#fed478fe]'>{user.name + " " +user.surname}</span>
             <button onClick={() => {
               localStorage.removeItem("userData");
               nav("/Login");
