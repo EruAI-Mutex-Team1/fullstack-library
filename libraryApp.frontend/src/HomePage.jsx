@@ -6,16 +6,17 @@ const HomePage = () => {
     const nav = useNavigate();
   
     useEffect(() => {
-      const data = localStorage.getItem("userData");
-      if(data === null){
-        nav("/login");
+      //BURAYI DA YORUMA ALDIM DB BAĞLI OLMADIĞI İÇİN DATA NULL OLUYOR VE LOGİNE DÖNDERİYOR
+      // const data = localStorage.getItem("userData");
+      // if(data === null){
+      //   nav("/login");
         
-      }
+      // }
 
-      const user = JSON.parse(data);
-      setUser(user); 
+      // const user = JSON.parse(data);
+      // setUser(user); 
      
-      console.log(user);
+      // console.log(user);
     },[]);
 
 
@@ -32,7 +33,7 @@ const HomePage = () => {
             <span className='text-[#fed478fe]'>{user.username}</span>
             <button onClick={() => {
               localStorage.removeItem("userData");
-              nav(0);
+              nav("/Login");
               }} className='mr-4 text-red-700'>LOGOUT</button>
             </div>
         </nav>
@@ -58,6 +59,7 @@ const HomePage = () => {
             <Link to="/Messaging" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> MESSAGİNG</Link>  
             <Link to="/Inbox" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> INBOX</Link>
             <Link to="/Booksearch" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> SEARCH BOOK</Link>
+            <Link to="/BorrowedBooks" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> MY BORROWED BOOKS</Link>
 
           </div>
             

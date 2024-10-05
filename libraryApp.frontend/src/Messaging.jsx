@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 //Zeh
 const Messaging = () => {
 
@@ -11,6 +11,7 @@ const Messaging = () => {
   const [receiverId, setreceiverId] = useState("");
 
   const [user, setUser] = useState({});
+  const nav = useNavigate();
 
   const fetchgetuser = async (user) => {
     const yanit = await fetch(`http://localhost:5249/api/User/getuserformessaging/${user.roleId}`, {
@@ -25,14 +26,14 @@ const Messaging = () => {
   };
 
   useEffect(() => {
-    const data = localStorage.getItem("userData");
-    if(data === null){
-      nav("/login");
-    }
+    // const data = localStorage.getItem("userData");
+    // if(data === null){
+    //   nav("/login");
+    // }
 
-    const user = JSON.parse(data);
-    setUser(user); 
-    console.log(user);
+    // const user = JSON.parse(data);
+    // setUser(user); 
+    // console.log(user);
     fetchgetuser(user);
   },[]);
 
@@ -53,8 +54,10 @@ e.preventDefault();
 
     if (yanit.ok) {
       console.log("mesaj gönderildi");
+      alert ("Mesajınız gönderildi.");
     } else {
       console.log("mesaj gönderilemedi");
+      alert ("Mesajınız gönderilemedi.");
     }
   }
 
@@ -66,8 +69,11 @@ e.preventDefault();
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+        <span className='text-[#fed478fe]'>{user.username}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 

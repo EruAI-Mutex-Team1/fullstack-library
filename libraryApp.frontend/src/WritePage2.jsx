@@ -9,9 +9,11 @@ const WritePage2 = () => {
   const [content, setContent] = useState("");
   const [pageNum, setPageNum] = useState(0);
 
+  const bookId = new URLSearchParams(location.search).get("bookId");
+
   useEffect(() => {
     const kitabiAl = async () => {
-      const yanit = await fetch(`http://localhost:5249/api/Book/${2}`, {
+      const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}`, {
         method: "GET",
       });
 

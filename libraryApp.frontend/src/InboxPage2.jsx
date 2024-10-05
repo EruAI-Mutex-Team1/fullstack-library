@@ -13,15 +13,15 @@ const InboxPage2 = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    const data = localStorage.getItem("userData");
-    if (data === null) {
-      nav("/login");
+    // const data = localStorage.getItem("userData");
+    // if (data === null) {
+    //   nav("/login");
 
-    }
+    // }
 
-    const user = JSON.parse(data);
-    setUser(user);
-    console.log(user);
+    // const user = JSON.parse(data);
+    // setUser(user);
+    // console.log(user);
     fetchmessages(user);
   }, []);
 
@@ -43,11 +43,14 @@ const InboxPage2 = () => {
       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
           <div className=' font-extrabold text-4xl'>LIBRARY</div>
-          <a href='#' className='text-l font-thin' >INBOX</a>
+          <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>USER NAME</span>
-          <a href='#' className='mr-4 '>LOGOUT</a>
+        <span className='text-[#fed478fe]'>{user.username}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 
@@ -57,7 +60,7 @@ const InboxPage2 = () => {
           <h2 className='text-xl text-black font-bold rounded mx-3 p-3'>MESSAGE OPTIONS </h2>
           <div className='flex flex-col'>
             <Link to="/Messaging" className='bg-[#fcb92afe] hover:bg-[#fec752] text-white font-semibold py-2 px-2 rounded  mt-10'>Send Message</Link>
-            <button className='bg-[#fcb92afe] hover:bg-[#fec752] text-white font-semibold py-2 px-4 rounded  mt-10'>View Inbox</button>
+            <div className='bg-[#fcb92afe] text-white font-semibold py-2 px-4 rounded  mt-10'>View Inbox</div>
           </div>
         </form>
 
@@ -71,12 +74,25 @@ const InboxPage2 = () => {
                   setShowedContent(mesaj.content);
                   setShowedSender(mesaj.senderName);
                   setShowedDate(mesaj.sendingDate);
-                }} className="p-4 rounded shadow">
+
+                  if (!mesaj.isRead) {
+            const updatedMessages = mesajlar2.map((m) => {
+                if (m.id === mesaj.id) {
+                    return { ...m, isRead: true }; // Okundu olarak güncelle
+                }
+                return m;
+            });
+
+            // Mesajları güncelle
+            setMesajlar2(updatedMessages);
+
+            
+                }}} className="p-4 rounded shadow">
                   <article className='p-4 flex justify-between items-center'>
                     <div>
                       <h3 className="text-gray-600 font-semibold">{mesaj.title}</h3>
                       <h3 className="text-gray-400 font-semibold">A message from {mesaj.senderName}</h3>
-                      <p className="text-[#fed478fe]">{mesaj.content.substring(0, 10)}</p>
+                      <p className="text-[#f0a606fe]">{mesaj.content.substring(0, 10)}</p>
                     </div>
                     <div className={(mesaj.isRead ? "bg-green-500 " : "bg-red-500 ") + "text-white font-bold py-2 px-4 rounded"}>
                       {(mesaj.isRead ? "Read" : "Unread")}
