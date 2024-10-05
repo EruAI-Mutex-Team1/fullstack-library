@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 //özge
 const AccRequest = () => {
   const [users, setusers] = useState([]);
- //ROLE ID VE STAFF ID EKLENMEDİ APPROVE VE REJECT KISIMLARINA
+
  const [user, setUser] = useState(null);//kullanıcı bilgileri için
  const nav = useNavigate();
 
@@ -21,6 +21,7 @@ const AccRequest = () => {
   useEffect(
     () => {
       fetchAccRequest();
+      //checkUser();
     }, [])
 
    //
@@ -38,6 +39,8 @@ const AccRequest = () => {
       if(yanit.ok)
       {
         console.log("kabul edilme gerçekleşti");
+        //islem sonrası isteği tablodan silmek icin
+        setusers(users.filter(user=>user.id !== id));
       }
       else{
         console.log("kabul edilme gerçekleştirilemedi");
@@ -58,6 +61,7 @@ const AccRequest = () => {
       if(yanit.ok)
       {
         console.log("reddetme gerçekleşti");
+        setusers(users.filter(user=>user.id !== id));
       }
       else{
         console.log("reddetme gerçekleştirilemedi");
@@ -90,8 +94,12 @@ const AccRequest = () => {
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login"  className='mr-4 text-red-700 '>LOGOUT</Link>
+          {/* username bilgisi gelmediği için hata veriyor. Muhtemelen db bağlanır ve login işlemi yapabilirsek düzelir  */}
+          {/* <span className='text-[#fed478fe]'>{user.username}</span> */}
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login"); //bulunduğu sayfayı yeniden yüklemeye yarar ama biz logine yönlendirmeliyiz
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 

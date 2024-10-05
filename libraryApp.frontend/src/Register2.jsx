@@ -29,6 +29,9 @@
       headers: { "Content-Type": "application/json" },
       body: Json.stringify(user),
     });
+    if(yanit.ok){
+      console.log("kayit oldu")
+    }
 }
 
 
@@ -71,7 +74,7 @@
              <input onChange={e => setconfirmPassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
               transition-all focus: outline-none'></input>
           </div>  
-               <button className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[105px]
+               <button onClick={uyeEkle} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[105px]
               place-self-center hover:bg-[#fed478c9] transition-all  '>KAYIT OL</button> 
          </form> 
       

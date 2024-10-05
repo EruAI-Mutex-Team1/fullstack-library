@@ -1,10 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AubookRequest = () => {
 //özge
   const [requests, setrequests] = useState([]);
+  const [user, setUser] = useState({});
+  const nav=useNavigate();
   // const requestId= new URLSearchParams(location.search).get("requestId");
+ 
+  const checkUser = () => {
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/Login");
+      return;
+    }
+    
+    const user = JSON.parse(data);
+    setUser(user);
+
+    if (user.roleName !== "manager") {
+     nav("/");
+     return;
+    }
+  }
+
 
   const BookCreateReq = async () => {
     const yanit = await fetch(`http://localhost:5249/api/Book/publishrequests`, {
@@ -17,6 +36,7 @@ const AubookRequest = () => {
   }
 
   useEffect(() => {
+    //checkUser();
     BookCreateReq();
   }, [])
 
@@ -68,8 +88,11 @@ const AubookRequest = () => {
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+        {/* <span className='text-[#fed478fe]'>{user.username}</span> */}
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
       {/*  underside */}

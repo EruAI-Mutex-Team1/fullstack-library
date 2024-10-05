@@ -1,11 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TbBrandD3 } from 'react-icons/tb'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //özge
+//EN BAŞTA TÜM KİTAPLARIN GELMESİNİ YAPAMADIM
 const Booksearch = () => {
 
   const [kitapIsmi, setKitapIsmi] = useState("");
   const [kitaplar, setKitaplar] = useState([]);
+  const [allBooks, setallBooks] = useState([]);
+  const [user, setUser] = useState({});
+  const nav = useNavigate();
+
+  const checkUser = () => {
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/Login");
+      return;
+    }
+
+    const user = JSON.parse(data);
+    setUser(user);
+
+    if (user.roleName !== "manager") {
+      nav("/");
+      return;
+    }
+  }
+
+  const fetchAllBooks = async () => {
+    const yanit = await fetch(`http://localhost:5249/api/Book`, {
+      method: "GET"
+    });
+
+    if (yanit.ok) {
+      const allBooks = await yanit.json();
+      setallBooks(allBooks);
+    }
+
+  }
+
+  useEffect(() => {
+    fetchAllBooks();
+    //checkUser();
+  }, [])
+
 
   const handleSearchClick = async () => {
     const yanit = await fetch(`http://localhost:5249/api/Book/bytitle/${kitapIsmi}`, {
@@ -50,8 +88,11 @@ const Booksearch = () => {
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+          {/* <span className='text-[#fed478fe]'>{user.username}</span> */}
+          <button onClick={() => {
+            localStorage.removeItem("userData");
+            nav("/Login");
+          }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
       {/*  underside */}

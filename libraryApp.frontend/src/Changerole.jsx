@@ -1,13 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-//özge
+//bu sayfanın logout ve name kısmı doğru
 const Changerole = () => {
   const [users, setusers] = useState([]); //userdan ne dönüyor dizi mi
   const [selectedRoleId, setSelectedRoleId] = useState(0);
   const [selectedUserId, setSelectedUserId] = useState(0);
+ //nav için
+  const nav = useNavigate();
+  //logout için
+  const [user, setuser] = useState({});
 
 
-  const [user, setUser] = useState(null);//kullanıcı bilgileri için
+  const checkUser = () => {
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/Login");
+      return;
+    }
+
+    const user = JSON.parse(data);
+    setUser(user);
+
+    if (user.roleName !== "manager") {
+      nav("/");
+      return;
+    }
+  }
 
   const fetchUsers = async () => {
     const yanit = await fetch(`http://localhost:5249/api/User/getusersforrolechanging/${user.roleId}`, {
@@ -59,8 +77,11 @@ const Changerole = () => {
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+          <span className='text-[#fed478fe]'>{user.username}</span>
+          <button onClick={() => {
+            localStorage.removeItem("userData");
+            nav("/Login");
+          }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 

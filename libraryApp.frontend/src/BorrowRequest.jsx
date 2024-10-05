@@ -1,10 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //özge
-//swaggerda nereden çekeceğimi emin olamadım borrow kısmından çektim doğru değil gibi geldi borrew request kısmını göremedim
+//Approve ve reject butonları çaşışmıyor
 
 const BorrowRequest = () => {
-  const [reqBooks, setreqBooks] = useState([]); //db de göremedim ama dizi döndermiş gibi düşündüm
+  const [reqBooks, setreqBooks] = useState([]); 
+  const [user, setUser] = useState({});
+  const nav = useNavigate();
+  
+  const checkUser = () => {
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/Login");
+      return;
+    }
+    
+    const user = JSON.parse(data);
+    setUser(user);
+
+    if (user.roleName !== "manager") {
+     nav("/");
+     return;
+    }
+  }
+
 
   const borrowRequest = async () => {
     const yanit = await fetch(`http://localhost:5249/api/Book/getBorrowRequests`, {
@@ -19,6 +38,7 @@ const BorrowRequest = () => {
 
   useEffect(() => {
     borrowRequest();
+    //checkUser();
   }, [])
 
   const ApproveReq = async () => {
@@ -34,6 +54,7 @@ const BorrowRequest = () => {
     });
     if (yanit.ok) {
       console.log("kabul edilme gerçekleşti");
+      setreqBooks(reqBooks.filter(reqBook=>reqBook.requestId !== requestId));
     }
     else {
       console.log("kabul edilme gerçekleştirilemedi");
@@ -52,6 +73,7 @@ const BorrowRequest = () => {
     });
     if (yanit.ok) {
       console.log("reddetme gerçekleşti");
+      setreqBooks(reqBooks.filter(reqBook=>reqBook.requestId !== requestId));
     }
     else {
       console.log("reddetme gerçekleştirilemedi");
@@ -67,8 +89,11 @@ const BorrowRequest = () => {
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+        <span className='text-[#fed478fe]'>{user.username}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 

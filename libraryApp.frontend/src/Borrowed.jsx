@@ -1,8 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //özge
 const Borrowed = () => {
   const [kitaplar2, setKitaplar2] = useState([]);
+  const [user, setUser] = useState({});
+  const nav= useNavigate();
+
+  const checkUser = () => {
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/Login");
+      return;
+    }
+    
+    const user = JSON.parse(data);
+    setUser(user);
+
+    if (user.roleName !== "manager") {
+     nav("/");
+     return;
+    }
+  }
+
 
   const fetchBorrowedBooks = async () => {
     const yanit = await fetch(`http://localhost:5249/api/Book/borrowed/23`, {
@@ -18,7 +37,8 @@ const Borrowed = () => {
 
   useEffect(() => {
     fetchBorrowedBooks();
-  }, [])
+    //checkUser();
+  },[])
   
   const returnBook = async () => {
 
@@ -50,8 +70,11 @@ const Borrowed = () => {
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+        <span className='text-[#fed478fe]'>{user.username}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 
@@ -65,7 +88,7 @@ const Borrowed = () => {
             <input type='text' className='border-2  w-50 h-9 bg-gray-300 p-2 rounded-l-full focus:border-[#ffc13bf4]' placeholder='  search book...' />
             <button className='bg-[#fcb92afe] w-20 h-9 text-white font-bold text-xs hover:bg-[#fec752] rounded-r-full'>SEARCH</button>
           </div>
-          <button className='bg-[#fcb92afe] w-19 h-9 text-white font-bold text-xs hover:bg-[#fec752] rounded-xl p-2'>VİEW BORROWED BOOKS</button>
+          <Link to={"/BookSearch"} className='bg-[#ff7504fe] w-19 h-9 text-white font-bold text-xs hover:bg-[#fec752] rounded-xl p-2'>BOOK SEARCH</Link>
         </div>
         {/* table */}
         <div className='mt-[70px] ml-[70px] overflow-y-auto max-h-[550px] '>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-
+//bu sayfanın nav kısmını özge güncellediii
 const HomePage = () => {
     const [user, setUser] = useState({});
     return (
@@ -12,8 +12,11 @@ const HomePage = () => {
             </div>
           
             <div className='flex gap-4 text-sm'>
-            <span className='text-[#fed478fe]'>MANAGER NAME</span>
-            <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+            <span className='text-[#fed478fe]'>{user.username}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav(0);
+              }} className='mr-4 text-red-700'>LOGOUT</button>
             </div>
         </nav>
 

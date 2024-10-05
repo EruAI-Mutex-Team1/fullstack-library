@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { MdOutlineLocalLibrary } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
-//özgen
+
 const Login = () => {
 
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
+
     const nav = useNavigate();
 
     const uyesor = async (e) => {
-        e.preventDefault(); //submit türündeki butonun sayfayı yenilemesini engeller
-
+      e.preventDefault();
         const user = {
           username: username,
           password: password,
@@ -20,14 +20,12 @@ const Login = () => {
         const yanit = await fetch(`http://localhost:5249/api/Account/Login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: Json.stringify(user),
+          body: JSON.stringify(user),
         });
 
-        if(yanit.ok)
-        {
-          const data = await yanit.json();
-          console.log(data);
-          localStorage.setItem("userData",JSON.stringify(data.userDTO)); //çekilen user diğer sayfalarda silinmesin diye kaydediyoruz başka yerden de çekicez
+        if(yanit.ok){
+          const user = await yanit.json();
+          localStorage.setItem("userData", JSON.stringify(user.userDTO));
           nav("/");
         }
       }
@@ -51,7 +49,7 @@ const Login = () => {
             <input onChange={e => setpassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
              transition-all focus: outline-none'></input>
         </div>    
-            <button onClick={e => uyesor(e)} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[230px]
+            <button onClick={uyesor} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[230px]
              place-self-center hover:bg-[#fed478c9] transition-all  '>GİRİŞ</button>
         </form>
       
