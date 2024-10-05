@@ -114,7 +114,7 @@ const ReadPage = () => {
           {/* {sayfalar.map((sayfa,index) => (
           <p className="text-lg leading-relaxed"> {sayfa} </p>
           ))} */}
-          <p className="text-lg">{setcurrentpage(index)}</p>
+          <p className="text-lg"></p>
           {currentpage < pages.length && (
           <p className="text-lg ">{pages[currentpage]}</p>)}
         </form>

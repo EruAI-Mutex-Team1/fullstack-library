@@ -7,7 +7,6 @@ const Booksearch = () => {
 
   const [kitapIsmi, setKitapIsmi] = useState("");
   const [kitaplar, setKitaplar] = useState([]);
-  const [allBooks, setallBooks] = useState([]);
   const [user, setUser] = useState({});
   const nav = useNavigate();
 
@@ -21,32 +20,16 @@ const Booksearch = () => {
     const user = JSON.parse(data);
     setUser(user);
 
-    if (user.roleName !== "manager") {
-      nav("/");
-      return;
-    }
-  }
-
-  const fetchAllBooks = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/Book`, {
-      method: "GET"
-    });
-
-    if (yanit.ok) {
-      const allBooks = await yanit.json();
-      setallBooks(allBooks);
-    }
-
   }
 
   useEffect(() => {
-    fetchAllBooks();
-    //checkUser();
+    handleSearchClick();
+    checkUser();
   }, [])
 
 
   const handleSearchClick = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/Book/bytitle/${kitapIsmi}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/bytitle?title=${kitapIsmi}`, {
       method: "GET",
     });
 
@@ -58,11 +41,11 @@ const Booksearch = () => {
 
   };
 
-  const borrowRequest = async () => {
+  const borrowRequest = async (bookId) => {
 
     const request = {
-      userId: 0,
-      bookId: 0,
+      userId: user.id,
+      bookId: bookId,
     }
 
     const yanit = await fetch(`http://localhost:5249/api/Book/requestBook`, {
@@ -72,9 +55,9 @@ const Booksearch = () => {
     });
 
     if (yanit.ok) {
-      console.log("istek gönderildi");
+      alert("başarılı");
     } else {
-      console.log("istek gönderilemedi");
+      alert("başarısız");
     }
   }
 
@@ -128,7 +111,7 @@ const Booksearch = () => {
                     <td className='py-3 font-thin'>{kitap.bookAuthors.join(", ")}</td>
                     <td className='py-2'>
                     <Link className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 ' to={"/ReadBook?bookId=" + kitap.id}>READ THE BOOK</Link>
-                      <button onClick={borrowRequest} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>BORROW</button>
+                      <button onClick={() => borrowRequest(kitap.id)} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>BORROW</button>
                       {/* post borrow request */}
                     </td>
                       

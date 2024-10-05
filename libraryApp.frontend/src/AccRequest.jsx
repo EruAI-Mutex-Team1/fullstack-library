@@ -21,7 +21,7 @@ const AccRequest = () => {
   useEffect(
     () => {
       fetchAccRequest();
-      //checkUser();
+      checkUser();
     }, [])
 
    //
@@ -37,14 +37,13 @@ const AccRequest = () => {
         body: JSON.stringify(request),
       });
       if(yanit.ok)
-      {
-        console.log("kabul edilme gerçekleşti");
-        //islem sonrası isteği tablodan silmek icin
-        setusers(users.filter(user=>user.id !== id));
-      }
-      else{
-        console.log("kabul edilme gerçekleştirilemedi");
-      }
+        {
+          alert("başarılı");
+          nav(0);
+        }
+        else{
+          alert("başarısız");
+        }
     }
 
     const RejectReq = async (id) =>{
@@ -60,11 +59,11 @@ const AccRequest = () => {
       });
       if(yanit.ok)
       {
-        console.log("reddetme gerçekleşti");
-        setusers(users.filter(user=>user.id !== id));
+        alert("başarılı");
+        nav(0);
       }
       else{
-        console.log("reddetme gerçekleştirilemedi");
+        alert("başarısız");
       }
     }
 
@@ -78,7 +77,7 @@ const AccRequest = () => {
       const user = JSON.parse(data);
       setUser(user);
   
-      if (user.roleName !== "manager") {
+      if (user.roleName !== "manager" && user.roleName !== "staff") {
        nav("/");
        return;
       }
@@ -109,8 +108,6 @@ const AccRequest = () => {
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>MEMBER OPERATİONS</h1>
           <Link to="/BorrowRequest" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px] w-[200px]'>PENDING BORROW REQUESTS</Link>
-          <button className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] w-[200px]'>PENDING MEMBER REGİSTORATİONS</button>
-
         </div>
         {/* table */}
         <div className=' bg-white w-[1225px] h-[780px] overflow-y-auto max-h-[780px]'>
