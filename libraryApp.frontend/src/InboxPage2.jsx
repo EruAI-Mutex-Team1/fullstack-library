@@ -67,7 +67,7 @@ const InboxPage2 = () => {
 
         <div className="container p-4 w-1/2">
           <form className="bg-slate-50 border-2 border-[#f0b954] rounded space-x-5 h-screen">
-            <label className="flex-auto text-md font-bold ml-10 mt-5">[1 Unread Message]</label>
+            <label className="flex-auto text-md font-bold ml-10 mt-5">Select a message</label>
             <ul className="p-4 space-y-2 overflow-y-auto h-screen">
               {mesajlar2.map((mesaj, index) => (
                 <li onClick={() => {
@@ -94,9 +94,6 @@ const InboxPage2 = () => {
                       <h3 className="text-black font-semibold">{mesaj.title}</h3>
                       <h3 className="text-gray-500 font-semibold">A message from {mesaj.senderName}</h3>
                       <p className="text-[#880906fe]">{mesaj.content.substring(0, 10)}</p>
-                    </div>
-                    <div className={(mesaj.isRead ? "bg-green-500 " : "bg-red-500 ") + "text-white font-bold py-2 px-4 rounded"}>
-                      {(mesaj.isRead ? "Read" : "Unread")}
                     </div>
                   </article>
                 </li>

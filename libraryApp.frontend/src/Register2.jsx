@@ -1,5 +1,6 @@
  import React, {  useState} from 'react'
  import { GiArcher ,GiArrowsShield } from "react-icons/gi";
+import { Link } from 'react-router-dom';
 
 
 //Zeh
@@ -92,8 +93,8 @@
              <input  onChange={e => setconfirmPassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
               transition-all focus: outline-none'></input>
           </div>  
-               <button onClick={uyeEkle} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[105px]
-              place-self-center hover:bg-[#fed478c9] transition-all  '>KAYIT OL</button> 
+               <Link to="/Login" onClick={uyeEkle} className='bg-[#fed478fe] rounded text-white text px-9 h-[30px] w-[150px] 
+              place-self-center hover:bg-[#fed478c9] transition-all  '>KAYIT OL</Link> 
          </form> 
       
      </div>

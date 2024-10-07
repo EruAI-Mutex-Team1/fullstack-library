@@ -45,9 +45,13 @@ const ReadPage = () => {
   };
 
   const searchpage = (e) => {
-      setcurrentpage(parseInt(e.target.value));
-      sayfalar[0] = book.pages[e.target.value - 1];
-      sayfalar[1] = book.pages[e.target.value];
+    console.log(e.target.value);
+    let page = parseInt(e.target.value === "" ? "1" : e.target.value);
+    page = page < 1 ? 1 : page;
+    page = page > book?.pages?.length - 1 ? book?.pages.length - 1 : page;
+    setcurrentpage(page);
+    sayfalar[0] = book.pages[page - 1];
+    sayfalar[1] = book.pages[page];
   };
 
   useEffect(() => {
@@ -97,7 +101,7 @@ const ReadPage = () => {
           </div>
 
           <div className="bg-[#f2e6c9fe] p-6 h-[600px] w-[500px] rounded-r-md shadow-md">
-            <p>{"Page: " + (currentpage+1)}</p>
+            <p>{"Page: " + (currentpage + 1)}</p>
             <p>{sayfalar[1]}</p>
           </div>
 
@@ -108,14 +112,14 @@ const ReadPage = () => {
             <GrCaretNext />
           </button>
           <div className='flex flex-col'>
-            <div className='flex items-center bg-[#f4eee2eb] p-1 rounded-full mt-8'>   
-            <input min={1} max={book?.pages?.length-1} type="number" onChange={searchpage} className=' bg-transparent py-2 px-3 rounded-full hover:bg-[#dad2c0eb] text-lg font-semibold h-10 w-20 flex-1 placeholder-slate-400 ' placeholder='Enter page' />
-            <FaSearch className='size-6 mr-1' />
+            <div className='flex items-center bg-[#f4eee2eb] p-1 rounded-full mt-8'>
+              <input min={1} max={book?.pages?.length - 1} type="number" onChange={searchpage} className=' bg-transparent py-2 px-3 rounded-full hover:bg-[#dad2c0eb] text-lg font-semibold h-10 w-20 flex-1 placeholder-slate-400 ' placeholder='Enter page' />
+              <FaSearch className='size-6 mr-1' />
             </div>
             <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-lg hover:bg-[#f6ca6beb] h-10 w-auto mt-[400px]'>Go Borrowed Books</Link>
             {(user.roleName === "author") && (
-            <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-lg hover:bg-[#f6ca6beb] h-10 w-auto mt-2'>Go My Books</Link>
-           )}
+              <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-lg hover:bg-[#f6ca6beb] h-10 w-auto mt-2'>Go My Books</Link>
+            )}
           </div>
         </div>
       </div>

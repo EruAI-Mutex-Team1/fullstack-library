@@ -98,7 +98,7 @@ namespace libraryApp.backend.Controllers
 
             List<LoanRequestListDTO> BookDtos = bookLoans.Select(loan => new LoanRequestListDTO
             {
-                id = loan.id,
+                bookId = loan.bookId,
                 title = loan.Book.title,
                 BookAuthors = loan.Book.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList(),
                 returnDate = loan.returnDate,
@@ -136,6 +136,7 @@ namespace libraryApp.backend.Controllers
             List<BookPublishRequestDTO> RequestDtos = requests.Select(request => new BookPublishRequestDTO
             {
                 id = request.id,
+                bookId = request.Book.id,
                 requestDate = request.requestDate,
                 confirmation = request.confirmation,
                 pending = request.pending,
@@ -149,24 +150,22 @@ namespace libraryApp.backend.Controllers
         [HttpPost("{id}/addpage")]
         public async Task<IActionResult> AddPageToBook(int id, [FromBody] PageDTO pageDTO)
         {
-            var book = await _bookRepository.GetBookById(id);
+            var book = await _bookRepository.GetAllBooks.Include(b => b.Pages).FirstOrDefaultAsync(b => b.id == id);
             if (book == null)
             {
                 return NotFound();
             }
 
-            int newPageNumber = book.Pages.Count > 0 ? book.Pages.Max(p => p.pageNumber) + 1 : 1;
+            int newPageNumber = book.Pages.Count + 1;
             pageDTO.bookId = id;
-            pageDTO.pageNumber = newPageNumber;
 
             var newPage = new Page
             {
-                bookId = pageDTO.bookId,
-                pageNumber = pageDTO.pageNumber,
+                bookId = id,
+                pageNumber = newPageNumber,
                 content = pageDTO.content
             };
 
-            book.Pages.Add(newPage);
             await _pageRepository.AddPage(newPage);
 
             return Ok(new { Message = "Page added successfully!" });

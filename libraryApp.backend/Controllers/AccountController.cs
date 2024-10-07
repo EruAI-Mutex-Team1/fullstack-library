@@ -30,7 +30,7 @@ namespace libraryApp.backend.Controllers
 
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            var user = await _userRepo.GetAllUsersAsync.Include(u => u.Role).FirstOrDefaultAsync(u => u.username == loginDto.username);
+            var user = await _userRepo.GetAllUsersAsync.Include(u => u.RegisterRequests).Include(u => u.Role).Where(u => u.RegisterRequests.Any(rr => rr.confirmation)).FirstOrDefaultAsync(u => u.username == loginDto.username);
             if (user == null)//acık şifre kontrolü 
                 return NotFound(new { message = "Username could not found" });
             if (user.password != loginDto.password)
@@ -67,8 +67,7 @@ namespace libraryApp.backend.Controllers
         {
             if (_userRepo.GetAllUsersAsync.Any(u => u.username == registerDto.username)) return BadRequest("This username already exits.");
 
-
-            await _userRepo.CreateUserAsync(new User
+            var user = new User
             {
                 roleId = 1,
                 name = registerDto.name,
@@ -78,6 +77,14 @@ namespace libraryApp.backend.Controllers
                 password = registerDto.password, //=BCrypt.Net.BCrypt.HashPassword(registerDto.password)
                 userStatus = false,
 
+            };
+            await _userRepo.CreateUserAsync(user);
+
+            await _registerRequestRepository.CreateRegisterRequestAsync(new RegisterRequest{
+                userId = user.id,
+                requestDate = DateOnly.FromDateTime(DateTime.Now),
+                pending = true,
+                confirmation = false,
             });
             return Ok(new { message = "User registered" });
 

@@ -45,6 +45,8 @@ const Borrowed = () => {
       body: JSON.stringify(id),
     });
 
+    console.log(id);
+
     if(yanit.ok)
     {
       alert("başarılı");
@@ -98,12 +100,12 @@ const Borrowed = () => {
                   <td className='py-3 font-thin'>{kitap.requestDate}</td>
                   <td className='py-3 font-thin'>{kitap.returnDate}</td>
                   <td className='py-2'>
-                    <Link to="/BookSearch" className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 '>READ</Link>
-                    <button onClick={() => {returnBook(kitap.id)}} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>RETURN</button>
+                    <Link to={"/ReadBook?bookId="+kitap.bookId} className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 '>READ</Link>
+                    <button onClick={() => {returnBook(kitap.bookId)}} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>RETURN</button>
                   </td>
                 </tr>
               ))}
-            {/* kitap yazarları eksik, return hatalı */}
+            {/* return hatalı */}
             </tbody>
           </table>
         </div>

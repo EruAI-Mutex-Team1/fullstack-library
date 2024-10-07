@@ -54,6 +54,7 @@ e.preventDefault();
 
     if (yanit.ok) {
       console.log("mesaj gönderildi");
+      nav(0);
       alert ("Mesajınız gönderildi.");
     } else {
       console.log("mesaj gönderilemedi");

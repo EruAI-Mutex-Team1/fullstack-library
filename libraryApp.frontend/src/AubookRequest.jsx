@@ -31,6 +31,7 @@ const AubookRequest = () => {
     });
     if (yanit.ok) {
       const requests = await yanit.json();
+      console.log(requests);
       setrequests(requests);
     }
   }

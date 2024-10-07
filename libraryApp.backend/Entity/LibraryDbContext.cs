@@ -193,16 +193,22 @@ namespace libraryApp.backend.Entity
             );
 
             modelBuilder.Entity<RegisterRequest>().HasData(
-                new RegisterRequest { id = 1, confirmation = false, pending = true, requestDate = DateOnly.FromDateTime(DateTime.Now), userId = 1 },
-                new RegisterRequest { id = 2, confirmation = false, pending = true, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-1)), userId = 2 },
+                new RegisterRequest { id = 1, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now), userId = 1 },
+                new RegisterRequest { id = 2, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-1)), userId = 2 },
                 new RegisterRequest { id = 3, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-2)), userId = 3 },
                 new RegisterRequest { id = 4, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-3)), userId = 4 },
-                new RegisterRequest { id = 5, confirmation = false, pending = true, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-4)), userId = 5 },
-                new RegisterRequest { id = 6, confirmation = false, pending = true, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-5)), userId = 6 },
+                new RegisterRequest { id = 5, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-4)), userId = 5 },
+                new RegisterRequest { id = 6, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-5)), userId = 6 },
                 new RegisterRequest { id = 7, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-6)), userId = 7 },
-                new RegisterRequest { id = 8, confirmation = false, pending = true, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-7)), userId = 8 },
+                new RegisterRequest { id = 8, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-7)), userId = 8 },
                 new RegisterRequest { id = 9, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-8)), userId = 9 },
-                new RegisterRequest { id = 10, confirmation = false, pending = true, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-9)), userId = 10 }
+                new RegisterRequest { id = 10, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-9)), userId = 10 },
+
+                new RegisterRequest { id = 11, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-9)), userId = 11 },
+                new RegisterRequest { id = 12, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-9)), userId = 12 },
+                new RegisterRequest { id = 13, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-9)), userId = 13 },
+                new RegisterRequest { id = 14, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-9)), userId = 14 },
+                new RegisterRequest { id = 15, confirmation = true, pending = false, requestDate = DateOnly.FromDateTime(DateTime.Now.AddDays(-9)), userId = 15 }
             );
 
             modelBuilder.Entity<User>().HasData(
