@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //Zeh
 const WritePage2 = () => {
 
@@ -8,35 +8,56 @@ const WritePage2 = () => {
   const [numOfPages, setNumOfPages] = useState([]);
   const [content, setContent] = useState("");
   const [pageNum, setPageNum] = useState(0);
+  const [Page, setPage] = useState([]);
 
   const bookId = new URLSearchParams(location.search).get("bookId");
+  const [user, setUser] = useState({});
+  const nav = useNavigate();
 
-  useEffect(() => {
-    const kitabiAl = async () => {
-      const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}`, {
-        method: "GET",
-      });
-
-      if (yanit.ok) {
-        const kitap = yanit.json();
-        setKitapAdi(kitap.title);
-        setType(kitap.type);
-        const pages = Array.from({ length: kitap.number_of_pages }, (_, i) => i);
-        setNumOfPages(pages);
-        setPageNum(kitap.number_of_pages + 1);
-      }
+  const checkUser = () => {
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/Login");
+      return;
     }
+    
+    const user = JSON.parse(data);
+    setUser(user);
+  }
+
+  const kitabiAl = async () => {
+    const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}`, {
+      method: "GET",
+    });
+
+    if (yanit.ok) {
+      const kitap = yanit.json();
+      setKitapAdi(kitap.title);
+      setType(kitap.type);
+      const pages = Array.from({ length: kitap.number_of_pages }, (_, i) => i);
+      setNumOfPages(pages);
+      setPageNum(kitap.number_of_pages + 1);
+    }
+  }
+
+  const handleInputChange = (e) => {
+    setPage(e.target.value);
+  };
+
+
+  useEffect(() => {  
     kitabiAl();
+    checkUser();
   }, []);
 
   const sayfaEkle = async () => {
 
     const page = {
-      kitapId: 2,
+      kitapId: {bookId},
       content: content,
     }
 
-    const yanit = await fetch(`http://localhost:5249/api/Book/${2}/addpage`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}/addpage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(page),
@@ -58,8 +79,11 @@ const WritePage2 = () => {
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>AUTHOR NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+        <span className='text-[#fed478fe]'>{user.name + " " + user.surname}</span>
+          <button onClick={() => {
+            localStorage.removeItem("userData");
+            nav("/Home");
+          }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
       <div className='bg-[#fdf2d8fe] h-screen flex flex-col gap-3 items-center '>
@@ -68,9 +92,9 @@ const WritePage2 = () => {
           <div className='flex justify-between gap-2 mt-2 ml-2 mr-2'>
             <form className='bg-[#f9ca67fe] h-16 w-4/5 rounded flex flex-row justify-center gap-2'>
               <h2 className='mt-4 text-lg text-slate-50'>Sayfa:</h2>
-              <form className='bg-slate-50 rounded border-b h-6 w-20 mt-5'>
-                <p className='ml-2 font-bold'> {pageNum}</p>
-              </form>
+              <input id="pageInput" type="number" value={pageNum} onChange={handleInputChange} className='bg-slate-50 rounded border-b p-2 h-6 w-20 mt-5'>
+                {/* <p className='ml-2 font-bold'> {pageNum}</p>  */}
+                </input>      
             </form>
             <form className='bg-slate-50 border-2 border-[#f9ca67fe] h-16 w-1/5 rounded flex justify-center'>
               <h2 className='mt-4 text-lg text-black'>Sayfalar</h2>
@@ -95,8 +119,7 @@ const WritePage2 = () => {
                 <input type="file" className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[#18bf18de] hover:file:bg-blue-100" />
               </label>
             </div>
-            <button onClick={sayfaEkle} className='bg-green-600 hover:bg-green-700 h-10 w-auto p-2 text-slate-50 rounded'> Kaydet
-            </button>
+            <button onClick={sayfaEkle} className='bg-green-600 hover:bg-green-700 h-10 w-auto p-2 text-slate-50 rounded'> Kaydet </button>
           </form>
         </form>
 

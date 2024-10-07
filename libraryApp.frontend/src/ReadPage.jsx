@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { GrCaretNext } from "react-icons/gr";
 import { GrCaretPrevious } from "react-icons/gr";
+import { FaSearch } from "react-icons/fa";
 
 //seçili kitap okunacak mı
 const ReadPage = () => {
@@ -78,15 +79,14 @@ const ReadPage = () => {
       </nav>
 
       <div className='bg-hero-pattern h-screen flex flex-col items-center gap-5 '>
-        <div className='bg-[#fdc13ffe] h-10 w-auto p-1 rounded-md flex items-center mr-[210px]'>
-          <h2 className='text-l font-serif text-black hover:border-b-2 '>{book?.title}</h2>
+        <div className='bg-[#fdc13ffe] h-10 w-auto p-1 rounded-md flex items-center mr-[150px]'>
+          <h2 className='text-l font-serif text-black'>{book?.title}</h2>
         </div>
         <div className='flex justify-between'>
           <button
             onClick={prevpage}
             className="px-4 py-2 rounded-lg bg-[#fdc13ffe] text-black font-semibold h-10 mt-[300px] mr-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={currentpage === 1}
-          >
+            disabled={currentpage === 1} >
             <GrCaretPrevious />
           </button>
           <div className="bg-[#f2e6c9fe] p-6 h-[600px] w-[500px] rounded-l-md shadow-md">
@@ -104,23 +104,19 @@ const ReadPage = () => {
           <button
             onClick={nextpage}
             className="px-4 py-2 rounded-lg bg-[#fdc13ffe] text-black font-semibold h-10 mt-[300px] ml-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={currentpage >= book?.pages?.length - 1}
-          >
+            disabled={currentpage >= book?.pages?.length - 1} >
             <GrCaretNext />
           </button>
           <div className='flex flex-col'>
-            <label className='bg-[#623216] text-white flex items-center w-15 mt-6 h-auto'>Search Page</label>
-            <input min={1} max={book?.pages?.length-1} type="number" onChange={searchpage} className='bg-[#f4eee2eb] py-2 px-3 rounded-sm hover:bg-[#dad2c0eb] h-10 w-auto' />
-            <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto mt-[400px]'>Go Borrowed Books</Link>
-            <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto mt-2'>Go My Books</Link>
-          </div></div>
-        <div className='flex flex-row justify-between gap-3 mr-[210px]'>
-
-
-
-          {/* {(user.roleName === "author") && (
-               <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] h-10 w-auto'>Go My Books</Link>
-            )} */}
+            <div className='flex items-center bg-[#f4eee2eb] p-1 rounded-full mt-8'>   
+            <input min={1} max={book?.pages?.length-1} type="number" onChange={searchpage} className=' bg-transparent py-2 px-3 rounded-full hover:bg-[#dad2c0eb] text-lg font-semibold h-10 w-20 flex-1 placeholder-slate-400 ' placeholder='Enter page' />
+            <FaSearch className='size-6 mr-1' />
+            </div>
+            <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-lg hover:bg-[#f6ca6beb] h-10 w-auto mt-[400px]'>Go Borrowed Books</Link>
+            {(user.roleName === "author") && (
+            <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-lg hover:bg-[#f6ca6beb] h-10 w-auto mt-2'>Go My Books</Link>
+           )}
+          </div>
         </div>
       </div>
 

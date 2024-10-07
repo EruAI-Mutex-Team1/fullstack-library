@@ -42,19 +42,15 @@ const HomePage = () => {
             <Link to="/Changerole" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px]'>CHANGE ROLE</Link>           
             )}
             {(user.roleName === "manager") && (
-            <Link to="/AubookRequest" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px]'>AUTHOR BOOK REQUEST</Link>           
+            <Link to="/AubookRequest" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] '>AUTHOR BOOK REQUEST</Link>           
             )}
             {(user.roleName === "manager" ||user.roleName === "staff") && (
-            <Link to="/Punishing" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px]'>PUNİSH</Link>
+            <Link to="/Punishing" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'>PUNİSH</Link>
             )}         
             {(user.roleName === "author") && (
-              <Link to="/AuMybook" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> MY BOOKS</Link>
+              <Link to="/AuMybook" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px]'> MY BOOKS</Link>
             )}
-            {(user.roleName === "author") && (
-             <Link to="/Writebook" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> WRİTE BOOK</Link> 
-            )}
-
-            <Link to="/Messaging" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> MESSAGİNG</Link>  
+            <Link to="/Messaging" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px]'> MESSAGİNG</Link>  
             <Link to="/Inbox" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> INBOX</Link>
             <Link to="/Booksearch" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> SEARCH BOOK</Link>
             <Link to="/BorrowedBooks" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'> MY BORROWED BOOKS</Link>
