@@ -1,14 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TbBrandD3 } from 'react-icons/tb'
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+//özge
+//EN BAŞTA TÜM KİTAPLARIN GELMESİNİ YAPAMADIM
 const Booksearch = () => {
 
   const [kitapIsmi, setKitapIsmi] = useState("");
   const [kitaplar, setKitaplar] = useState([]);
+  const [user, setUser] = useState({});
+  const nav = useNavigate();
+
+  const checkUser = () => {
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/Login");
+      return;
+    }
+
+    const user = JSON.parse(data);
+    setUser(user);
+
+  }
+
+  useEffect(() => {
+    handleSearchClick();
+    checkUser();
+  }, [])
+
 
   const handleSearchClick = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/Book/bytitle/${kitapIsmi}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/bytitle?title=${kitapIsmi}`, {
       method: "GET",
     });
 
@@ -20,19 +41,41 @@ const Booksearch = () => {
 
   };
 
+  const borrowRequest = async (bookId) => {
+
+    const request = {
+      userId: user.id,
+      bookId: bookId,
+    }
+
+    const yanit = await fetch(`http://localhost:5249/api/Book/requestBook`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request),
+    });
+
+    if (yanit.ok) {
+      alert("başarılı");
+    } else {
+      alert("başarısız");
+    }
+  }
+
+
   return (
     <div>
       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
           <div className=' font-extrabold text-4xl'>LIBRARY</div>
-          <a href='#' className='text-l font-thin hover:text-[#fcb92afe]' >HOME</a>
+          <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <a href='#' className='hover:border-b-2 ' >REPORTS</a>
-          <a href='#' className='hover:border-b-2'>SETTINGS</a>
-          <a href='#' className='mr-4 hover:text-red-700'>LOGOUT</a>
+          <span className='text-[#fed478fe]'>{user.name + " " +user.surname}</span>
+          <button onClick={() => {
+            localStorage.removeItem("userData");
+            nav("/Login");
+          }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
       {/*  underside */}
@@ -67,9 +110,11 @@ const Booksearch = () => {
                     <td className='py-3 font-thin'>{kitap.type}</td>
                     <td className='py-3 font-thin'>{kitap.bookAuthors.join(", ")}</td>
                     <td className='py-2'>
-                      <Link className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 ' to={"/ReadBook?bookId=" + kitap.id}>READ THE BOOK</Link>
-                      <button className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>BORROW</button>
-                      </td>
+                    <Link className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 ' to={"/ReadBook?bookId=" + kitap.id}>READ THE BOOK</Link>
+                      <button onClick={() => borrowRequest(kitap.id)} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>BORROW</button>
+                      {/* post borrow request */}
+                    </td>
+                      
                   </tr>
                 ))
               }

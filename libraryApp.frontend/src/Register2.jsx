@@ -1,5 +1,6 @@
  import React, {  useState} from 'react'
- import { MdOutlineLocalLibrary } from "react-icons/md";
+ import { GiArcher ,GiArrowsShield } from "react-icons/gi";
+
 
 //Zeh
  const Register2 = () => {
@@ -10,6 +11,7 @@
    const[email, setemail]=useState("");
    const[password, setpassword]=useState("");
    const[confirmPassword, setconfirmPassword]=useState("");
+   const[passwordeşleşiyormu, setpasswordeşleşiyormu]=useState("");
 
    const uyeEkle = async () => {
 
@@ -27,22 +29,41 @@
     const yanit = await fetch(`http://localhost:5249/api/Account/Register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: Json.stringify(user),
+      body: JSON.stringify(user),
     });
+    if(yanit.ok){
+      console.log("kayit oldu")
+    }
 }
+
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   if (password === confirmPassword) {
+//     setpasswordeşleşiyormu(true);
+//     alert("Registration successful!"); // Şifreler eşleşirse işlemi devam ettir
+//   } else {
+//     setpasswordeşleşiyormu(false);
+//   }
+// };
+
+
 
 
    return (
-     <div className='place-self-center bg-white h-[750px] w-[430px] p-20 rounded-xl flex flex-col gap-3 '>
+     <div className='place-self-center bg-white h-[750px] w-[430px] p-20 rounded-xl flex flex-col gap-5 '>
        {/* title */}
+       
         <div className='flex flex-col justify-center items-center gap-1'> 
-          <MdOutlineLocalLibrary className='text-5xl text-sky-950 font-bold '/> {/* adding icon */}
+          <div className='flex flex-row gap-4'>
+          <GiArcher className='text-5xl text-sky-950 font-bold '/> {/* adding icon */}
+          <GiArrowsShield className='text-5xl text-sky-950 font-bold '/> {/* adding icon */}
+          </div>
           <h1 className='text-3xl text-center text-sky-950 font-bold tracking-wider'>KAYIT OL</h1>
        </div>
        <form className='bg-white h-[650px] rounded-md text-sky-950 text-base 
         tracking-normal p-8 flex flex-col gap-4 border border-blue-300 cursor-pointer'>
          <div>
-             <label>KULLANICI ADI</label>
+             <label>USERNAME</label>
              <input onChange={e => setusername(e.target.value)} type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
               hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
          </div>
@@ -68,15 +89,15 @@
           </div>  
           <div>
              <label>PAROLA TEKRAR</label>
-             <input onChange={e => setconfirmPassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
+             <input  onChange={e => setconfirmPassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
               transition-all focus: outline-none'></input>
           </div>  
-               <button className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[105px]
+               <button onClick={uyeEkle} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[105px]
               place-self-center hover:bg-[#fed478c9] transition-all  '>KAYIT OL</button> 
          </form> 
       
      </div>
    )
- }
-
+ 
+  }
  export default Register2

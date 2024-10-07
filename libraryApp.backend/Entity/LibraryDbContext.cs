@@ -40,16 +40,16 @@ namespace libraryApp.backend.Entity
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Book>().HasData(
-    new Book { id = 1, title = "The Psychology of Money", type = "psychology", number_of_pages = 250, status = true },
-    new Book { id = 2, title = "The Silent Patient", type = "thriller", number_of_pages = 368, status = true },
-    new Book { id = 3, title = "Educated", type = "memoir", number_of_pages = 334, status = true },
-    new Book { id = 4, title = "Becoming", type = "memoir", number_of_pages = 448, status = true },
-    new Book { id = 5, title = "The Alchemist", type = "fiction", number_of_pages = 208, status = true },
-    new Book { id = 6, title = "Sapiens: A Brief History of Humankind", type = "history", number_of_pages = 464, status = true },
-    new Book { id = 7, title = "The Power of Habit", type = "self-help", number_of_pages = 371, status = true },
-    new Book { id = 8, title = "The Catcher in the Rye", type = "fiction", number_of_pages = 277, status = true },
-    new Book { id = 9, title = "1984", type = "dystopian", number_of_pages = 328, status = true },
-    new Book { id = 10, title = "To Kill a Mockingbird", type = "fiction", number_of_pages = 281, status = true }
+    new Book { id = 1, title = "The Psychology of Money", type = "psychology", number_of_pages = 250, status = false },
+    new Book { id = 2, title = "The Silent Patient", type = "thriller", number_of_pages = 368, status = false },
+    new Book { id = 3, title = "Educated", type = "memoir", number_of_pages = 334, status = false },
+    new Book { id = 4, title = "Becoming", type = "memoir", number_of_pages = 448, status = false },
+    new Book { id = 5, title = "The Alchemist", type = "fiction", number_of_pages = 208, status = false },
+    new Book { id = 6, title = "Sapiens: A Brief History of Humankind", type = "history", number_of_pages = 464, status = false },
+    new Book { id = 7, title = "The Power of Habit", type = "self-help", number_of_pages = 371, status = false },
+    new Book { id = 8, title = "The Catcher in the Rye", type = "fiction", number_of_pages = 277, status = false },
+    new Book { id = 9, title = "1984", type = "dystopian", number_of_pages = 328, status = false },
+    new Book { id = 10, title = "To Kill a Mockingbird", type = "fiction", number_of_pages = 281, status = false }
 );
 
             modelBuilder.Entity<BookAuthor>().HasData(

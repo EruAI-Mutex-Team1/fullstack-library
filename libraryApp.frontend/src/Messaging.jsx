@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 //Zeh
 const Messaging = () => {
 
@@ -11,6 +11,7 @@ const Messaging = () => {
   const [receiverId, setreceiverId] = useState("");
 
   const [user, setUser] = useState({});
+  const nav = useNavigate();
 
   const fetchgetuser = async (user) => {
     const yanit = await fetch(`http://localhost:5249/api/User/getuserformessaging/${user.roleId}`, {
@@ -53,8 +54,10 @@ e.preventDefault();
 
     if (yanit.ok) {
       console.log("mesaj gönderildi");
+      alert ("Mesajınız gönderildi.");
     } else {
       console.log("mesaj gönderilemedi");
+      alert ("Mesajınız gönderilemedi.");
     }
   }
 
@@ -66,8 +69,11 @@ e.preventDefault();
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>MANAGER NAME</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+        <span className='text-[#fed478fe]'>{user.name + " " + user.surname}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 
@@ -77,8 +83,8 @@ e.preventDefault();
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>MESSAGE OPERATİONS</h1>
-          <button  className=' bg-[#fcb92afe] py-3 px-3 rounded-sm hover:bg-[#fec752] mt-[30px] w-[200px]'>SEND MESSAGE </button>
-          <Link to="/Inbox" className=' bg-[#fcb92afe] py-3 px-3 rounded-sm hover:bg-[#fec752] w-[200px]'>VİEW INBOX</Link>
+          <div  className=' bg-[#fab914fe] py-3 px-4 rounded-sm mt-[30px] w-[200px]'>SEND MESSAGE </div>
+          <Link to="/Inbox" className=' bg-[#fab914fe] py-3 px-3 rounded-sm hover:bg-[#fec752] w-[200px]'>VİEW INBOX</Link>
 
         </div>
         <form className='bg-slate-500 w-[1500px] h-[780px] flex flex-row'>
@@ -100,8 +106,6 @@ e.preventDefault();
             <textarea onChange={e => setcontent(e.target.value)} type='text' className='w-[700px] h-[450px] rounded-sm'></textarea>
             <button onClick={Mesajekle} className='bg-[#fcb92afe] text-white font-medium rounded-sm px-3 py-2  hover:bg-[#fec752] w-[80px] ml-[620px] mt-[20px]'>SEND</button>
           </div>
-
-
         </form>
       </div>
 

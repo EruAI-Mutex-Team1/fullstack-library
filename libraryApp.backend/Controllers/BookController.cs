@@ -71,10 +71,10 @@ namespace libraryApp.backend.Controllers
         }
 
         [HttpGet("bytitle")]
-        public async Task<IActionResult> GetBooksByTitle([FromRoute] string? title)
+        public async Task<IActionResult> GetBooksByTitle([FromQuery] string? title)
         {
             var books = await _bookRepository.GetAllBooks
-                .Where(b => b.title.Contains(title ?? ""))
+                .Where(b => b.title.Contains(title ?? "") && b.status == true)
                 .Include(b => b.BookAuthors)
                 .ThenInclude(b => b.User)
                 .ToListAsync();
@@ -94,14 +94,27 @@ namespace libraryApp.backend.Controllers
         [HttpGet("borrowed/{id}")]
         public async Task<IActionResult> GetBorrowedBooksByUser(int id)
         {
-            User user = await _userRepository.GetUseridAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var bookLoans = _loanRequestRepository.GetAllLoanRequests.Where(b => b.pending != true && b.confirmation == true && b.isReturned == false).Include(lr => lr.Book).ThenInclude(u => u.BookAuthors).ThenInclude(ba => ba.User);
 
-            var books = user.LoanRequests.Where(b => b.pending != true && b.confirmation == true && b.isReturned == false).
-                Select(b => b.Book);
+            List<LoanRequestListDTO> BookDtos = bookLoans.Select(loan => new LoanRequestListDTO
+            {
+                id = loan.id,
+                title = loan.Book.title,
+                BookAuthors = loan.Book.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList(),
+                returnDate = loan.returnDate,
+                requestDate = loan.requestDate,
+            }).ToList();
+
+            return Ok(BookDtos);
+        }
+
+        [HttpGet("byauthor/{id}")]
+        public async Task<IActionResult> GetBooksByAuthor(int id)
+        {
+            var books = await _bookAuthorRepository.GetAllAuthors
+                .Where(ba => ba.userId == id)
+                .Select(ba => ba.Book)
+                .ToListAsync();
 
             List<BookSearchDTO> BookDtos = books.Select(book => new BookSearchDTO
             {
@@ -115,52 +128,19 @@ namespace libraryApp.backend.Controllers
             return Ok(BookDtos);
         }
 
-        [HttpGet("byauthor/{id}")]
-        public async Task<IActionResult> GetBooksByAuthor(int id)
-        {
-            var books = await _bookAuthorRepository.GetAllAuthors
-                .Where(ba => ba.User.id == id)
-                .Select(ba => ba.Book)
-                .ToListAsync();
-            if (!books.Any())
-            {
-                return NotFound();
-            }
-
-            List<BookSearchDTO> BookDtos = books.Select(book => new BookSearchDTO
-            {
-                title = book.title,
-                type = book.type,
-                number_of_pages = book.number_of_pages,
-                BookAuthors = book.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList()
-            }).ToList();
-
-            return Ok(BookDtos);
-        }
-
         [HttpGet("publishrequests")]
         public async Task<IActionResult> GetBookPublishRequests()
         {
-            var requests = await _bookPublishRequestRepository.GetAllBookPublishRequests.ToListAsync();
-            if (!requests.Any())
-            {
-                return NotFound();
-            }
+            var requests = await _bookPublishRequestRepository.GetAllBookPublishRequests.Where(bpr => bpr.pending).Include(bpr => bpr.User).Include(bpr => bpr.Book).ToListAsync();
 
             List<BookPublishRequestDTO> RequestDtos = requests.Select(request => new BookPublishRequestDTO
             {
+                id = request.id,
                 requestDate = request.requestDate,
                 confirmation = request.confirmation,
                 pending = request.pending,
-                User = new List<string>
-                {
-                    request.User.name,
-                    request.User.surname
-                },
-                Book = new List<string>
-                {
-                    request.Book.title,
-                }
+                userFullname = request.User.name + " " +request.User.surname,
+                bookTitle = request.Book.title,
             }).ToList();
 
             return Ok(RequestDtos);
@@ -193,53 +173,48 @@ namespace libraryApp.backend.Controllers
         }
 
         [HttpPut("returnBook")]
-        public async Task<IActionResult> ReturnBook([FromBody] ReturnBookDTO returnBookDTO)
+        public async Task<IActionResult> ReturnBook([FromBody] int kitapId)
         {
-            var loan = await _loanRequestRepository.GetLoanRequestById(returnBookDTO.bookId);
+            var loan = await _loanRequestRepository.GetAllLoanRequests.FirstOrDefaultAsync(lr => lr.confirmation && !lr.isReturned && lr.bookId == kitapId);
             if (loan == null)
             {
                 return NotFound();
-            }
-            if (loan.isReturned)
-            {
-                return BadRequest("Book is already returned.");
             }
 
             loan.isReturned = true;
             await _loanRequestRepository.UpdateLoanRequest(loan);
 
-            var book = await _bookRepository.GetBookById(returnBookDTO.bookId);
-            if (book != null)
-            {
-                book.status = true;
-                await _bookRepository.UpdateBook(book);
-            }
             return Ok(new { Message = "Book returned succesfully!" });
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreateBook([FromBody] BookSearchDTO bookSearchDTO)
+        public async Task<IActionResult> CreateBook([FromBody] bookCreateDTO bookCreateDTO)
         {
-            if (bookSearchDTO == null || string.IsNullOrEmpty(bookSearchDTO.title) || string.IsNullOrEmpty(bookSearchDTO.type))
-            {
-                return BadRequest(new { Message = "Invalid book data. Title and Type are required." });
-            }
-
-            if (bookSearchDTO.BookAuthors == null || !bookSearchDTO.BookAuthors.Any())
-            {
-                return BadRequest(new { Message = "A book must have at least one author." });
-            }
-
             var newBook = new Book
             {
-                title = bookSearchDTO.title,
-                type = bookSearchDTO.type,
-                number_of_pages = bookSearchDTO.number_of_pages
+                title = bookCreateDTO.title,
+                type = bookCreateDTO.type,
+                status = false,
+                number_of_pages = 0,
             };
-
             await _bookRepository.AddBook(newBook);
+
+            _bookAuthorRepository.AddBookAuthor(new BookAuthor{
+                userId = bookCreateDTO.yazarId,
+                bookId = newBook.id,
+            });
 
             return Ok(new { Message = "Book created successfully!" });
         }
+        [HttpPut("editBookTitle")]
+        public async Task<IActionResult> editBookTitle([FromBody] bookChangeTitleDTO bookChangeTitleDTO)
+        {
+            var book = await _bookRepository.GetBookById(bookChangeTitleDTO.bookId);
+            if(book == null) return NotFound();
+            book.title = bookChangeTitleDTO.yeniIsim;
+            _bookRepository.UpdateBook(book);
+            return Ok();
+        }
+
         [HttpPost("requestBook")]
         public async Task<IActionResult> RequestBorrowingBook([FromBody] LoanRequestDTO loanRequestDTO)
         {
@@ -254,21 +229,23 @@ namespace libraryApp.backend.Controllers
             {
                 return NotFound();
             }
-            var existingRequest = await _loanRequestRepository.GetLoanRequestByUserAndBook(loanRequestDTO.userId, loanRequestDTO.bookId);
-            if (existingRequest != null && !existingRequest.isReturned)
-            {
-                return Conflict(new { Message = "You have already sent borrowing request" });
-            }
+            // var existingRequest = await _loanRequestRepository.GetLoanRequestByUserAndBook(loanRequestDTO.userId, loanRequestDTO.bookId);
+            // if (existingRequest != null && !existingRequest.isReturned)
+            // {
+            //     return Conflict(new { Message = "You have already sent borrowing request" });
+            // }
             var newLoanRequest = new LoanRequest
             {
                 userId = loanRequestDTO.userId,
-                bookId = book.id,
+                bookId = loanRequestDTO.bookId,
                 requestDate = DateOnly.FromDateTime(DateTime.UtcNow),
                 returnDate = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(14)),
                 isReturned = false,
                 confirmation = false,
                 pending = true
             };
+            
+            _loanRequestRepository.AddLoanRequest(newLoanRequest);
             return Ok(new { Message = "Loan request submitted successfully!" });
         }
         [HttpPost("setBorrowRequest")]
@@ -293,36 +270,41 @@ namespace libraryApp.backend.Controllers
             await _loanRequestRepository.UpdateLoanRequest(loanRequest);
             return Ok(new { Message = borrowRequestUpdateDTO.confirmation ? "Loan request approved successfully!" : "Loan request rejected successfully!" });
         }
-        [HttpPost("requestpublishment")]
-        public async Task<IActionResult> RequestPublishment([FromBody] RequestPublishmentDTO requestDto)
+
+        [HttpGet("getBorrowRequests")]
+        public async Task<IActionResult> SetBorrowRequest()
         {
-            var newBook = new Book
-            {
-                title = requestDto.title,
-                type = requestDto.type,
-                number_of_pages = requestDto.number_of_pages,
-                status = false
-            };
+            var requests  = await _loanRequestRepository.GetAllLoanRequests.Where(lr => lr.pending).Include(lr => lr.User).Include(lr => lr.Book).ToListAsync();
+            return Ok(requests.Select(r => new GetBorrowReqDTO{
+                id = r.id,
+                userFullname = r.User.name + " " + r.User.surname,
+                bookTitle = r.Book.title,
+                borrowDate = r.requestDate,
+                returnDate = r.returnDate,
+            }).ToList());
+        }
 
-            await _bookRepository.AddBook(newBook);
-
+        [HttpPost("requestpublishment")]
+        public async Task<IActionResult> RequestPublishment([FromBody] RequestPublishmentDTO requestpublishment)
+        {
             var newPublishRequest = new BookPublishRequest
             {
-                bookId = newBook.id,
+                bookId = requestpublishment.kitapId,
                 requestDate = DateOnly.FromDateTime(DateTime.UtcNow),
                 confirmation = false,
-                pending = true
+                pending = true,
+                userId = requestpublishment.yazarId
             };
 
             await _bookPublishRequestRepository.AddBookPublishRequest(newPublishRequest);
 
-            return CreatedAtAction(nameof(RequestPublishment), new { id = newBook.id }, newPublishRequest);
+            return Ok();
         }
 
-        [HttpPost("setpublishing/{requestId}")]
-        public async Task<IActionResult> SetPublishing(int requestId, [FromBody] SetPublishingDTO publishingDto)
+        [HttpPut("setpublishing")]
+        public async Task<IActionResult> SetPublishing([FromBody] SetPublishingDTO publishingDto)
         {
-            var publishRequest = await _bookPublishRequestRepository.GetBookPublishRequestById(requestId);
+            var publishRequest = await _bookPublishRequestRepository.GetBookPublishRequestById(publishingDto.id);
 
             if (publishRequest == null)
             {

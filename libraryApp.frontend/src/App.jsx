@@ -16,6 +16,7 @@ import Register2 from "./Register2"
 import HomePage from "./HomePage"
 import ReadPage from "./ReadPage"
 
+
 function App() {
 
   return (
@@ -77,7 +78,12 @@ function App() {
             <AuMybook />
           </div>
         }></Route>
-        <Route path="WritePage" element={      
+         <Route path="AubookRequest" element={
+          <div className="bg-[#d8d8d8] min-h-screen grid">
+            <AubookRequest/>
+          </div>
+        }></Route>
+        <Route path="WriteBook" element={      
             <WritePage2 />    
         }></Route>
         <Route path="Punishing" element={
@@ -95,12 +101,6 @@ function App() {
             <AccRequest />
           </div>
         }></Route>
-         <Route path="AubookRequest" element={
-          <div className="bg-[#d8d8d8] min-h-screen grid">
-            <AubookRequest />
-          </div>
-        }></Route>
-
       </Routes>
     </BrowserRouter>
   )

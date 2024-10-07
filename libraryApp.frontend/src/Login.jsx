@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { MdOutlineLocalLibrary } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -25,8 +25,13 @@ const Login = () => {
 
         if(yanit.ok){
           const user = await yanit.json();
+          console.log(user);
           localStorage.setItem("userData", JSON.stringify(user.userDTO));
           nav("/");
+        }
+          else {
+            alert("Giriş başarısız! Lütfen kullanıcı adı ve parolanızı kontrol edin.");
+            return;
         }
       }
 
@@ -35,22 +40,22 @@ const Login = () => {
       {/* title */}
       <div className='flex flex-col justify-center items-center gap-5'>
          <MdOutlineLocalLibrary className='text-5xl text-sky-950 font-bold '/> {/* adding icon */}
-         <h1 className='text-3xl text-center text-sky-950 font-bold tracking-wider'>GİRİŞ YAP</h1>
+         <h1 className='text-3xl text-center text-sky-950 font-bold tracking-wider'>LOG İN</h1>
       </div>
       <form className='bg-white h-[300px] rounded-md text-sky-950 text-base 
        tracking-wide p-8 flex flex-col gap-5 border border-blue-300 cursor-pointer'>
         <div>
-            <label>KULLANICI ADI</label>
+            <label>USERNAME</label>
             <input onChange={e => setusername(e.target.value)} type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
              hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
         </div>
         <div>
-            <label>PAROLA</label>
+            <label>PASSWORD</label>
             <input onChange={e => setpassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
              transition-all focus: outline-none'></input>
         </div>    
             <button onClick={uyesor} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[230px]
-             place-self-center hover:bg-[#fed478c9] transition-all  '>GİRİŞ</button>
+             place-self-center hover:bg-[#fed478c9] transition-all  '>LOG İN</button>
         </form>
       
     </div>
