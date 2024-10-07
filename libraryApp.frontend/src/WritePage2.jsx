@@ -88,11 +88,11 @@ const WritePage2 = () => {
         </div>
       </nav>
       <div className='bg-[#fdf2d8fe] h-screen flex flex-col gap-3 items-center '>
-        <h2 className='text-l font-semibold text-slate-50 mt-5'>{kitapAdi}</h2>
-        <form className='bg-[#fde5b1fe] border-2 border-[#f9ca67fe] h-4/5 w-4/5 rounded'>
+        {/* <h2 className='text-l font-semibold text-slate-50 mt-5'>{kitapAdi}</h2> */}
+        <form className='bg-[#fde5b1fe] border-2 border-[#f9ca67fe] h-4/5 w-4/5 rounded mt-5'>
           <div className='flex justify-between gap-2 mt-2 ml-2 mr-2'>
             <form className='bg-[#f9ca67fe] h-16 w-4/5 rounded flex flex-row justify-center gap-2'>
-              <h2 className='mt-4 text-lg text-slate-50'>Sayfa:</h2>
+            <h2 className='text-l font-bold text-white mt-5'>{kitapAdi}</h2>
             </form>
             <form className='bg-slate-50 border-2 border-[#f9ca67fe] h-16 w-1/5 rounded flex justify-center'>
               <h2 className='mt-4 text-lg text-black'>Sayfalar</h2>

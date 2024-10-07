@@ -93,15 +93,15 @@ const ReadPage = () => {
             disabled={currentpage === 1} >
             <GrCaretPrevious />
           </button>
-          <div className="bg-[#f2e6c9fe] p-6 h-[600px] w-[500px] rounded-l-md shadow-md">
-            <p>{"Page: " + currentpage}</p>
+          <div className="bg-[#f2e6c9fe] p-6 h-8/9 w-[500px] rounded-l-md shadow-md ">
+            <p className='font-serif text-xl'>{"Page: " + currentpage}</p>
             <p>{sayfalar[0]}</p>
           </div>
           <div className='bg-black h-[600px] w-[8px]'>
           </div>
 
-          <div className="bg-[#f2e6c9fe] p-6 h-[600px] w-[500px] rounded-r-md shadow-md">
-            <p>{"Page: " + (currentpage + 1)}</p>
+          <div className="bg-[#f2e6c9fe] p-6 h-8/) w-[500px] rounded-r-md shadow-md">
+            <p className='font-serif text-xl '>{"Page: " + (currentpage + 1)}</p>
             <p>{sayfalar[1]}</p>
           </div>
 
@@ -118,7 +118,7 @@ const ReadPage = () => {
             </div>
             <Link to="/BorrowedBooks" className='bg-[#fdc13ffe] py-2 px-3 rounded-lg hover:bg-[#f6ca6beb] h-10 w-auto mt-[400px]'>Go Borrowed Books</Link>
             {(user.roleName === "author") && (
-              <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-lg hover:bg-[#f6ca6beb] h-10 w-auto mt-2'>Go My Books</Link>
+              <Link to="/AuMyBook" className='bg-[#fdc13ffe] py-2 px-3 rounded-lg hover:bg-[#f6ca6beb] h-10 w-auto mt-4'>Go My Books</Link>
             )}
           </div>
         </div>

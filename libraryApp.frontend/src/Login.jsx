@@ -40,10 +40,10 @@ const Login = () => {
       {/* title */}
       <div className='flex flex-col justify-center items-center gap-5'>
          <MdOutlineLocalLibrary className='text-5xl text-sky-950 font-bold '/> {/* adding icon */}
-         <h1 className='text-3xl text-center text-sky-950 font-bold tracking-wider'>LOG İN</h1>
+         <h1 className='text-3xl text-center text-sky-950 font-bold tracking-wider'>SİGN İN</h1>
       </div>
       <form className='bg-white h-[300px] rounded-md text-sky-950 text-base 
-       tracking-wide p-8 flex flex-col gap-5 border border-blue-300 cursor-pointer'>
+       tracking-wide p-8 flex flex-col gap-5 border border-blue-300 cursor-pointer mt-2'>
         <div>
             <label>USERNAME</label>
             <input onChange={e => setusername(e.target.value)} type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
@@ -53,9 +53,14 @@ const Login = () => {
             <label>PASSWORD</label>
             <input onChange={e => setpassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
              transition-all focus: outline-none'></input>
-        </div>    
-            <button onClick={uyesor} className='bg-[#fed478fe] rounded text-white text h-[30px] w-[150px] absolute bottom-[230px]
-             place-self-center hover:bg-[#fed478c9] transition-all  '>LOG İN</button>
+        </div>
+            <button onClick={uyesor} className='bg-[#fbc85bfe] rounded-md text-white text h-[30px] w-auto p-1
+             place-self-center hover:bg-[#fed478c9] transition-all'>SİGN İN</button>
+             <div className='flex flex-col gap-2 items-center'>        
+            <Link to="/Register" className='bg-[#fbc85bfe] rounded-md text-white text h-[30px] w-auto p-1
+             place-self-center hover:bg-[#fed478c9]'> SİGN UP</Link>
+              <p className='text-sm mt-1'>Do not have an account?</p>
+             </div>
         </form>
       
     </div>
