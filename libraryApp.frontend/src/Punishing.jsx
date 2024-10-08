@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 //Zeh
 const Punishing = () => {
 
@@ -39,10 +40,10 @@ const Punishing = () => {
     });
 
     if (yanit.ok) {
-      alert("başarılı");
+      toast.success("başarılı");
       nav(0);
     } else {
-      alert("başarısız");
+      toast.error("başarısız");
     }
   }
 
