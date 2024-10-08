@@ -74,7 +74,7 @@ const ReadPage = () => {
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>{user.name + " " + user.surname}</span>
+          <span className='text-[#fed478fe] font-semibold'>{user.name + " " + user.surname}</span>
           <button onClick={() => {
             localStorage.removeItem("userData");
             nav("/Home");

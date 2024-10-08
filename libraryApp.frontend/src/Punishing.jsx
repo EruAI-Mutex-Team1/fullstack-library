@@ -72,7 +72,7 @@ const Punishing = () => {
         </div>
 
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>{user.name + " " + user.surname}</span>
+          <span className='text-[#fed478fe] font-semibold'>{user.name + " " + user.surname}</span>
           <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
         </div>
       </nav>

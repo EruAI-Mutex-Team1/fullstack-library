@@ -70,7 +70,7 @@ e.preventDefault();
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-        <span className='text-[#fed478fe]'>{user.name + " " + user.surname}</span>
+        <span className='text-[#fed478fe] font-semibold'>{user.name + " " + user.surname}</span>
             <button onClick={() => {
               localStorage.removeItem("userData");
               nav("/Login");
@@ -84,15 +84,15 @@ e.preventDefault();
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>MESSAGE OPERATİONS</h1>
-          <div  className=' bg-[#fab914fe] py-3 px-4 rounded-sm mt-[30px] w-[200px]'>SEND MESSAGE </div>
-          <Link to="/Inbox" className=' bg-[#fab914fe] py-3 px-3 rounded-sm hover:bg-[#fec752] w-[200px]'>VİEW INBOX</Link>
+          <div  className=' bg-[#fcb92afe] py-2 px-3 font-semibold rounded mt-[30px] w-auto'>SEND MESSAGE </div>
+          <Link to="/Inbox" className=' bg-[#fcb92afe] py-2 px-3 font-semibold rounded hover:bg-[#fec752] w-auto'>VİEW INBOX</Link>
 
         </div>
-        <form className='bg-slate-500 w-[1500px] h-[780px] flex flex-row'>
+        <form className='bg-slate-50 w-[1500px] h-[780px] flex flex-row'>
           <div className='w-[300px] h-[780px] border-r-2 border-black flex flex-col items-center gap-3 pt-[70px]'>
-            <label className='font-normal'>SELECT RECEİVER</label>
+            <label className='font-normal '>SELECT RECEİVER</label>
             {/* get userfor messaging */}
-            <select onChange={e => setSelectedUserId(e.target.value)} className='w-[200px] h-7 rounded-sm'>
+            <select onChange={e => setSelectedUserId(e.target.value)} className='w-[200px] bg-[#fbce8b] border-2 border-[#f0b954] h-7 rounded-sm'>
             <option value="" >Select an user</option>
                {users.map((user, index) => (
             <option value={user.userId} >{user.fullname + " - " + user.roleName}</option>
@@ -102,10 +102,10 @@ e.preventDefault();
           <div className=' flex flex-col ml-[140px] mt-[70px]'>
             {/* post sendmessage */}
             <label>TITLE</label>
-            <input onChange={e => settitle(e.target.value)} type='text' className='w-[700px] h-7 rounded-sm '/>
+            <input onChange={e => settitle(e.target.value)} type='text' className='w-[700px] h-7 bg-[#fbce8b] border-2 border-[#f0b954] rounded-sm '/>
             <label>YOUR MESSAGE</label>
-            <textarea onChange={e => setcontent(e.target.value)} type='text' className='w-[700px] h-[450px] rounded-sm'></textarea>
-            <button onClick={Mesajekle} className='bg-[#fcb92afe] text-white font-medium rounded-sm px-3 py-2  hover:bg-[#fec752] w-[80px] ml-[620px] mt-[20px]'>SEND</button>
+            <textarea onChange={e => setcontent(e.target.value)} type='text' className='w-[700px] h-[450px] bg-[#f8d49e] border-2 border-[#f0b954] rounded-sm'></textarea>
+            <button onClick={Mesajekle} className='bg-[#fcb92afe] text-white font-medium rounded-md px-3 py-2  hover:bg-[#fec752] w-[80px] ml-[620px] mt-[20px]'>SEND</button>
           </div>
         </form>
       </div>
