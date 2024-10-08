@@ -64,18 +64,18 @@ const Booksearch = () => {
 
   return (
     <div>
-      <nav className='bg-black text-white h-24 flex items-center justify-between'>
+     <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
           <div className=' font-extrabold text-4xl'>LIBRARY</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
-        <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>{user.name + " " +user.surname}</span>
-          <button onClick={() => {
-            localStorage.removeItem("userData");
-            nav("/Login");
-          }} className='mr-4 text-red-700'>LOGOUT</button>
+        <div className='flex gap-4 text-base'>
+        <span className='text-[#fed478fe] font-semibold '>{user.name + " " + user.surname}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
       {/*  underside */}
@@ -87,31 +87,31 @@ const Booksearch = () => {
           {/* search bar */}
           <div className=' flex item-center'>
             <input onChange={e => setKitapIsmi(e.target.value)} type='text' className='border-2  w-50 h-9 bg-gray-300 p-2 rounded-l-full focus:border-[#ffc13bf4]' placeholder='  search book...' />
-            <button onClick={handleSearchClick} className='bg-[#fcb92afe] w-20 h-9 text-white font-bold text-xs hover:bg-[#fec752] rounded-r-full'>SEARCH</button>
+            <button onClick={handleSearchClick} className='bg-pink-700 w-20 h-9 text-white font-bold text-sm hover:bg-[#fec752] rounded-r-full'>SEARCH</button>
           </div>
-          <Link className='bg-[#fcb92afe] w-19 h-9 text-white font-bold text-xs hover:bg-[#fec752] rounded-xl p-2' to="/BorrowedBooks">VİEW BORROWED BOOKS</Link>
+          <Link className='bg-[#fab914fe] py-3 px-7 text-white text-lg font-semibold rounded-sm mt-[30px] hover:bg-[#fec752]' to="/BorrowedBooks">BORROWED BOOKS</Link>
         </div>
         {/* table */}
-        <div className='mt-[70px] ml-[70px] overflow-y-auto max-h-[550px] '>
-          <table className='border-2 border-black bg-[#202f4c9a] text-slate-200'>
-            <thead className='bg-[#141b295e] text-sm'>
+        <div className='bg-white w-[1220px] h-[780px] overflow-y-auto max-h-[780px]'>
+          <table className='border-2 border-black bg-white text-black w-[1220px]'>
+            <thead className='bg-[#f9dc7654] text-sm'>
               <tr className='border-b-2 border-black'>
-                <th className='py-3 pl-4 pr-[200px] font-serif'>TITLE</th>
-                <th className='py-3  pr-[100px] font-serif'>TYPE</th>
+                <th className='py-3 pl-4 pr-[250px] font-serif'>TITLE</th>
+                <th className='py-3  pr-[160px] font-serif'>TYPE</th>
                 <th className='py-3  pr-[150px] font-serif'>AUTHORS</th>
                 <th className='py-3  pr-[270px] font-serif '>ACTIONS</th>
               </tr>
             </thead>
-            <tbody className='text-white text-sm'>
+            <tbody className='text-black text-base'>
               {
                 kitaplar.map((kitap, index) => (
                   <tr className='border-b-2 border-black'>
-                    <td className='py-3 pl-4 font-medium'>{kitap.title}</td>
-                    <td className='py-3 font-thin'>{kitap.type}</td>
-                    <td className='py-3 font-thin'>{kitap.bookAuthors.join(", ")}</td>
+                    <td className='py-3 pl-4 font-bold'>{kitap.title}</td>
+                    <td className='py-3 font-medium'>{kitap.type}</td>
+                    <td className='py-3 font-medium'>{kitap.bookAuthors.join(", ")}</td>
                     <td className='py-2'>
-                    <Link className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 ' to={"/ReadBook?bookId=" + kitap.id}>READ THE BOOK</Link>
-                      <button onClick={() => borrowRequest(kitap.id)} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>BORROW</button>
+                    <Link className='bg-[#fab914fe] text-white  rounded-md text-sm font-medium p-2 hover:bg-[#dcaa4de7] mr-3 ' to={"/ReadBook?bookId=" + kitap.id}>READ THE BOOK</Link>
+                      <button onClick={() => borrowRequest(kitap.id)} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6]'>BORROW</button>
                       {/* post borrow request */}
                     </td>
                       

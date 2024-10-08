@@ -39,7 +39,7 @@ function App() {
           </div>
         }></Route>
         <Route path="BorrowedBooks" element={
-          <div className="bg-[#f8f6f6] min-h-screen grid">
+          <div className="bg-white min-h-screen grid">
             <Borrowed />
           </div>
         }></Route>
@@ -64,7 +64,7 @@ function App() {
           </div>
         }></Route>
         <Route path="ChangeRole" element={
-          <div className="bg-[#d8d8d8] min-h-screen grid">
+          <div className=" bg-[#f9dc7654] min-h-screen grid">
             <Changerole />
           </div>
         }></Route>
@@ -74,7 +74,7 @@ function App() {
           </div>
         }></Route>
         <Route path="AuMybook" element={
-          <div className="bg-[#d8d8d8] min-h-screen grid">
+          <div className="bg-white min-h-screen grid">
             <AuMybook />
           </div>
         }></Route>

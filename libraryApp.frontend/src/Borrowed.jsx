@@ -50,6 +50,7 @@ const Borrowed = () => {
     if(yanit.ok)
     {
       alert("başarılı");
+      nav(0);
     }else{
       alert("başarısız");
     }
@@ -58,14 +59,14 @@ const Borrowed = () => {
 
   return (
     <div>
-      <nav className='bg-black text-white h-24 flex items-center justify-between'>
+       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
           <div className=' font-extrabold text-4xl'>LIBRARY</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
-        <div className='flex gap-4 text-sm'>
-        <span className='text-[#fed478fe]'>{user.username}</span>
+        <div className='flex gap-4 text-base'>
+        <span className='text-[#fed478fe] font-semibold '>{user.name + " " + user.surname}</span>
             <button onClick={() => {
               localStorage.removeItem("userData");
               nav("/Login");
@@ -74,16 +75,16 @@ const Borrowed = () => {
       </nav>
 
       {/*  underside */}
-      <div className='flex flex-row'>
+      <div className='flex flex-row bg-[#f9dc7654]'>
         {/* sidebar */}
         <div className=' bg-black  flex flex-col gap-8 items-center w-[320px] min-h-screen'>
           <h2 className='text-white text-2xl font-serif mt-[60px] hover:border-b-2'>BOOK OPERATİONS</h2>
-          <Link to={"/BookSearch"} className='bg-[#ff7504fe] w-19 h-9 text-white font-bold text-xs hover:bg-[#fec752] rounded-xl p-2'>BOOK SEARCH</Link>
+          <Link to={"/BookSearch"} className='bg-[#fab914fe] py-3 px-7 text-white text-lg font-semibold rounded-sm mt-[30px] hover:bg-[#fec752]'>BOOK SEARCH</Link>
         </div>
         {/* table */}
-        <div className='mt-[70px] ml-[70px] overflow-y-auto max-h-[550px] '>
-          <table className='border-2 border-black bg-[#202f4c9a] text-slate-200'>
-            <thead className='bg-[#141b295e] text-xs'>
+        <div className='mt-[70px] ml-[55px] overflow-y-auto max-h-[550px] '>
+          <table className='border-2 border-black bg-white text-black'>
+            <thead className='bg-[#f9dd769e]  text-sm'>
               <tr className='border-b-2 border-black'>
                 <th className='py-3 pl-4 pr-[150px] font-serif'>TİTLE</th>
                 <th className='py-3  pr-[100px] font-serif'>AUTHOR</th>
@@ -92,16 +93,16 @@ const Borrowed = () => {
                 <th className='py-3  pr-[200px] font-serif'>ACTIONS</th>
               </tr>
             </thead>
-            <tbody className='text-white text-sm'>
+            <tbody className='text-black text-base'>
               {kitaplar2.map((kitap, index) => (
                 <tr className='border-b-2 border-black'>
-                  <td className='py-3 pl-4 font-medium'>{kitap.title}</td>
-                  <td className='py-3 font-thin'>{kitap.bookAuthors.join(",")}</td>
-                  <td className='py-3 font-thin'>{kitap.requestDate}</td>
-                  <td className='py-3 font-thin'>{kitap.returnDate}</td>
+                  <td className='py-3 pl-4 font-bold'>{kitap.title}</td>
+                  <td className='py-3 font-medium'>{kitap.bookAuthors.join(",")}</td>
+                  <td className='py-3 font-medium'>{kitap.requestDate}</td>
+                  <td className='py-3 font-medium'>{kitap.returnDate}</td>
                   <td className='py-2'>
-                    <Link to={"/ReadBook?bookId="+kitap.bookId} className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] mr-3 '>READ</Link>
-                    <button onClick={() => {returnBook(kitap.bookId)}} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>RETURN</button>
+                    <Link to={"/ReadBook?bookId="+kitap.bookId} className='bg-[#fab914fe] text-white  rounded-md text-sm font-medium p-2 hover:bg-[#dcaa4de7] mr-3 '>READ</Link>
+                    <button onClick={() => {returnBook(kitap.bookId)}} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6]'>RETURN</button>
                   </td>
                 </tr>
               ))}

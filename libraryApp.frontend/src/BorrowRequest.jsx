@@ -81,14 +81,14 @@ const BorrowRequest = () => {
 
   return (
     <div>
-      <nav className='bg-black text-white h-24 flex items-center justify-between'>
+     <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
           <div className=' font-extrabold text-4xl'>LIBRARY</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
-        <div className='flex gap-4 text-sm'>
-        <span className='text-[#fed478fe]'>{user.username}</span>
+        <div className='flex gap-4 text-base'>
+        <span className='text-[#fed478fe] font-semibold '>{user.name + " " + user.surname}</span>
             <button onClick={() => {
               localStorage.removeItem("userData");
               nav("/Login");
@@ -101,14 +101,14 @@ const BorrowRequest = () => {
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>MEMBER OPERATİONS</h1>
-          <Link to="/AccountRequest" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] w-[200px]'>PENDING MEMBER REGİSTORATİONS</Link>
+          <Link to="/AccountRequest" className=' bg-[#fab914fe] py-3 px-7 text-lg font-semibold rounded-sm mt-[30px] hover:bg-[#fec752]'>REGİSTER REQUESTS</Link>
 
         </div>
         {/* table */}
-        <div className=' bg-slate-500 w-[1500px] h-[780px] overflow-y-auto max-h-[780px]'>
+        <div className=' bg-white w-[1220px] h-[780px] overflow-y-auto max-h-[780px]'>
 
-          <table className=' bg-slate-500 text-slate-200 w-[1265px] '>
-            <thead className='bg-[#141b295e] text-xs'>
+          <table className=' bg-white text-black w-[1220px] '>
+            <thead className='bg-[#f9dc7654] text-sm'>
               <tr className='border-b-2 border-black'>
                 <th className='py-3 pl-4 pr-[200px] font-serif'>BOOK</th>
                 <th className='py-3  pr-[100px] font-serif'>REQUESTOR</th>
@@ -118,16 +118,16 @@ const BorrowRequest = () => {
               </tr>
             </thead>
             {/* burada db de göremediğim için parametreleri rastgele atadım */}
-            <tbody className='text-white text-sm'>
+            <tbody className='text-black text-base'>
               {reqBooks.map((request, index) => (
                 <tr className='border-b-2 border-black'>
-                  <td className='py-3 pl-4 font-medium'>{request.bookTitle}</td>
-                  <td className='py-3 font-thin'>{request.userFullname}</td>
-                  <td className='py-3 font-thin'>{request.borrowDate}</td>
-                  <td className='py-3 font-thin'>{request.returnDate}</td>
+                  <td className='py-3 pl-4 font-bold'>{request.bookTitle}</td>
+                  <td className='py-3 font-medium'>{request.userFullname}</td>
+                  <td className='py-3 font-medium'>{request.borrowDate}</td>
+                  <td className='py-3 font-medium'>{request.returnDate}</td>
                   <td className='py-2 flex flex-row gap-3'>
-                    <button onClick={() => ApproveReq(request.id)} className='bg-[#0f123c] rounded-sm text-xs font-medium p-2 hover:bg-[#0f123cd1] ml-3 '>APPROVE</button>
-                    <button onClick={() => RejectReq(request.id)} className='bg-[#f8c558fe] rounded-sm text-xs font-bold p-2 hover:bg-[#ecbe5bb6]'>REJECT</button>
+                    <button onClick={() => ApproveReq(request.id)} className='bg-[#19871b] text-white rounded-md text-sm font-medium p-2 hover:bg-[#58bb46d2] ml-3 '>APPROVE</button>
+                    <button onClick={() => RejectReq(request.id)} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6]'>REJECT</button>
                     {/* setborrowrequestden approve ve reject çekeceğim */}
                     </td>
                 </tr>

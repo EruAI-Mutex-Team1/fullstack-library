@@ -103,19 +103,19 @@ const AubookRequest = () => {
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>AUTHOR OPERATİONS</h1>
-          <div className=' bg-[#fab914fe] py-2 px-3 text-lg font-semibold rounded-sm mt-[30px]  w-[230px]'>PENDING BOOK CREATION REQUESTS</div>
+          <Link to="/BookSearch" className=' bg-[#fab914fe] py-3 px-7 text-lg font-semibold rounded-sm mt-[30px] hover:bg-[#fec752] '>BOOK SEARCH</Link>
 
         </div>
         {/* table */}
-        <div className=' bg-white w-[1225px] h-[780px] overflow-y-auto max-h-[780px]'>
+        <div className=' bg-white w-[1220px] h-[780px] overflow-y-auto max-h-[780px]'>
 
-          <table className=' bg-white text-black w-[1225px] '>
+          <table className=' bg-white text-black w-[1220px] '>
             <thead className='bg-[#f9dc7654]  text-sm'>
               <tr className='border-b-2 border-black'>
                 <th className='py-3 pl-4 pr-[150px] font-serif'>BOOK NAME</th>
                 <th className='py-3  pr-[100px] font-serif'>AUTHOR</th>
                 <th className='py-3  pr-[60px] font-serif'>REQUEST DATE</th>
-                <th className='py-3  pr-[380px] font-serif'>ACTIONS</th>
+                <th className='py-3  pl-12 pr-[230px] font-serif'>ACTIONS</th>
               </tr>
             </thead>
             <tbody className='text-black text-base'>
@@ -123,8 +123,8 @@ const AubookRequest = () => {
                 <tr className='border-b-2 border-black'>
                   <td className='py-3 pl-8 font-bold'>{request.bookTitle}</td>
                   <td className='py-3 font-medium'>{request.userFullname}</td>
-                  <td className='py-3 font-medium'>{request.requestDate}</td>
-                  <td className='py-2 flex flex-row gap-3'>
+                  <td className='py-3 pl-5 font-medium'>{request.requestDate}</td>
+                  <td className='py-2 pl-4 flex flex-row gap-3'>
                     <Link to={"/ReadBook?bookId="+ request.bookId} className=' bg-[#fab914fe] text-white  rounded-md text-sm font-medium p-2 hover:bg-[#dcaa4de7] ml-[80px] '>READ THE BOOK</Link>
                     <button onClick={() => ApproveReq(request.id)} className=' bg-[#19871b] text-white rounded-md text-sm font-medium p-2 hover:bg-[#58bb46d2]'>APPROVE</button>
                     <button onClick={() => RejectReq(request.id)} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6]'>REJECT</button>

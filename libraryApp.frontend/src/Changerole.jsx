@@ -81,12 +81,12 @@ const Changerole = () => {
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
-        <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>{user.name + " " + user.surname}</span>
-          <button onClick={() => {
-            localStorage.removeItem("userData");
-            nav("/Login");
-          }} className='mr-4 text-red-700'>LOGOUT</button>
+        <div className='flex gap-4 text-base'>
+        <span className='text-[#fed478fe] font-semibold '>{user.name + " " + user.surname}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 
@@ -95,15 +95,14 @@ const Changerole = () => {
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
           <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>GENERAL OPERATİONS</h1>
-          <button className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px]'>CHANGE ROLE</button>
-          <Link to="/Punishing" className=' bg-[#fcb92afe] py-2 px-3 rounded-sm hover:bg-[#fec752]'>PUNISH A USER</Link>
+          <Link to="/Punishing" className=' bg-[#fab914fe] py-3 px-7 text-lg font-semibold rounded-sm mt-[30px] hover:bg-[#fec752] '>PUNISH A USER</Link>
 
         </div>
         {/* form */}
-        <form className='text-white bg-[#3953882c]  border-2 border-black h-[600px] w-[1000px] flex flex-col py-7 px-7 gap-6 ml-[120px] mt-[40px]'>
+        <form className='text-black text-lg  bg-[#f9dc7654]  border-2 border-black h-[600px] w-[1000px] flex flex-col py-7 px-7 gap-6 ml-[120px] mt-[40px]'>
           <div className='flex flex-col'>
             <label >SELECT USER</label>
-            <select onChange={e => setSelectedUserId(e.target.value)} className=' bg-[#0b265d5e] w-[800px] hover:bg-[#2d374b5a] '>
+            <select onChange={e => setSelectedUserId(e.target.value)} className=' bg-[#f9dd76ae] w-[800px] hover:bg-[#ecd16fef]'>
               <option value="" >Select an option</option>
               {users.map((user, index) => (
                 <option value={user.userId} >{user.fullname + " - " + user.roleName}</option>
@@ -113,7 +112,7 @@ const Changerole = () => {
 
           <div className='flex flex-col py-3'>
             <label>ROLES</label>
-            <select onChange={e => setSelectedRoleId(e.target.value)} className=' bg-[#0b265d5e] w-[800px] hover:bg-[#2d374b5a] '>
+            <select onChange={e => setSelectedRoleId(e.target.value)} className=' bg-[#f9dd76b8] w-[800px] hover:bg-[#ecd16fef] '>
               <option value="" >Select an option</option>
               <option value="1" >MEMBER</option>
               <option value="2" >MANAGER</option>
@@ -122,7 +121,7 @@ const Changerole = () => {
             </select>
           </div>
 
-          <button onClick={updateRole} className='bg-[#0f123c] rounded-sm py-1 hover:bg-[#0f123cd1] w-[120px]  ml-[670px] mt-[50px]'>UPDATE</button>
+          <button onClick={updateRole} className='bg-[#fab914fe] text-white rounded-md text-md  py-2 hover:bg-[#dcaa4de7] ml-[670px] mt-[50px]'>UPDATE</button>
 
         </form>
 
