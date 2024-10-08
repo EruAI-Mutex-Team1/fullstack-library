@@ -120,6 +120,10 @@ namespace libraryApp.backend.Controllers
         {
             var books = await _bookAuthorRepository.GetAllAuthors
                 .Where(ba => ba.userId == id)
+                .Include(ba => ba.Book)
+                .ThenInclude(b => b.BookPublishRequests)
+                .Include(ba => ba.Book)
+                .ThenInclude(b => b.Pages)
                 .Select(ba => ba.Book)
                 .ToListAsync();
 
@@ -128,8 +132,9 @@ namespace libraryApp.backend.Controllers
                 id = book.id,
                 title = book.title,
                 type = book.type,
-                number_of_pages = book.number_of_pages,
-                BookAuthors = book.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList()
+                number_of_pages = book.Pages.Count,
+                BookAuthors = book.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList(),
+                isBookPublished = book.BookPublishRequests.Any(bpr => bpr.confirmation),
             }).ToList();
 
             return Ok(BookDtos);
@@ -239,11 +244,9 @@ namespace libraryApp.backend.Controllers
             {
                 return NotFound();
             }
-            // var existingRequest = await _loanRequestRepository.GetLoanRequestByUserAndBook(loanRequestDTO.userId, loanRequestDTO.bookId);
-            // if (existingRequest != null && !existingRequest.isReturned)
-            // {
-            //     return Conflict(new { Message = "You have already sent borrowing request" });
-            // }
+
+            if (_loanRequestRepository.GetAllLoanRequests.Any(lr => lr.userId == loanRequestDTO.userId && lr.bookId == loanRequestDTO.bookId && lr.pending)) return BadRequest(new { Message = "You already requested that book" });
+
             var newLoanRequest = new LoanRequest
             {
                 userId = loanRequestDTO.userId,
@@ -278,6 +281,15 @@ namespace libraryApp.backend.Controllers
                 loanRequest.confirmation = false;
             }
             await _loanRequestRepository.UpdateLoanRequest(loanRequest);
+
+            var otherReqs = await _loanRequestRepository.GetAllLoanRequests.Where(lr => lr.bookId == loanRequest.bookId && lr.pending && lr.id != loanRequest.id).ToListAsync();
+            foreach (var req in otherReqs)
+            {
+                req.pending = false;
+                req.confirmation = false;
+                await _loanRequestRepository.UpdateLoanRequest(req);
+            }
+
             return Ok(new { Message = borrowRequestUpdateDTO.confirmation ? "Loan request approved successfully!" : "Loan request rejected successfully!" });
         }
 
