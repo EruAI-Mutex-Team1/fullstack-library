@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 //özge
 const Borrowed = () => {
   const [kitaplar2, setKitaplar2] = useState([]);
@@ -49,10 +50,12 @@ const Borrowed = () => {
 
     if(yanit.ok)
     {
-      alert("başarılı");
+      const data=await yanit.json();
+      toast.success(data.message);
       nav(0);
     }else{
-      alert("başarısız");
+      const data=await yanit.json();
+      toast.error(data.message);
     }
   }
 

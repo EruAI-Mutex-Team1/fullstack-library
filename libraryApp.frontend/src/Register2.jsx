@@ -19,12 +19,15 @@ const Register2 = () => {
     e.preventDefault();
 
 
-    
+    if (username === "" || email === "" || name === "" || surname === "" || password === "" || confirmPassword === "") {
+      toast.error("Fill all the boxes");
+      return;
+    }
 
-      if (password !== confirmPassword) {
-        toast.error("Passwords must match");
-        return;
-      }
+    if (password !== confirmPassword) {
+      toast.error("Passwords must match");
+      return;
+    }
 
     const user = {
 

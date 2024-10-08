@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 //bu sayfanın logout ve name kısmı doğru
 const Changerole = () => {
   const [users, setusers] = useState([]); //userdan ne dönüyor dizi mi
@@ -62,11 +63,13 @@ const Changerole = () => {
     });
 
     if (yanit.ok) {
-      alert("rol güncellendi");
+      const data= await yanit.json();
+      toast.success(data.message);
       nav(0);
     }
     else {
-      alert("rol güncellenemedi");
+      const data =await yanit.json();
+      toast.error(data.message);
     }
 
   };

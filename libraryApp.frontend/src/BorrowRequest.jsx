@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 //özge
 //Approve ve reject butonları çaşışmıyor
 
@@ -52,11 +53,13 @@ const BorrowRequest = () => {
       body: JSON.stringify(request),
     });
     if (yanit.ok) {
-      alert("başarılı");
-      nav(0);
+     const data=await yanit.json();
+     toast.success(data.message);
+     nav(0);
     }
     else {
-      alert("başarısız");
+      const data = await yanit.json();
+    toast.error(data.message);
     }
   }
 
@@ -71,11 +74,15 @@ const BorrowRequest = () => {
       body: JSON.stringify(request),
     });
     if (yanit.ok) {
-      alert("başarılı");
+      const data= await yanit.json();
+      toast.success(data.message);
       nav(0);
+
     }
     else {
-      alert("başarısız");
+      const data = await yanit.json();
+      toast.error(data.message);
+      
     }
   }
 

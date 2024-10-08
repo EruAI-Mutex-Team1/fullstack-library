@@ -116,11 +116,11 @@ namespace libraryApp.backend.Controllers
         {
 
             var request = await _registerRequestRepository.GetAllRegisterRequestsAsync.FirstOrDefaultAsync(r => r.id == userRequestDto.requestId);
-            if (request == null) return NotFound();//404 gibi
+            if (request == null) return NotFound( new {Message="Rejected"});//404 gibi
             request.pending = false;
             request.confirmation = userRequestDto.isApproved;
             await _registerRequestRepository.UpdateAsync(request);
-            return Ok(); //201
+            return Ok(new {Message=" Approved"}); //201
         }
 
     }

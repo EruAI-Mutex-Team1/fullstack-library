@@ -184,7 +184,7 @@ namespace libraryApp.backend.Controllers
             var loan = await _loanRequestRepository.GetAllLoanRequests.FirstOrDefaultAsync(lr => lr.confirmation && !lr.isReturned && lr.bookId == kitapId);
             if (loan == null)
             {
-                return NotFound();
+                return NotFound( new {Message="Book could not return"});
             }
 
             loan.isReturned = true;
@@ -219,7 +219,7 @@ namespace libraryApp.backend.Controllers
             if (book == null) return NotFound();
             book.title = bookChangeTitleDTO.yeniIsim;
             await _bookRepository.UpdateBook(book);
-            return Ok();
+            return Ok( new {Message="Title is changes successfully!"});
         }
 
         [HttpPost("requestBook")]
@@ -228,7 +228,7 @@ namespace libraryApp.backend.Controllers
             var user = await _userRepository.GetUseridAsync(loanRequestDTO.userId);
             if (user == null)
             {
-                return NotFound();
+                return NotFound( new{Message="Not found"});
             }
 
             var isUserPunished = _punishRepo.GetAllPunishmentsAsync.Any(p => p.isActive && p.userId == loanRequestDTO.userId);
@@ -237,7 +237,7 @@ namespace libraryApp.backend.Controllers
             var book = await _bookRepository.GetBookById(loanRequestDTO.bookId);
             if (book == null)
             {
-                return NotFound();
+                return NotFound(new{Message="Not found"});
             }
             // var existingRequest = await _loanRequestRepository.GetLoanRequestByUserAndBook(loanRequestDTO.userId, loanRequestDTO.bookId);
             // if (existingRequest != null && !existingRequest.isReturned)
@@ -309,7 +309,7 @@ namespace libraryApp.backend.Controllers
 
             await _bookPublishRequestRepository.AddBookPublishRequest(newPublishRequest);
 
-            return Ok();
+            return Ok( new{Message="Operation is successful"});
         }
 
         [HttpPut("setpublishing")]
@@ -319,7 +319,7 @@ namespace libraryApp.backend.Controllers
 
             if (publishRequest == null)
             {
-                return NotFound();
+                return NotFound( new {Message="This book is not exist!"});
             }
 
             if (!publishRequest.pending)

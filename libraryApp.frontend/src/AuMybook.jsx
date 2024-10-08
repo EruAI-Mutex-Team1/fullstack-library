@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 //özge
 const AuMybook = () => {
@@ -12,6 +13,7 @@ const AuMybook = () => {
   const [title, settitle] = useState("");
   const [type, settype] = useState("");
   const [pages, setpages] = useState(0);
+
   //button değişikliği için
   // const [buttonText, setbuttonText] = useState('Request Publishment');
   // const [buttonColor, setbuttonColor] = useState('#2345');
@@ -67,11 +69,13 @@ const AuMybook = () => {
 
     setshowForm(!showForm);
     if (yanit.ok) {
-      alert("başarılı");
+      const data=await yanit.json();
+      toast.success(data.message);
       nav(0);
     }
     else {
-      alert("başarısız");
+      const data=await yanit.json();
+      toast.error("Something went wrong!");
     }
   }
   // //BU FONKSİYON DA ÇALIŞMIYOR :(((((
@@ -105,10 +109,14 @@ const AuMybook = () => {
       }),
     });
     if (yanit.ok) {
-      alert("başarılı");
+      const data=await yanit.json();
+      toast.success(data.message);
+      nav(0);
     }
     else {
-      alert("başarısız");
+      const data=await yanit.json();
+      toast.error("Something went wrong!");
+    
     }
   }
 
@@ -138,11 +146,13 @@ const AuMybook = () => {
     });
 
     if (yanit.ok) {
-      alert("başarılı");
-      nav(0);
+    const data=await yanit.json();
+    toast.success(data.message);
+    nav(0);
     }
     else {
-      alert("başarısız");
+    const data= await yanit.json();
+    toast.error("Something went wrong!");
     }
   }
   return (
