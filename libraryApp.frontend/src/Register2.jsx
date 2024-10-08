@@ -13,7 +13,6 @@ const Register2 = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
-  const [passwordeşleşiyormu, setpasswordeşleşiyormu] = useState("");
 
   const uyeEkle = async (e) => {
     e.preventDefault();
@@ -46,23 +45,9 @@ const Register2 = () => {
       body: JSON.stringify(user),
     });
     if (yanit.ok) {
-      console.log("kayit oldu")
-      nav("/login");
+      toast.success("Register request has sent.", {onClose: () => nav("/login")})
     }
   }
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (password === confirmPassword) {
-  //     setpasswordeşleşiyormu(true);
-  //     alert("Registration successful!"); // Şifreler eşleşirse işlemi devam ettir
-  //   } else {
-  //     setpasswordeşleşiyormu(false);
-  //   }
-  // };
-
-
-
 
   return (
     <div className='place-self-center bg-white h-[750px] w-[430px] p-20 rounded-xl flex flex-col gap-5 '>

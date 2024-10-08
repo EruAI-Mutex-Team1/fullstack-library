@@ -89,7 +89,7 @@ const Booksearch = () => {
           {/* search bar */}
           <div className=' flex item-center'>
             <input onChange={e => setKitapIsmi(e.target.value)} type='text' className='border-2  w-50 h-9 bg-gray-300 p-2 rounded-l-full focus:border-[#ffc13bf4]' placeholder='  search book...' />
-            <button onClick={handleSearchClick} className='bg-pink-700 w-20 h-9 text-white font-bold text-sm hover:bg-[#fec752] rounded-r-full'>SEARCH</button>
+            <button onClick={handleSearchClick} className='bg-pink-700 w-20 h-9 text-white font-bold text-sm hover:bg-pink-900 rounded-r-full'>SEARCH</button>
           </div>
           <Link className='bg-[#fab914fe] py-3 px-7 text-white text-lg font-semibold rounded-sm mt-[30px] hover:bg-[#fec752]' to="/BorrowedBooks">BORROWED BOOKS</Link>
         </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 //Zeh
 const WritePage2 = () => {
   const [book,setBook] = useState({});
@@ -65,10 +66,11 @@ const WritePage2 = () => {
     });
 
     if (yanit.ok) {
-      alert("başarılı")
-      nav(0);
+     const data = await yanit.json();
+     toast.success(data.message, {onClose:() => nav(0)});
     } else {
-      alert("sayfa eklenemedi");
+      const data = await yanit.json();
+     toast.error(data.message);
     }
   }
 
@@ -80,7 +82,7 @@ const WritePage2 = () => {
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
         <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe]'>{user.name + " " + user.surname}</span>
+          <span className='text-[#fed478fe] font-semibold'>{user.name + " " + user.surname}</span>
           <button onClick={() => {
             localStorage.removeItem("userData");
             nav("/Home");

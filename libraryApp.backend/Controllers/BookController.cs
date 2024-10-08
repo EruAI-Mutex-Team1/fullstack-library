@@ -165,7 +165,7 @@ namespace libraryApp.backend.Controllers
             var book = await _bookRepository.GetAllBooks.Include(b => b.Pages).FirstOrDefaultAsync(b => b.id == id);
             if (book == null)
             {
-                return NotFound();
+                return NotFound( new {Message = "Page cannot be added!"});
             }
 
             int newPageNumber = book.Pages.Count + 1;
