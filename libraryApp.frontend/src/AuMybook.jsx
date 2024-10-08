@@ -217,13 +217,16 @@ const AuMybook = () => {
                   <td className='py-3 font-medium'>{book.number_of_pages}</td>
                   <td className='py-2'>
                     {/* name input */}
-                    <div className='flex flex-row mb-2'>
-                      <input onChange={e => handleTitleChange(e, book.id)} type='text' className='  w-60 h-8 bg-gray-300 p-2 rounded-sm text-black' placeholder='Enter new name' />
-                      <button onClick={e => changeTitle(book.id)} className='bg-black  text-white rounded-sm text-sm font-medium p-1 hover:bg-neutral-900 mr-3 '>CHANGE</button>
-                    </div>
+                    {(!book.isBookPublished) && (
+                      <>
+                        <div className='flex flex-row mb-2'>
+                          <input onChange={e => handleTitleChange(e, book.id)} type='text' className='  w-60 h-8 bg-gray-300 p-2 rounded-sm text-black' placeholder='Enter new name' />
+                          <button onClick={e => changeTitle(book.id)} className='bg-black  text-white rounded-sm text-sm font-medium p-1 hover:bg-neutral-900 mr-3 '>CHANGE</button>
+                        </div>
 
-                    <Link to={"/WriteBook?bookId=" + book.id} className='bg-[#19871b] text-white rounded-md text-sm font-medium p-2 hover:bg-[#58bb46d2]  mr-3 '>WRITE</Link>
-                    <button onClick={() => PublishRequest(book.id)} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6] mr-3 '> Request Publishment </button>
+                        <Link to={"/WriteBook?bookId=" + book.id} className='bg-[#19871b] text-white rounded-md text-sm font-medium p-2 hover:bg-[#58bb46d2]  mr-3 '>WRITE</Link>
+                        <button onClick={() => PublishRequest(book.id)} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6] mr-3 '> Request Publishment </button>
+                      </>)}
                     <Link to={"/ReadBook?bookId=" + book.id} className='bg-[#fab914fe] text-white  rounded-md text-sm font-medium p-2 hover:bg-[#dcaa4de7] ml-[80px]] mr-3 '>READ</Link>
                     {/* create:create change : add page, write:router writepage2???? req:req  read: router read page miii */}
                   </td>

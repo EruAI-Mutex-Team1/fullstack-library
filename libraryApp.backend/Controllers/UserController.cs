@@ -86,11 +86,11 @@ namespace libraryApp.backend.Controllers
             //1=üye 2=yönetici 3=görevli 4=yazar
             int[] rolesToMessage = roleId == 1 ? [3] : roleId == 2 ? [3, 4] : roleId == 3 ? [1, 2, 4] : roleId == 4 ? [2, 3] : [0];
 
-            var users = await _userRepo.GetAllUsersAsync.Where(u => rolesToMessage.Contains(u.roleId)).Include(u => u.Role).ToListAsync(); //filtreleme oluyor  userlar arasındaki roller arraye göre filtrelendi
+            var users = await _userRepo.GetAllUsersAsync.Include(u => u.RegisterRequests).Where(u => u.RegisterRequests.Any(rr => rr.confirmation) && rolesToMessage.Contains(u.roleId)).Include(u => u.Role).ToListAsync(); //filtreleme oluyor  userlar arasındaki roller arraye göre filtrelendi
             return Ok(users.Select(u => new UserFDto
             {
                 userId = u.id,
-                fullname = u.name + u.surname,
+                fullname = u.name + " " + u.surname,
                 roleName = u.Role.name,
             }));
 
@@ -102,11 +102,11 @@ namespace libraryApp.backend.Controllers
         public async Task<IActionResult> GetUserforPunishment(int roleId)
         {
             int[] rolesToPunish = roleId == 2 ? [1, 3, 4] : roleId == 3 ? [1, 4] : roleId == 1 ? [0] : roleId == 4 ? [0] : [0];
-            var usersP = await _userRepo.GetAllUsersAsync.Where(p => rolesToPunish.Contains(p.roleId)).Include(u => u.Role).Include(u => u.Punishments).ToListAsync();
-            return Ok(usersP.Select( p => new UserFDto
+            var usersP = await _userRepo.GetAllUsersAsync.Include(u => u.RegisterRequests).Where(p => p.RegisterRequests.Any(rr => rr.confirmation) && rolesToPunish.Contains(p.roleId)).Include(u => u.Role).Include(u => u.Punishments).ToListAsync();
+            return Ok(usersP.Select(p => new UserFDto
             {
                 userId = p.id,
-                fullname = p.name + p.surname,
+                fullname = p.name + " " + p.surname,
                 roleName = p.Role.name,
                 isPunished = p.Punishments.Any(p => p.isActive)
             }));
@@ -118,11 +118,11 @@ namespace libraryApp.backend.Controllers
         public async Task<IActionResult> GetUserforRoleChanging(int roleId)
         {
             int[] roleChange = roleId == 2 ? [1, 3, 4] : [0];
-            var userChangeRole = await _userRepo.GetAllUsersAsync.Where(c => roleChange.Contains(c.roleId)).Include(u => u.Role).ToListAsync();
+            var userChangeRole = await _userRepo.GetAllUsersAsync.Include(u => u.RegisterRequests).Where(c => c.RegisterRequests.Any(rr => rr.confirmation) && roleChange.Contains(c.roleId)).Include(u => u.Role).ToListAsync();
             return Ok(userChangeRole.Select(c => new UserFDto
             {
                 userId = c.id,
-                fullname = c.name +" " +  c.surname,
+                fullname = c.name + " " + c.surname,
                 roleName = c.Role.name,
             }));
         }
