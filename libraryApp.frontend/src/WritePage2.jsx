@@ -24,11 +24,13 @@ const WritePage2 = () => {
 
     const user = JSON.parse(data);
     setUser(user);
+    kitabiAl(user);
+
   }
 
-  const kitabiAl = async () => {
+  const kitabiAl = async (user) => {
     console.log(bookId)
-    const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}`, {
+    const yanit = await fetch(`http://localhost:5249/api/Book/GetBookById?bookId=${bookId}&requestorId=${user.id}`, {
       method: "GET",
     });
 
@@ -48,7 +50,6 @@ const WritePage2 = () => {
 
 
   useEffect(() => {
-    kitabiAl();
     checkUser();
   }, []);
 
@@ -112,14 +113,7 @@ const WritePage2 = () => {
           </div>
           <form className='bg-[#fde5b1fe]  h-7 w w-3/4 ml-12'></form>
           <div className='bg-[#fde5b1fe] h-20 w-3/4 ml-12 flex flex-row justify-end gap-3 '>
-            <p className='ml-1 font-semibold mt-2 text-black'> Bir Metin Yükle (.txt):</p>
-            <div className="flex items-center justify-center h-10 rounded-xl bg-gray-100">
-              <label className="block">
-                <span className="sr-only">Choose File</span>
-                <input type="file" className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-[#18bf18de] hover:file:bg-blue-100" />
-              </label>
-            </div>
-            <button onClick={e => sayfaEkle(e)} className='bg-green-600 hover:bg-green-700 h-10 w-auto p-2 text-slate-50 rounded'> Kaydet </button>
+            <button onClick={e => sayfaEkle(e)} className='bg-green-600 hover:bg-green-700 h-10 w-auto p-2 text-slate-50 rounded'> Save </button>
           </div>
         </form>
 
