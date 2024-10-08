@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { TbBrandD3 } from 'react-icons/tb'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 //özge
 //EN BAŞTA TÜM KİTAPLARIN GELMESİNİ YAPAMADIM
 const Booksearch = () => {
@@ -55,9 +56,10 @@ const Booksearch = () => {
     });
 
     if (yanit.ok) {
-      alert("başarılı");
+      toast.success("başarılı");
     } else {
-      alert("başarısız");
+      const data = await yanit.json();
+      toast.error(data.message);
     }
   }
 

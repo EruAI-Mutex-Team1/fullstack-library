@@ -16,8 +16,8 @@ const ReadPage = () => {
 
   const bookId = new URLSearchParams(location.search).get("bookId");
 
-  const kitabiAl = async () => {
-    const yanit = await fetch(`http://localhost:5249/api/Book/${bookId}`, {
+  const kitabiAl = async (user) => {
+    const yanit = await fetch(`http://localhost:5249/api/Book/GetBookById?bookId=${bookId}&requestorId=${user.id}`, {
       method: "GET",
     });
 
@@ -63,7 +63,7 @@ const ReadPage = () => {
     setUser(user);
     console.log(user);
 
-    kitabiAl();
+    kitabiAl(user);
   }, []);
 
   return (
