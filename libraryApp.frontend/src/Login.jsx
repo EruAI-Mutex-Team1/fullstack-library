@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { MdOutlineLocalLibrary } from "react-icons/md";
 import {Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
@@ -30,7 +31,8 @@ const Login = () => {
           nav("/");
         }
           else {
-            alert("Giriş başarısız! Lütfen kullanıcı adı ve parolanızı kontrol edin.");
+            const data =await yanit.json();
+            toast.error(data.message);
             return;
         }
       }

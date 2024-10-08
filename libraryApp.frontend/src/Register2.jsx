@@ -19,8 +19,6 @@ const Register2 = () => {
     e.preventDefault();
 
 
-    
-
       if (password !== confirmPassword) {
         toast.error("Passwords must match");
         return;
@@ -47,19 +45,6 @@ const Register2 = () => {
       nav("/login");
     }
   }
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (password === confirmPassword) {
-  //     setpasswordeşleşiyormu(true);
-  //     alert("Registration successful!"); // Şifreler eşleşirse işlemi devam ettir
-  //   } else {
-  //     setpasswordeşleşiyormu(false);
-  //   }
-  // };
-
-
-
 
   return (
     <div className='place-self-center bg-white h-[750px] w-[430px] p-20 rounded-xl flex flex-col gap-5 '>

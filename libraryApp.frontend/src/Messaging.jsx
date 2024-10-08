@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom';
-//Zeh
+import { toast } from 'react-toastify';
+
 const Messaging = () => {
 
   const [users, setusers] = useState([]);
@@ -53,12 +54,14 @@ e.preventDefault();
     });
 
     if (yanit.ok) {
-      console.log("mesaj gönderildi");
-      nav(0);
-      alert ("Mesajınız gönderildi.");
+
+      const data =await yanit.json();
+      toast.success("mesaj gönderildi", {
+        onClose: () => {nav(0)},
+      });
     } else {
-      console.log("mesaj gönderilemedi");
-      alert ("Mesajınız gönderilemedi.");
+      const data =await yanit.json();
+      toast.error(data.message);
     }
   }
 

@@ -24,7 +24,7 @@ const Punishing = () => {
     }
   };
 
-  const setPunishment = async (e,isPunished) => {
+  const setPunishment = async (e, isPunished) => {
     e.preventDefault();
 
     const punish = {
@@ -40,10 +40,11 @@ const Punishing = () => {
     });
 
     if (yanit.ok) {
-      toast.success("başarılı");
-      nav(0);
+      const data = await yanit.json();
+      toast.success(data.message, { onClose: () => nav(0) });
     } else {
-      toast.error("başarısız");
+      const data = await yanit.json();
+      toast.error(data.message);
     }
   }
 
@@ -101,8 +102,8 @@ const Punishing = () => {
           <form className='bg-[#fde5b1fe] border-2 border-black flex flex-col w-[1000px] h-[480px] mt-[18px] '>
             {/* <p>{punishusers.find(p => p.userId === selectedUserId)?.isPunished ? "punished":"not punished"}</p> */}
             <div className=' place-self-center w-[950px] mt-40'>
-              {(selectedUser?.isPunished) ? (<button onClick={(e) => { setPunishment(e,false) }} className='bg-[#d51760fe]  text-white rounded-sm py-1 w-[105px] hover:bg-[#f75858f4] ml-[450px] mt-[20px]'>Remove punishment</button>
-              ) : (<button onClick={(e) => { setPunishment(e,true) }} className='bg-[#d51760fe]  text-white rounded-sm py-1 w-[105px] hover:bg-[#f75858f4] ml-[450px] mt-[20px]'>Punish user</button>
+              {(selectedUser?.isPunished) ? (<button onClick={(e) => { setPunishment(e, false) }} className='bg-[#d51760fe]  text-white rounded-sm py-1 w-[105px] hover:bg-[#f75858f4] ml-[450px] mt-[20px]'>Remove punishment</button>
+              ) : (<button onClick={(e) => { setPunishment(e, true) }} className='bg-[#d51760fe]  text-white rounded-sm py-1 w-[105px] hover:bg-[#f75858f4] ml-[450px] mt-[20px]'>Punish user</button>
               )}
             </div>
 
