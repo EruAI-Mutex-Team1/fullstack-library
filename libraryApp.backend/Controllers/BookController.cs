@@ -84,6 +84,7 @@ namespace libraryApp.backend.Controllers
                 .Where(b => b.title.Contains(title ?? "") && b.status == true)
                 .Include(b => b.BookAuthors)
                 .ThenInclude(b => b.User)
+                .Include(b => b.LoanRequest)
                 .ToListAsync();
 
             List<BookSearchDTO> BookDtos = books.Select(b => new BookSearchDTO
@@ -92,7 +93,8 @@ namespace libraryApp.backend.Controllers
                 title = b.title,
                 type = b.type,
                 number_of_pages = b.number_of_pages,
-                BookAuthors = b.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList()
+                BookAuthors = b.BookAuthors.Select(ba => ba.User.name + " " + ba.User.surname).ToList(),
+                isBorrowed = b.LoanRequest.Any(lr => lr.confirmation && !lr.isReturned),
             }).ToList();
 
             return Ok(BookDtos);

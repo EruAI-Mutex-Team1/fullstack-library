@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 const AccRequest = () => {
   const [users, setusers] = useState([]);
 
- const [user, setUser] = useState({});//kullanıcı bilgileri için
- const nav = useNavigate();
+  const [user, setUser] = useState({});//kullanıcı bilgileri için
+  const nav = useNavigate();
 
   const fetchAccRequest = async () => {
     const yanit = await fetch(`http://localhost:5249/api/Account/getaccountcreationrequests`, {
@@ -25,66 +25,64 @@ const AccRequest = () => {
       checkUser();
     }, [])
 
-   //
-    const ApproveReq = async (id) =>{
-      const request={
-        requestId: id,
-        isApproved: true,
-      }
-
-      const yanit = await fetch(`http://localhost:5249/api/Account/setaccountcreationrequest`,{
-        method:"PUT",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(request),
-      });
-      if(yanit.ok)
-        { 
-          const data = await yanit.json();
-          toast.success(data.message);
-          nav(0);
-        }
-        else{
-          const data = await yanit.json();
-          toast.error(data.message);
-        }
+  //
+  const ApproveReq = async (id) => {
+    const request = {
+      requestId: id,
+      isApproved: true,
     }
 
-    const RejectReq = async (id) =>{
-      const request={
-        requestId: id,
-        isApproved: false,
-      }
+    const yanit = await fetch(`http://localhost:5249/api/Account/setaccountcreationrequest`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request),
+    });
+    if (yanit.ok) {
+      const data = await yanit.json();
+      toast.success(data.message, { onClose: () => nav(0) });
+    }
+    else {
+      const data = await yanit.json();
+      toast.error(data.message);
+    }
+  }
 
-      const yanit = await fetch(`http://localhost:5249/api/Account/setaccountcreationrequest`,{
-        method:"PUT",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(request),
-      });
-      if(yanit.ok)
-      {
-        alert("başarılı");
-        nav(0);
-      }
-      else{
-        alert("başarısız");
-      }
+  const RejectReq = async (id) => {
+    const request = {
+      requestId: id,
+      isApproved: false,
     }
 
-    const checkUser = () => {
-      const data = localStorage.getItem("userData");
-      if (data === null) {
-        nav("/Login");
-        return;
-      }
-      
-      const user = JSON.parse(data);
-      setUser(user);
-  
-      if (user.roleName !== "manager" && user.roleName !== "staff") {
-       nav("/");
-       return;
-      }
+    const yanit = await fetch(`http://localhost:5249/api/Account/setaccountcreationrequest`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request),
+    });
+    if (yanit.ok) {
+      const data = await yanit.json();
+      toast.success(data.message, { onClose: () => nav(0) });
     }
+    else {
+      const data = await yanit.json();
+      toast.error(data.message);
+    }
+  }
+
+  const checkUser = () => {
+    const data = localStorage.getItem("userData");
+    if (data === null) {
+      nav("/Login");
+      return;
+    }
+
+    const user = JSON.parse(data);
+    setUser(user);
+
+    if (user.roleName !== "manager" && user.roleName !== "staff") {
+      nav("/");
+      return;
+    }
+  }
 
 
   return (
@@ -97,10 +95,10 @@ const AccRequest = () => {
 
         <div className='flex gap-4 text-base'>
           <span className='text-[#fed478fe] font-semibold'>{user.name + " " + user.surname}</span>
-            <button onClick={() => {
-              localStorage.removeItem("userData");
-              nav("/Login"); //bulunduğu sayfayı yeniden yüklemeye yarar ama biz logine yönlendirmeliyiz
-              }} className='mr-4 text-red-700'>LOGOUT</button>
+          <button onClick={() => {
+            localStorage.removeItem("userData");
+            nav("/Login"); //bulunduğu sayfayı yeniden yüklemeye yarar ama biz logine yönlendirmeliyiz
+          }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 

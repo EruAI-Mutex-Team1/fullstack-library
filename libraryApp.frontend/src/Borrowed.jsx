@@ -51,8 +51,7 @@ const Borrowed = () => {
     if(yanit.ok)
     {
       const data=await yanit.json();
-      toast.success(data.message);
-      nav(0);
+      toast.success(data.message, { onClose: () => nav(0) });
     }else{
       const data=await yanit.json();
       toast.error(data.message);
