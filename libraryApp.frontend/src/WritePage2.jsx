@@ -77,17 +77,18 @@ const WritePage2 = () => {
 
   return (
     <div>
-      <nav className='bg-black text-white h-24 flex items-center justify-between'>
+       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
-          <div className=' font-extrabold text-4xl'>LIBRARY</div>
+          <div className=' font-extrabold text-4xl'>KURTUBA</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
-        <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe] font-semibold'>{user.name + " " + user.surname}</span>
-          <button onClick={() => {
-            localStorage.removeItem("userData");
-            nav("/Home");
-          }} className='mr-4 text-red-700'>LOGOUT</button>
+
+        <div className='flex gap-4 text-base'>
+        <span className='text-[#fed478fe] font-semibold '>{user.name + " " + user.surname}</span>
+            <button onClick={() => {
+              localStorage.removeItem("userData");
+              nav("/Login");
+              }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
       <div className='bg-[#fdf2d8fe] h-screen flex flex-col gap-3 items-center '>
@@ -95,10 +96,10 @@ const WritePage2 = () => {
         <form className='bg-[#fde5b1fe] border-2 border-[#f9ca67fe] h-4/5 w-4/5 rounded mt-5'>
           <div className='flex justify-between gap-2 mt-2 ml-2 mr-2'>
             <form className='bg-[#f9ca67fe] h-16 w-4/5 rounded flex flex-row justify-center gap-2'>
-            <h2 className='text-l font-bold text-white mt-5'>{kitapAdi}</h2>
+            <h2 className='text-xl font-bold text-white mt-5'>{kitapAdi}</h2>
             </form>
             <form className='bg-slate-50 border-2 border-[#f9ca67fe] h-16 w-1/5 rounded flex justify-center'>
-              <h2 className='mt-4 text-lg text-black'>Sayfalar</h2>
+              <h2 className='mt-4 text-lg text-black'>Pages</h2>
             </form>
           </div>
           <div className='flex justify-between h-3/5 gap-2 mt-2 ml-2 mr-2'>
@@ -113,7 +114,7 @@ const WritePage2 = () => {
           </div>
           <form className='bg-[#fde5b1fe]  h-7 w w-3/4 ml-12'></form>
           <div className='bg-[#fde5b1fe] h-20 w-3/4 ml-12 flex flex-row justify-end gap-3 '>
-            <button onClick={e => sayfaEkle(e)} className='bg-green-600 hover:bg-green-700 h-10 w-auto p-2 text-slate-50 rounded'> Save </button>
+            <button onClick={e => sayfaEkle(e)} className='bg-green-600 hover:bg-green-700 h-10 w-auto py-1 px-8 text-slate-50 text-xl font-semibold rounded'> Save </button>
           </div>
         </form>
 

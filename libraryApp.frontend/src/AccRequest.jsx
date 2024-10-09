@@ -89,7 +89,7 @@ const AccRequest = () => {
     <div>
       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
-          <div className=' font-extrabold text-4xl'>LIBRARY</div>
+          <div className=' font-extrabold text-4xl'>KURTUBA</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
@@ -106,7 +106,7 @@ const AccRequest = () => {
       <div className='flex flex-row'>
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
-          <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>MEMBER OPERATİONS</h1>
+          <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>MEMBER OPERATIONS</h1>
           <Link to="/BorrowRequest" className=' bg-[#ffb71cfe] text-lg font-semibold py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px] w-[200px]'>BORROW REQUESTS</Link>
         </div>
         {/* table */}
@@ -124,10 +124,10 @@ const AccRequest = () => {
             <tbody className='text-black text-base'>
               {users.map((user, index) => (
                 <tr className='border-b-2 border-black'>
-                  <td className='py-3 pl-4 font-bold'>{user.fullName}</td>
-                  <td className='py-3 font-medium'>{user.username}</td>
-                  <td className='py-3 font-medium'>{user.requestDate}</td>
-                  <td className='py-2 flex flex-row gap-3'>
+                  <td className='py-3 pl-10 font-bold'>{user.fullName}</td>
+                  <td className='py-3 pl-5 font-medium'>{user.username}</td>
+                  <td className='py-3 pl-6 font-medium'>{user.requestDate}</td>
+                  <td className='py-2 pl-4 flex flex-row gap-3'>
                     <button onClick={() => ApproveReq(user.id)} className=' bg-[#19871b] text-white rounded-md text-sm font-medium p-2 hover:bg-[#58bb46d2] ml-3 '>APPROVE</button>
                     <button onClick={() => RejectReq(user.id)} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6]'>REJECT</button>
                   </td>

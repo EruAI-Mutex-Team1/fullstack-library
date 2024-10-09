@@ -67,15 +67,18 @@ const Punishing = () => {
 
   return (
     <div>
-      <nav className='bg-black text-white h-24 flex items-center justify-between'>
+<nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
-          <div className=' font-extrabold text-4xl'>LIBRARY</div>
+          <div className=' font-extrabold text-4xl'>KURTUBA</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
-        <div className='flex gap-4 text-sm'>
-          <span className='text-[#fed478fe] font-semibold'>{user.name + " " + user.surname}</span>
-          <Link to="/Login" className='mr-4 text-red-700'>LOGOUT</Link>
+        <div className='flex gap-4 text-base'>
+          <span className='text-[#fed478fe] font-semibold '>{user.name + " " + user.surname}</span>
+          <button onClick={() => {
+            localStorage.removeItem("userData");
+            nav("/Login");
+          }} className='mr-4 text-red-700'>LOGOUT</button>
         </div>
       </nav>
 
@@ -83,15 +86,15 @@ const Punishing = () => {
       <div className='flex flex-row'>
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
-          <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>GENERAL OPERATİONS</h1>
-          <Link to="/ChangeRole" className=' bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb] mt-[30px]'>CHANGE ROLE</Link>
-          <button className='bg-[#fdc13ffe] py-2 px-3 rounded-sm hover:bg-[#f6ca6beb]'>PUNISH A USER</button>
+          <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>GENERAL OPERATIONS</h1>
+          <Link to="/ChangeRole" className=' bg-[#ffb71cfe] text-lg font-semibold py-2 px-3 rounded-sm hover:bg-[#fec752] mt-[30px] w-[150px]'>CHANGE ROLE</Link>
+         
         </div>
         {/* forms */}
         <div className='w-[1000px] h-[600px] ml-[70px] mt-[38px]'>
           <form className='bg-[#fde5b1fe] border-2 border-black flex flex-col w-[1000px] h-[80px] pl-6 pt-1'>
             <label>SELECT A USER TO VİEW PUNİSHMENT STATUS</label>
-            <select onChange={e => setSelectedUserId(e.target.value)} className='w-[650px] text-gray-400 ' aria-placeholder='Select'>
+            <select onChange={e => setSelectedUserId(e.target.value)} className='w-[650px] text-pink-600 text-base ' aria-placeholder='Select'>
               <option value="" >Select an user</option>
               {punishusers.map((user, index) => (
                 <option value={user.userId} >{user.fullname + " - " + user.roleName}</option>
@@ -102,8 +105,8 @@ const Punishing = () => {
           <form className='bg-[#fde5b1fe] border-2 border-black flex flex-col w-[1000px] h-[480px] mt-[18px] '>
             {/* <p>{punishusers.find(p => p.userId === selectedUserId)?.isPunished ? "punished":"not punished"}</p> */}
             <div className=' place-self-center w-[950px] mt-40'>
-              {(selectedUser?.isPunished) ? (<button onClick={(e) => { setPunishment(e, false) }} className='bg-[#d51760fe]  text-white rounded-sm py-1 w-[105px] hover:bg-[#f75858f4] ml-[450px] mt-[20px]'>Remove punishment</button>
-              ) : (<button onClick={(e) => { setPunishment(e, true) }} className='bg-[#d51760fe]  text-white rounded-sm py-1 w-[105px] hover:bg-[#f75858f4] ml-[450px] mt-[20px]'>Punish user</button>
+              {(selectedUser?.isPunished) ? (<button onClick={(e) => { setPunishment(e, false) }} className='bg-[#d51760fe] text-white text-lg font-semibold py-2 px-3 rounded-sm hover:bg-[#f75858f4] w-[150px] ml-[400px] mt-[20px]'>Remove punishment</button>
+              ) : (<button onClick={(e) => { setPunishment(e, true) }} className='bg-[#d51760fe] text-white text-lg font-semibold py-2 px-3 rounded-sm hover:bg-[#f75858f4] w-[150px] ml-[400px] mt-[20px]'>Punish user</button>
               )}
             </div>
 

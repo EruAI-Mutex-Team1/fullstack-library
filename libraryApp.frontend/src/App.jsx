@@ -41,8 +41,8 @@ function App() {
         <Routes>
           <Route path="/" element={
             <div className="bg-hero-pattern min-h-screen grid">
-              <HomePage />
-            </div>                                                    //home default giriş
+              <HomePage/>
+            </div>                                                    //default giriş
           }></Route>
           <Route path="Home" element={
             <div className="bg-hero-pattern min-h-screen grid">

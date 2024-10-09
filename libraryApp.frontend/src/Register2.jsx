@@ -55,45 +55,45 @@ const Register2 = () => {
 
       <div className='flex flex-col justify-center items-center gap-1'>
         <div className='flex flex-row gap-4'>
-          <GiArcher className='text-5xl text-sky-950 font-bold ' /> {/* adding icon */}
-          <GiArrowsShield className='text-5xl text-sky-950 font-bold ' /> {/* adding icon */}
+          <GiArcher className='text-5xl text-black font-bold ' /> {/* adding icon */}
+          <GiArrowsShield className='text-5xl text-black font-bold ' /> {/* adding icon */}
         </div>
-        <h1 className='text-3xl text-center text-sky-950 font-bold tracking-wider'>KAYIT OL</h1>
+        <h1 className='text-3xl text-center text-black font-bold tracking-wider'>SIGN UP</h1>
       </div>
-      <form className='bg-white h-[650px] rounded-md text-sky-950 text-base 
-        tracking-normal p-8 flex flex-col gap-4 border border-blue-300 cursor-pointer'>
+      <form className='bg-white h-[650px] rounded-md text-black text-base 
+        tracking-normal p-8 flex flex-col gap-4 border border-black cursor-pointer'>
         <div>
           <label>USERNAME</label>
-          <input onChange={e => setusername(e.target.value)} type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
+          <input onChange={e => setusername(e.target.value)} type='text' className='border-b-2 border-pink-600 bg-[#c1c2be33]
               hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
         </div>
         <div>
-          <label>AD</label>
-          <input onChange={e => setname(e.target.value)} type='text' className='flex flex-col border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
+          <label>NAME</label>
+          <input onChange={e => setname(e.target.value)} type='text' className='flex flex-col border-b-2 border-pink-600 bg-[#c1c2be33] 
               hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
         </div>
         <div>
-          <label>SOYAD</label>
-          <input onChange={e => setsurname(e.target.value)} type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
+          <label>SURNAME</label>
+          <input onChange={e => setsurname(e.target.value)} type='text' className='border-b-2 border-pink-600 bg-[#c1c2be33]
               hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
         </div>
         <div>
-          <label>E-POSTA</label>
-          <input onChange={e => setemail(e.target.value)} type='text' className='border-b-2 border-blue-300 bg-[#c1c2be33] text-blue-950
+          <label>E-MAİL</label>
+          <input onChange={e => setemail(e.target.value)} type='text' className='border-b-2 border-pink-600 bg-[#c1c2be33]
               hover:bg-[#9fa19e44] transition-all focus: outline-none'></input>
         </div>
         <div>
-          <label>PAROLA</label>
-          <input onChange={e => setpassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
+          <label>PASSWORD</label>
+          <input onChange={e => setpassword(e.target.value)} type='password' className='border-b-2 border-pink-600 bg-[#c1c2be33] hover:bg-[#9fa19e44]
               transition-all focus: outline-none'></input>
         </div>
         <div>
-          <label>PAROLA TEKRAR</label>
-          <input onChange={e => setconfirmPassword(e.target.value)} type='password' className='border-b-2 border-blue-300 bg-[#c1c2be33] hover:bg-[#9fa19e44]
+          <label>CONFİRM</label>
+          <input onChange={e => setconfirmPassword(e.target.value)} type='password' className='border-b-2 border-pink-600 bg-[#c1c2be33] hover:bg-[#9fa19e44]
               transition-all focus: outline-none'></input>
         </div>
-        <button onClick={uyeEkle} className='bg-[#fed478fe] rounded text-white text px-9 h-[30px] w-[150px] 
-              place-self-center hover:bg-[#fed478c9] transition-all  '>KAYIT OL</button>
+        <button onClick={uyeEkle} className='bg-[#d51760fe] rounded text-white text px-9 h-[30px] w-[150px] 
+              place-self-center hover:bg-[#ec5b67d6] transition-all  '>SIGN UP</button>
       </form>
 
     </div>

@@ -56,7 +56,7 @@ const Booksearch = () => {
     });
 
     if (yanit.ok) {
-      toast.success("başarılı");
+      toast.success("Successful");
     } else {
       const data = await yanit.json();
       toast.error(data.message);
@@ -68,7 +68,7 @@ const Booksearch = () => {
     <div>
      <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
-          <div className=' font-extrabold text-4xl'>LIBRARY</div>
+          <div className=' font-extrabold text-4xl'>KURTUBA</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
@@ -84,7 +84,7 @@ const Booksearch = () => {
       <div className='flex flex-row'>
         {/* sidebar */}
         <div className=' bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
-          <h2 className='text-white text-2xl font-serif mt-[60px] hover:border-b-2'>BOOK OPERATİONS</h2>
+          <h2 className='text-white text-2xl font-serif mt-[60px] hover:border-b-2'>BOOK OPERATIONS</h2>
 
           {/* search bar */}
           <div className=' flex item-center'>
@@ -101,7 +101,7 @@ const Booksearch = () => {
                 <th className='py-3 pl-4 pr-[250px] font-serif'>TITLE</th>
                 <th className='py-3  pr-[160px] font-serif'>TYPE</th>
                 <th className='py-3  pr-[150px] font-serif'>AUTHORS</th>
-                <th className='py-3  pr-[150px] font-serif'>Is Borrowed</th>
+                <th className='py-3  pr-[150px] font-serif'>IS BORROWED</th>
                 <th className='py-3  pr-[270px] font-serif '>ACTIONS</th>
               </tr>
             </thead>
@@ -112,7 +112,7 @@ const Booksearch = () => {
                     <td className='py-3 pl-4 font-bold'>{kitap.title}</td>
                     <td className='py-3 font-medium'>{kitap.type}</td>
                     <td className='py-3 font-medium'>{kitap.bookAuthors.join(", ")}</td>
-                    <td className='py-3 font-medium'>{kitap.isBorrowed ? "Yes" : "No"}</td>
+                    <td className='py-3 pl-9 font-medium'>{kitap.isBorrowed ? "Yes" : "No"}</td>
                     <td className='py-2'>
                     <Link className='bg-[#fab914fe] text-white  rounded-md text-sm font-medium p-2 hover:bg-[#dcaa4de7] mr-3 ' to={"/ReadBook?bookId=" + kitap.id}>READ THE BOOK</Link>
                       <button disabled={kitap.isBorrowed} onClick={() => borrowRequest(kitap.id)} className='bg-[#d51760fe] text-white rounded-md text-sm font-medium p-2 hover:bg-[#ec5b67d6] disabled:bg-[#d51760fe]/30'>BORROW</button>

@@ -156,7 +156,7 @@ const AuMybook = () => {
     <div>
       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
-          <div className=' font-extrabold text-4xl'>LIBRARY</div>
+          <div className=' font-extrabold text-4xl'>KURTUBA</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 

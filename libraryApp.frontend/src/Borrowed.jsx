@@ -63,7 +63,7 @@ const Borrowed = () => {
     <div>
        <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
-          <div className=' font-extrabold text-4xl'>LIBRARY</div>
+          <div className=' font-extrabold text-4xl'>KURTUBA</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
@@ -80,7 +80,7 @@ const Borrowed = () => {
       <div className='flex flex-row bg-[#f9dc7654]'>
         {/* sidebar */}
         <div className=' bg-black  flex flex-col gap-8 items-center w-[320px] min-h-screen'>
-          <h2 className='text-white text-2xl font-serif mt-[60px] hover:border-b-2'>BOOK OPERATİONS</h2>
+          <h2 className='text-white text-2xl font-serif mt-[60px] hover:border-b-2'>BOOK OPERATIONS</h2>
           <Link to={"/BookSearch"} className='bg-[#fab914fe] py-3 px-7 text-white text-lg font-semibold rounded-sm mt-[30px] hover:bg-[#fec752]'>BOOK SEARCH</Link>
         </div>
         {/* table */}
@@ -88,7 +88,7 @@ const Borrowed = () => {
           <table className='border-2 border-black bg-white text-black'>
             <thead className='bg-[#f9dd769e]  text-sm'>
               <tr className='border-b-2 border-black'>
-                <th className='py-3 pl-4 pr-[150px] font-serif'>TİTLE</th>
+                <th className='py-3 pl-4 pr-[150px] font-serif'>TITLE</th>
                 <th className='py-3  pr-[100px] font-serif'>AUTHOR</th>
                 <th className='py-3  pr-[100px] font-serif'>BORROWED DATE</th>
                 <th className='py-3  pr-[100px] font-serif'>RETURN DATE</th>

@@ -79,7 +79,7 @@ const Changerole = () => {
     <div>
       <nav className='bg-black text-white h-24 flex items-center justify-between'>
         <div className=' flex flex-col gap-1 ml-10'>
-          <div className=' font-extrabold text-4xl'>LIBRARY</div>
+          <div className=' font-extrabold text-4xl'>KURTUBA</div>
           <Link to="/Home" className='text-l font-thin' >HOME</Link>
         </div>
 
@@ -96,7 +96,7 @@ const Changerole = () => {
       <div className='flex flex-row'>
         {/* sidebar */}
         <div className='text-white bg-black  flex flex-col gap-8 items-center w-[300px] min-h-screen'>
-          <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>GENERAL OPERATİONS</h1>
+          <h1 className='text-xl font-serif mt-[60px] hover:border-b-2'>GENERAL OPERATIONS</h1>
           <Link to="/Punishing" className=' bg-[#fab914fe] py-3 px-7 text-lg font-semibold rounded-sm mt-[30px] hover:bg-[#fec752] '>PUNISH A USER</Link>
 
         </div>
@@ -123,7 +123,7 @@ const Changerole = () => {
             </select>
           </div>
 
-          <button onClick={updateRole} className='bg-[#fab914fe] text-white rounded-md text-md  py-2 hover:bg-[#dcaa4de7] ml-[670px] mt-[50px]'>UPDATE</button>
+          <button onClick={updateRole} className='bg-[#faa914fe] text-white rounded-md text-md font-semibold py-2 hover:bg-[#dcaa4de7] ml-[670px] mt-[50px]'>UPDATE</button>
 
         </form>
 
